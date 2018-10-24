@@ -21,8 +21,22 @@ class VitoConnect extends IPSModule
 
         $this->RegisterPropertyString("Username", "");
         $this->RegisterPropertyString("Password", "");
+
+        $this->RegisterPropertyInteger("Interval", 5);
+
+        $this->RegisterTimer("Update", 0, 'VVC_Update($_IPS[\'TARGET\']);');        
+        
     }
 
+    public function ApplyChanges(){
+        
+        //Never delete this line!
+        parent::ApplyChanges();
+
+        $this->SetTimerInterval("Update", $this->ReadPropertyInteger("Interval") * 60 * 1000);
+
+    }
+    
     private function FetchAuthorizationCode()
     {
 
