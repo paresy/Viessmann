@@ -1,0 +1,11 @@
+{
+	"id": "{3BF2B1B8-BD31-4A06-8C70-FD0FF95FE22E}",
+	"name": "VitoConnect",
+	"type": 3,
+	"vendor": "Viessmann",
+	"aliases": [],
+	"parentRequirements": [],
+	"childRequirements": [],
+	"implemented": [],
+	"prefix": "VVC"
+}
