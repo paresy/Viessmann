@@ -170,19 +170,19 @@ class VitoConnect extends IPSModule
         //Use Token to request device data
         $device = $this->FetchData($accessToken, sprintf($this->device_data_url, $id, $serial));
         
-        $updateVariable = function($id, $type, $value, $profile) {
-            $ident = str_replace(".", "_", $id);
+        $updateVariable = function($id, $name, $type, $value, $profile) {
+            $ident = str_replace(".", "_", $id) . "_" . strtolower($name);
             switch($type) {
                 case "boolean":
-                    $this->RegisterVariableBoolean($ident, $id, $profile);
+                    $this->RegisterVariableBoolean($ident, $id . " (" . $name . ")", $profile);
                     $this->SetValue($ident, $value);
                     break;
                 case "number":
-                    $this->RegisterVariableFloat($ident, $id, $profile);
+                    $this->RegisterVariableFloat($ident, $id . " (" . $name . ")", $profile);
                     $this->SetValue($ident, $value);
                     break;
                 case "string":
-                    $this->RegisterVariableString($ident, $id, $profile);
+                    $this->RegisterVariableString($ident, $id . " (" . $name . ")", $profile);
                     $this->SetValue($ident, $value);
                     break;
                 default:
@@ -196,19 +196,39 @@ class VitoConnect extends IPSModule
                 foreach($entity->properties as $name => $property) {
                     switch($name) {
                         case "active":
-                            $updateVariable($entity->class[0], $property->type, $property->value, "Switch");
+                            $updateVariable($entity->class[0], $name, $property->type, $property->value, "Switch");
                             break;
                         case "status":
-                            $updateVariable($entity->class[0], $property->type, $property->value, "");
+                        case "statusWired":
+                        case "statusWireless":
+                            //This is not very interesting
+                            //$updateVariable($entity->class[0], $name, $property->type, $property->value, "");
                             break;
                         case "value":
-                            $updateVariable($entity->class[0], $property->type, $property->value, "");
+                        case "slope":
+                        case "shift":
+                        case "errorCode":
+                            $updateVariable($entity->class[0], $name, $property->type, $property->value, "");
                             break;
                         case "temperature":
-                            $updateVariable($entity->class[0], $property->type, $property->value, "Temperature");
+                            $updateVariable($entity->class[0], $name, $property->type, $property->value, "Temperature");
+                            break;
+                        case "entries":
+                        case "enabled":
+                            //Unsupported
+                            break;
+                        case "start":
+                        case "end":
+                            //We may convert this to our UnixTimeStamp
+                            break;
+                        case "serviceDue":
+                        case "serviceIntervalMonths":
+                        case "activeMonthSinceLastService":
+                        case "lastService":
+                            //I don't need this
                             break;
                         default:
-                            //$this->SendDebug($entity->class[0], $name . " = " . print_r($property, true), 0);
+                            $this->SendDebug($name, $entity->class[0] . " = " . print_r($property, true), 0);
                             break;
                     }
                 }
