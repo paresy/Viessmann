@@ -207,6 +207,9 @@ class VitoConnect extends IPSModule
                         case "value":
                         case "slope":
                         case "shift":
+                        case "name":    //name of circuit Isi
+                            $updateVariable($entity->class[0], $name, $property->type, $property->value, "");
+                            break;
                         case "errorCode":
                             $updateVariable($entity->class[0], $name, $property->type, $property->value, "");
                             break;
