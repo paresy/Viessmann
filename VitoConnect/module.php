@@ -132,7 +132,7 @@ class VitoConnect extends IPSModule
 
     }
 
-    private function FetchData($url)
+    private function UpdateAccessToken()
     {
 
         //Request a new Access Token if required
@@ -145,6 +145,15 @@ class VitoConnect extends IPSModule
             $this->SetBuffer("Expires", (time() + 3600));
         }
 
+        return $accessToken;
+
+    }
+
+    private function FetchData($url)
+    {
+
+        $accessToken = $this->UpdateAccessToken();
+
         //FetchData with Access Token
         $this->SendDebug("FetchData", $url, 0);
 
@@ -153,9 +162,14 @@ class VitoConnect extends IPSModule
                 'header' => "Authorization: Bearer " . $accessToken . "\r\n",
             )
         );
+
         $context = stream_context_create($options);
         $result = file_get_contents($url, false, $context);
         
+        if($result === false) {
+            die("Fetching data failed!");
+        }
+
         $this->SendDebug("GotData", $result, 0);
 
         $data = json_decode($result);
@@ -169,7 +183,7 @@ class VitoConnect extends IPSModule
         }
         
         return $data;
-        
+
     }
 
     private function FetchDeviceData() {
