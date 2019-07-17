@@ -112,14 +112,25 @@ class VitoConnect extends IPSModule
 
     }
 
-    private function FetchData($token, $url)
+    private function FetchData($url)
     {
 
+        //Request a new Access Token if required
+        $accessToken =  $this->GetBuffer("Token");
+        if ($accessToken == "" || time() >= intval($this->GetBuffer("Expires"))) {
+            $authorizationCode = $this->FetchAuthorizationCode();
+            $accessToken = $this->FetchAccessToken($authorizationCode);
+            
+            $this->SetBuffer("Token", $accessToken);
+            $this->SetBuffer("Expires", (time() + 3600));
+        }
+
+        //FetchData with Access Token
         $this->SendDebug("FetchData", $url, 0);
 
         $options = array(
             'http' => array(
-                'header' => "Authorization: Bearer " . $token . "\r\n",
+                'header' => "Authorization: Bearer " . $accessToken . "\r\n",
             )
         );
         $context = stream_context_create($options);
@@ -143,19 +154,9 @@ class VitoConnect extends IPSModule
     
     public function Update()
     {
-
-        //Request a new Access Token if required
-        $accessToken =  $this->GetBuffer("Token");
-        if ($accessToken == "" || time() >= intval($this->GetBuffer("Expires"))) {
-            $authorizationCode = $this->FetchAuthorizationCode();
-            $accessToken = $this->FetchAccessToken($authorizationCode);
-            
-            $this->SetBuffer("Token", $accessToken);
-            $this->SetBuffer("Expires", (time() + 3600));
-        }
         
         //Use Token to request gateway data
-        $gateway = $this->FetchData($accessToken, $this->gateway_data_url);
+        $gateway = $this->FetchData($this->gateway_data_url);
 
         $id = $gateway->entities[0]->properties->id;
         $serial = $gateway->entities[0]->entities[0]->properties->serial;
@@ -168,7 +169,7 @@ class VitoConnect extends IPSModule
         $this->SendDebug("GatewaySerial", print_r($serial, true), 0);
         
         //Use Token to request device data
-        $device = $this->FetchData($accessToken, sprintf($this->device_data_url, $id, $serial));
+        $device = $this->FetchData(sprintf($this->device_data_url, $id, $serial));
         
         $updateVariable = function($id, $name, $type, $value, $profile) {
             $ident = str_replace(".", "_", $id) . "_" . strtolower($name);
