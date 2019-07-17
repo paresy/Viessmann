@@ -207,6 +207,7 @@ class VitoConnect extends IPSModule
                         case "value":
                         case "slope":
                         case "shift":
+                        case "name":
                         case "errorCode":
                             $updateVariable($entity->class[0], $name, $property->type, $property->value, "");
                             break;
