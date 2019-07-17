@@ -3,6 +3,9 @@
 	"author": "Michael Maroszek",
 	"name": "Viessmann",
 	"url": "www.maroszek.de",
+	"compatibility": {
+		"version": "5.1"
+	},
 	"version": "1.0",
 	"build": 0,
 	"date": 0
