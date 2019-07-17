@@ -24,7 +24,10 @@ class VitoConnect extends IPSModule
 
         $this->RegisterPropertyInteger("Interval", 5);
 
-        $this->RegisterTimer("Update", 0, 'VVC_Update($_IPS[\'TARGET\']);');        
+        $this->RegisterAttributeInteger("GatewayID", 0);
+        $this->RegisterAttributeString("GatewaySerial", "");
+
+        $this->RegisterTimer("Update", 0, 'VVC_Update($_IPS[\'TARGET\']);');
         
     }
 
@@ -33,7 +36,24 @@ class VitoConnect extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
 
-        $this->SetTimerInterval("Update", $this->ReadPropertyInteger("Interval") * 60 * 1000);
+        if($this->ReadPropertyString("Username") && $this->ReadPropertyString("Username")) {
+            //Fetch Gateway ID and Serial for later reuse
+            $gateway = $this->FetchData($this->gateway_data_url);
+
+            $id = $gateway->entities[0]->properties->id;
+            $serial = $gateway->entities[0]->entities[0]->properties->serial;
+
+            $this->SendDebug("GatewayID", $id, 0);
+            $this->SendDebug("GatewaySerial", print_r($serial, true), 0);
+    
+            $this->WriteAttributeInteger("GatewayID", $id);
+            $this->WriteAttributeString("GatewaySerial", $serial);
+
+            //Set Timer only if valid credential are available
+            $this->SetTimerInterval("Update", $this->ReadPropertyInteger("Interval") * 60 * 1000);
+        } else {
+            $this->SetTimerInterval("Update", 0);
+        }
 
     }
     
@@ -154,19 +174,12 @@ class VitoConnect extends IPSModule
     
     public function Update()
     {
+        $id = $this->ReadAttributeInteger("GatewayID");
+        $serial = $this->ReadAttributeString("GatewaySerial");
         
-        //Use Token to request gateway data
-        $gateway = $this->FetchData($this->gateway_data_url);
-
-        $id = $gateway->entities[0]->properties->id;
-        $serial = $gateway->entities[0]->entities[0]->properties->serial;
-        
-        if($id == "" || $serial == "") {
-            die("Failed fetching GatewayID or GatewaySerial!");
+        if($id == 0 || $serial == "") {
+            die("GatewayID or GatewaySerial are missing");
         }
-        
-        $this->SendDebug("GatewayID", $id, 0);
-        $this->SendDebug("GatewaySerial", print_r($serial, true), 0);
         
         //Use Token to request device data
         $device = $this->FetchData(sprintf($this->device_data_url, $id, $serial));
