@@ -171,18 +171,24 @@ class VitoConnect extends IPSModule
         return $data;
         
     }
-    
-    public function Update()
-    {
+
+    private function FetchDeviceData() {
+
         $id = $this->ReadAttributeInteger("GatewayID");
         $serial = $this->ReadAttributeString("GatewaySerial");
         
         if($id == 0 || $serial == "") {
             die("GatewayID or GatewaySerial are missing");
         }
-        
-        //Use Token to request device data
-        $device = $this->FetchData(sprintf($this->device_data_url, $id, $serial));
+
+        return $this->FetchData(sprintf($this->device_data_url, $id, $serial));
+
+    }
+    
+    public function Update()
+    {
+
+        $device = $this->FetchDeviceData();
         
         $updateVariable = function($id, $name, $type, $value, $profile) {
             $ident = str_replace(".", "_", $id) . "_" . strtolower($name);
