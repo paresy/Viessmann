@@ -186,7 +186,34 @@ class VitoConnect extends IPSModule
 
     }
 
-    private function FetchDeviceData() {
+    private function SendAction($url, $post_data = null)
+    {
+
+        $accessToken = $this->UpdateAccessToken();
+
+        //SendAction with Access Token
+        $this->SendDebug("SendAction", $url, 0);
+
+        $options = array(
+            'http' => array(
+                'method' => "POST",
+                'header' => "Authorization: Bearer " . $accessToken . "\r\nContent-Type: application/json\r\nAccept: application/vnd.siren+json\r\n",
+                'content' => ($post_data == null) ? "{}" : json_encode($post_data)
+            )
+        );
+
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        
+        if($result === false) {
+            die("Fetching data failed!");
+        }
+
+        $this->SendDebug("Success", $result, 0);
+        
+    }
+
+    private function RequestDeviceData($action = "", $post_data = null) {
 
         $id = $this->ReadAttributeInteger("GatewayID");
         $serial = $this->ReadAttributeString("GatewaySerial");
@@ -195,14 +222,18 @@ class VitoConnect extends IPSModule
             die("GatewayID or GatewaySerial are missing");
         }
 
-        return $this->FetchData(sprintf($this->device_data_url, $id, $serial));
+        if($action) {
+            return $this->SendAction(sprintf($this->device_data_url, $id, $serial) . $action, $post_data);
+        } else {
+            return $this->FetchData(sprintf($this->device_data_url, $id, $serial));
+        }
 
     }
     
     public function Update()
     {
 
-        $device = $this->FetchDeviceData();
+        $device = $this->RequestDeviceData();
         
         $updateVariable = function($id, $name, $type, $value, $profile) {
             $ident = str_replace(".", "_", $id) . "_" . strtolower($name);
@@ -223,6 +254,29 @@ class VitoConnect extends IPSModule
                     die("Unsupported variable type:" . $type);
             }
         };
+
+        $updateAction = function($id, $name, $actions) {
+            $hasAction = function($name) use($actions) {
+                foreach($actions as $action) {
+                    if($action->name == $name) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            $ident = str_replace(".", "_", $id) . "_" . strtolower($name);
+            switch($name) {
+                case "active":
+                    if($hasAction("activate") && $hasAction("deactivate")) {
+                        $this->EnableAction($ident);
+                    }
+                case "temperature":
+                    if($hasAction("setTemperature")) {
+                        $this->EnableAction($ident);
+                    }
+            }
+        };
         
         //Parse data
         foreach($device->entities as $entity) {
@@ -231,6 +285,7 @@ class VitoConnect extends IPSModule
                     switch($name) {
                         case "active":
                             $updateVariable($entity->class[0], $name, $property->type, $property->value, "Switch");
+                            $updateAction($entity->class[0], $name, $entity->actions);
                             break;
                         case "status":
                         case "statusWired":
@@ -249,6 +304,7 @@ class VitoConnect extends IPSModule
                             break;
                         case "temperature":
                             $updateVariable($entity->class[0], $name, $property->type, $property->value, "Temperature");
+                            $updateAction($entity->class[0], $name, $entity->actions);
                             break;
                         case "entries":
                         case "enabled":
@@ -272,6 +328,32 @@ class VitoConnect extends IPSModule
             }
         }
         
+    }
+
+    public function RequestAction($Ident, $Value)
+    {
+        $parts = explode("_", $Ident);
+        $name = array_pop($parts);
+        $id = implode(".", $parts);
+        switch($name) {
+            case "active":
+                if($Value) {
+                    $this->RequestDeviceData($id . "/activate");
+                } else {
+                    $this->RequestDeviceData($id . "/deactivate");
+                }
+                SetValue($this->GetIDForIdent($Ident), $Value);
+                break;
+            case "temperature":
+                $this->RequestDeviceData($id . "/setTemperature", [
+                    "targetTemperature" => $Value
+                ]);
+                SetValue($this->GetIDForIdent($Ident), $Value);
+                break;
+            default:
+                throw new Exception("Invalid Ident");
+        }
+     
     }
 
 }
