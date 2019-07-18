@@ -1,0 +1,11 @@
+{
+    "translations": {
+        "de": {
+            "Username": "Benutzername",
+            "Password": "Passwort",
+            "Interval": "Intervall",
+            "Minutes": "Minuten",
+            "Update": "Aktualisieren"
+        }
+    }
+}

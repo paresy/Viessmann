@@ -3,7 +3,7 @@
 	[
 		{ "name": "Username", "type": "ValidationTextBox", "caption": "Username" },
 		{ "name": "Password", "type": "PasswordTextBox", "caption": "Password" },
-		{ "type": "IntervalBox", "name": "Interval", "caption": "Minutes" }
+		{ "type": "NumberSpinner", "name": "Interval", "caption": "Interval", "suffix": "Minutes" }
 	],
 	"actions":
 	[
