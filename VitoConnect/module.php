@@ -236,6 +236,22 @@ class VitoConnect extends IPSModule
         $device = $this->RequestDeviceData();
         
         $updateVariable = function($id, $name, $type, $value, $profile) {
+            if($type == "array") {
+                //Try to autodetect the type
+                if(is_bool($value)) {
+                    $type = "boolean";
+                }
+                else if(is_numeric($value)) {
+                    $type = "number";
+                }
+                else if(is_string($value)) {
+                    $type = "string";
+                }
+                else {
+                    //do nothing and fall through to the "die" function
+                }
+            }
+
             $ident = str_replace(".", "_", $id) . "_" . strtolower($name);
             switch($type) {
                 case "boolean":
@@ -319,6 +335,18 @@ class VitoConnect extends IPSModule
                         case "activeMonthSinceLastService":
                         case "lastService":
                             //I don't need this
+                            break;
+                        case "unit":
+                            //Maybe we need to use this for day/week/year values. At the moment we hardcode to kWh
+                            if($property->value != "kilowattHour") {
+                                $this->SendDebug($name, "Unit = " . $property->value . " (Expected kilowattHour)", 0);
+                            }
+                            break;
+                        case "day":
+                        case "week":
+                        case "month":
+                        case "year":
+                            $updateVariable($entity->class[0], $name, $property->type, $property->value[0] /* 0 = current period */, "Electricity");
                             break;
                         default:
                             $this->SendDebug($name, $entity->class[0] . " = " . print_r($property, true), 0);
