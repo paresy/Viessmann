@@ -1,5 +1,7 @@
 <?
 
+include_once __DIR__ . '/compute_name.php';
+
 class VitoConnect extends IPSModule
 {
 
@@ -255,15 +257,15 @@ class VitoConnect extends IPSModule
             $ident = str_replace(".", "_", $id) . "_" . strtolower($name);
             switch($type) {
                 case "boolean":
-                    $this->RegisterVariableBoolean($ident, $id . " (" . $name . ")", $profile);
+                    $this->RegisterVariableBoolean($ident, computeName($id, $name), $profile);
                     $this->SetValue($ident, $value);
                     break;
                 case "number":
-                    $this->RegisterVariableFloat($ident, $id . " (" . $name . ")", $profile);
+                    $this->RegisterVariableFloat($ident, computeName($id, $name), $profile);
                     $this->SetValue($ident, $value);
                     break;
                 case "string":
-                    $this->RegisterVariableString($ident, $id . " (" . $name . ")", $profile);
+                    $this->RegisterVariableString($ident, computeName($id, $name), $profile);
                     $this->SetValue($ident, $value);
                     break;
                 default:
