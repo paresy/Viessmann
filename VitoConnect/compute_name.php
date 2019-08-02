@@ -52,7 +52,7 @@ function computeName($id, $name)
     $splitID = explode('.', $id);
 
     for($i = 0; $i < count($splitID); $i++) {
-        if (is_int($splitID[$i])) {
+        if (is_numeric($splitID[$i])) {
             $numbers[] = intval($splitID[$i]) + 1; // Add 1, so we start enumerating at 1, not 0
             $splitID[$i] = "%d";
         }
