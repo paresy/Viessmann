@@ -49,7 +49,7 @@ define("READABLE_NAMES", [
 function computeName($id, $name)
 {
     $numbers = [];
-    $splitID = split('.', '$id');
+    $splitID = explode('.', $id);
 
     for($i = 0; $i < count($splitID); $i++) {
         if (is_int($splitID[$i])) {
@@ -58,7 +58,7 @@ function computeName($id, $name)
         }
     }
 
-    $placeholderID = join(".", $splitID);
+    $placeholderID = implode(".", $splitID);
 
     if (array_key_exists($placeholderID, READABLE_IDS) && array_key_exists($name, READABLE_NAMES)) {
         return sprintf(READABLE_IDS[$placeholderID], ...$numbers) . READABLE_NAMES[$name];
