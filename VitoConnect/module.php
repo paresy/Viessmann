@@ -318,6 +318,12 @@ class VitoConnect extends IPSModule
                         case "hours":
                         case "starts":
                         case "errorCode":
+                        case "mode":
+                        case "hoursLoadClassOne":
+                        case "hoursLoadClassTwo":
+                        case "hoursLoadClassThree":
+                        case "hoursLoadClassFour":
+                        case "hoursLoadClassFive":
                             $updateVariable($entity->class[0], $name, $property->type, $property->value, "");
                             break;
                         case "temperature":
