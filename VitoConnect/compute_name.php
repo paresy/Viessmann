@@ -29,7 +29,8 @@ define("READABLE_IDS", [
     "heating.burner.modulation" => "Modulation",
     "heating.burner" => "Brennerstatus",
     "heating.boiler.serial" => "Meine Anlage: Seriennummer",
-    "heating.boiler.sensors.temperature.main" => "Kesseltemperatur"
+    "heating.boiler.sensors.temperature.main" => "Kesseltemperatur",
+    "heating.circuits.%d.circulation.schedule.active" => "Zeitprogramm Zirkulation"
 ]);
 
 define("READABLE_NAMES", [
