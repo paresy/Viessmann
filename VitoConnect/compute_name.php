@@ -1,11 +1,11 @@
 <?php
 
 define("READABLE_IDS", [
-    "heating compressors.%d.statistics" => "Heizkreis %d: Verdichter Laufzeit Belastungsklasse",
+    "heating compressors.%d.statistics" => "Heizkreis %d: Verdichter Laufzeit",
     "heating.boiler.sensors.temperature.main" => "Kesseltemperatur",
     "heating.boiler.serial" => "Meine Anlage: Seriennummer",
     "heating.burner.modulation" => "Modulation",
-    "heating.burner.statistics" => "",
+    "heating.burner.statistics" => "Brenner",
     "heating.burner" => "Brennerstatus",
     "heating.circuits.%d.circulation.schedule.active" => "Zeitprogramm Zirkulation",
     "heating.circuits.%d.heating.curve" => "Heizkreis %d: Heizkennlinie",
@@ -64,8 +64,8 @@ define("READABLE_IDS", [
 define("READABLE_NAMES", [
     "value" => "",
     "active" => "",
-    "hours" => "Betriebsstunden",
-    "starts" => "Starts",
+    "hours" => " " . "(Betriebsstunden)",
+    "starts" => " " . "(Starts)",
     "name" => " " . "(Name)",
     "temperature" => " " . "(Soll)",
     "day" => " " . "(heute)",
@@ -74,11 +74,11 @@ define("READABLE_NAMES", [
     "year" => " " . "(dieses Jahr)",
     "shift" => " " . "(Niveau)",
     "slope" => " " . "(Neigung)",
-    "hoursLoadClassFive" => " " . "5",
-    "hoursLoadClassFour" => " " . "4",
-    "hoursLoadClassThree" => " " . "3",
-    "hoursLoadClassTwo" => " " . "2",
-    "hoursLoadClassOne" => " " . "1",
+    "hoursLoadClassFive" => " " . "Belastungsklasse 5",
+    "hoursLoadClassFour" => " " . "Belastungsklasse 4",
+    "hoursLoadClassThree" => " " . "Belastungsklasse 3",
+    "hoursLoadClassTwo" => " " . "Belastungsklasse 2",
+    "hoursLoadClassOne" => " " . "Belastungsklasse 1",
 ]);
 
 // Generated names are currently German only, as we only know the names within the German app
