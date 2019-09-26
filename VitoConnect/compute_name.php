@@ -1,7 +1,7 @@
 <?php
 
 define("READABLE_IDS", [
-    "heating compressors.%d.statistics" => "Heizkreis %d: Verdichter Laufzeit",
+    "heating compressors.%d.statistics" => "Heizkreis %d: Verdichter",
     "heating.boiler.sensors.temperature.main" => "Kesseltemperatur",
     "heating.boiler.serial" => "Meine Anlage: Seriennummer",
     "heating.burner.modulation" => "Modulation",
@@ -74,11 +74,11 @@ define("READABLE_NAMES", [
     "year" => " " . "(dieses Jahr)",
     "shift" => " " . "(Niveau)",
     "slope" => " " . "(Neigung)",
-    "hoursLoadClassFive" => " " . "Belastungsklasse 5",
-    "hoursLoadClassFour" => " " . "Belastungsklasse 4",
-    "hoursLoadClassThree" => " " . "Belastungsklasse 3",
-    "hoursLoadClassTwo" => " " . "Belastungsklasse 2",
-    "hoursLoadClassOne" => " " . "Belastungsklasse 1",
+    "hoursLoadClassFive" => " " . "(Laufzeit Belastungsklasse 5)",
+    "hoursLoadClassFour" => " " . "(Laufzeit Belastungsklasse 4)",
+    "hoursLoadClassThree" => " " . "(Laufzeit Belastungsklasse 3)",
+    "hoursLoadClassTwo" => " " . "(Laufzeit Belastungsklasse 2)",
+    "hoursLoadClassOne" => " " . "(Laufzeit Belastungsklasse 1)",
 ]);
 
 // Generated names are currently German only, as we only know the names within the German app
