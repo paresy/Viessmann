@@ -1,7 +1,7 @@
 # VitoConnect
 Das Modul dient dazu die VitoConnect Cloud-API abzufragen und alle relevanten Informationen über das angeschlossene Viessmann Gerät darzustellen.
 
-### Inhaltverzeichnis
+### Inhaltsverzeichnis
 
 1. [Funktionsumfang](#1-funktionsumfang)
 2. [Voraussetzungen](#2-voraussetzungen)
@@ -22,8 +22,9 @@ Das Modul dient dazu die VitoConnect Cloud-API abzufragen und alle relevanten In
 
 ### 3. Software-Installation
 
-Über das Modul-Control folgende URL hinzufügen.  
-`git://github.com/paresy/Viessmann.git`  
+* Über den Module Store das Modul Viessmann Vitoconnect installieren.
+* Alternativ über das Module Control folgende URL hinzufügen:  
+`https://github.com/paresy/Viessmann`  
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
