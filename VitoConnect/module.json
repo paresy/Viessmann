@@ -7,5 +7,6 @@
 	"parentRequirements": [],
 	"childRequirements": [],
 	"implemented": [],
-	"prefix": "VVC"
+	"prefix": "VVC",
+	"url": "https://github.com/paresy/Viessmann/tree/master/VitoConnect"
 }
