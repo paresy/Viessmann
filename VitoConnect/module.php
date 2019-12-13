@@ -344,7 +344,9 @@ class VitoConnect extends IPSModule
                         case 'week':
                         case 'month':
                         case 'year':
-                            $updateVariable($entity->class[0], $name, $property->type, $property->value[0] /* 0 = current period */, 'Electricity');
+                            // Fetching values only if device can produce electricity
+                            if (count($property->value)>1)
+                                $updateVariable($entity->class[0], $name, $property->type, $property->value[0] /* 0 = current period */, 'Electricity');
                             break;
                         default:
                             $this->SendDebug($name, $entity->class[0] . ' = ' . print_r($property, true), 0);
