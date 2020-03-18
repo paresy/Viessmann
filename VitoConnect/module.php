@@ -25,7 +25,7 @@ class VitoConnect extends IPSModule
         $this->RegisterPropertyString('Username', '');
         $this->RegisterPropertyString('Password', '');
 
-        $this->RegisterPropertyInteger('Interval', 5);
+        $this->RegisterPropertyInteger('Interval', 15);
 
         $this->RegisterAttributeInteger('GatewayID', 0);
         $this->RegisterAttributeString('GatewaySerial', '');
