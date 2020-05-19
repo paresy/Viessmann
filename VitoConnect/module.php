@@ -20,6 +20,7 @@ if (defined('PHPUNIT_TESTSUITE')) {
 
 class VitoConnect extends IPSModule
 {
+    use Simulate;
     private $client_id = '79742319e39245de5f91d15ff4cac2a8';
     private $client_secret = '8ad97aceb92c5892e102b093c7c083fa';
 
@@ -30,8 +31,6 @@ class VitoConnect extends IPSModule
     private $device_data_url = 'https://api.viessmann-platform.io/operational-data/installations/%s/gateways/%s/devices/0/features/';
 
     private $callback_uri = 'vicare://oauth-callback/everest';
-
-    use Simulate;
 
     public function Create()
     {
@@ -72,6 +71,36 @@ class VitoConnect extends IPSModule
             $this->SetTimerInterval('Update', $this->ReadPropertyInteger('Interval') * 60 * 1000);
         } else {
             $this->SetTimerInterval('Update', 0);
+        }
+    }
+
+    public function Update()
+    {
+        $this->ParseDeviceData($this->RequestDeviceData());
+    }
+
+    public function RequestAction($Ident, $Value)
+    {
+        $parts = explode('_', $Ident);
+        $name = array_pop($parts);
+        $id = implode('.', $parts);
+        switch ($name) {
+            case 'active':
+                if ($Value) {
+                    $this->RequestDeviceData($id . '/activate');
+                } else {
+                    $this->RequestDeviceData($id . '/deactivate');
+                }
+                $this->SetValue($Ident, $Value);
+                break;
+            case 'temperature':
+                $this->RequestDeviceData($id . '/setTemperature', [
+                    'targetTemperature' => $Value
+                ]);
+                $this->SetValue($Ident, $Value);
+                break;
+            default:
+                throw new Exception('Invalid Ident');
         }
     }
 
@@ -238,11 +267,6 @@ class VitoConnect extends IPSModule
         }
     }
 
-    public function Update()
-    {
-        $this->ParseDeviceData($this->RequestDeviceData());
-    }
-
     private function ParseDeviceData($device)
     {
         $updateVariable = function ($id, $name, $type, $value, $profile)
@@ -375,31 +399,6 @@ class VitoConnect extends IPSModule
                     }
                 }
             }
-        }
-    }
-
-    public function RequestAction($Ident, $Value)
-    {
-        $parts = explode('_', $Ident);
-        $name = array_pop($parts);
-        $id = implode('.', $parts);
-        switch ($name) {
-            case 'active':
-                if ($Value) {
-                    $this->RequestDeviceData($id . '/activate');
-                } else {
-                    $this->RequestDeviceData($id . '/deactivate');
-                }
-                $this->SetValue($Ident, $Value);
-                break;
-            case 'temperature':
-                $this->RequestDeviceData($id . '/setTemperature', [
-                    'targetTemperature' => $Value
-                ]);
-                $this->SetValue($Ident, $Value);
-                break;
-            default:
-                throw new Exception('Invalid Ident');
         }
     }
 }
