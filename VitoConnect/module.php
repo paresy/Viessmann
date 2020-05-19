@@ -371,13 +371,13 @@ class VitoConnect extends IPSModule
                 } else {
                     $this->RequestDeviceData($id . '/deactivate');
                 }
-                SetValue($this->GetIDForIdent($Ident), $Value);
+                $this->SetValue($Ident, $Value);
                 break;
             case 'temperature':
                 $this->RequestDeviceData($id . '/setTemperature', [
                     'targetTemperature' => $Value
                 ]);
-                SetValue($this->GetIDForIdent($Ident), $Value);
+                $this->SetValue($Ident, $Value);
                 break;
             default:
                 throw new Exception('Invalid Ident');
