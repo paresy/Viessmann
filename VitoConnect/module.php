@@ -4,6 +4,20 @@ declare(strict_types=1);
 
 include_once __DIR__ . '/compute_name.php';
 
+if (defined('PHPUNIT_TESTSUITE')) {
+    trait Simulate
+    {
+        public function DebugParseDeviceData($device)
+        {
+            return $this->ParseDeviceData($device);
+        }
+    }
+} else {
+    trait Simulate
+    {
+    }
+}
+
 class VitoConnect extends IPSModule
 {
     private $client_id = '79742319e39245de5f91d15ff4cac2a8';
@@ -16,6 +30,8 @@ class VitoConnect extends IPSModule
     private $device_data_url = 'https://api.viessmann-platform.io/operational-data/installations/%s/gateways/%s/devices/0/features/';
 
     private $callback_uri = 'vicare://oauth-callback/everest';
+
+    use Simulate;
 
     public function Create()
     {
@@ -224,8 +240,11 @@ class VitoConnect extends IPSModule
 
     public function Update()
     {
-        $device = $this->RequestDeviceData();
+        $this->ParseDeviceData($this->RequestDeviceData());
+    }
 
+    private function ParseDeviceData($device)
+    {
         $updateVariable = function ($id, $name, $type, $value, $profile)
         {
             if ($type == 'array') {
