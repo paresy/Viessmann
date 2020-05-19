@@ -278,11 +278,12 @@ class VitoConnect extends IPSModule
                     if ($hasAction('activate') && $hasAction('deactivate')) {
                         $this->EnableAction($ident);
                     }
-                    // FIXME: No break. Please add proper comment if intentional
+                    break;
                 case 'temperature':
                     if ($hasAction('setTemperature')) {
                         $this->EnableAction($ident);
                     }
+                    break;
             }
         };
 
