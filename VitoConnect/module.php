@@ -9,6 +9,7 @@ if (defined('PHPUNIT_TESTSUITE')) {
     {
         public function DebugParseDeviceData($device)
         {
+            $this->failOnUnexpected = true;
             return $this->ParseDeviceData($device);
         }
     }
@@ -334,8 +335,44 @@ class VitoConnect extends IPSModule
         foreach ($device->entities as $entity) {
             if (isset($entity->properties)) {
                 foreach ($entity->properties as $name => $property) {
+                    //Search for unit for property
+                    $searchUnit = function ($id) use ($entity)
+                    {
+                        foreach ($entity->properties as $name => $property) {
+                            if ($entity->class[0] == $id && $name == 'unit') {
+                                return $property->value;
+                            }
+                        }
+                        return '';
+                    };
+
+                    //Convert unit to our profiles
+                    $unitToProfile = function ($unit)
+                    {
+                        switch ($unit) {
+                            case '':
+                                return '';
+                            case 'bar':
+                                return ''; //We currently  do not have a profile for bar
+                            case 'cubicMeter':
+                                return 'Gas';
+                            case 'celsius':
+                                return 'Temperature';
+                            case 'kilowattHour':
+                                return 'Electricity';
+                            default:
+                                if (isset($this->failOnUnexpected)) {
+                                    throw new Exception(sprintf('Unknown unit: %s', $unit));
+                                } else {
+                                    $this->SendDebug('Unknown Unit', $unit, 0);
+                                }
+                                return '';
+                        }
+                    };
+
                     switch ($name) {
                         case 'active':
+                            //Hard code the Switch profile. It is never set through the "unit"
                             $updateVariable($entity->class[0], $name, $property->type, $property->value, 'Switch');
                             $updateAction($entity->class[0], $name, $entity->actions);
                             break;
@@ -358,9 +395,10 @@ class VitoConnect extends IPSModule
                         case 'hoursLoadClassThree':
                         case 'hoursLoadClassFour':
                         case 'hoursLoadClassFive':
-                            $updateVariable($entity->class[0], $name, $property->type, $property->value, '');
+                            $updateVariable($entity->class[0], $name, $property->type, $property->value, $unitToProfile($searchUnit($entity->class[0])));
                             break;
                         case 'temperature':
+                            //Hard code the temperature profile. It is not always set through the "unit"
                             $updateVariable($entity->class[0], $name, $property->type, $property->value, 'Temperature');
                             $updateAction($entity->class[0], $name, $entity->actions);
                             break;
@@ -379,10 +417,7 @@ class VitoConnect extends IPSModule
                             //I don't need this
                             break;
                         case 'unit':
-                            //Maybe we need to use this for day/week/year values. At the moment we hardcode to kWh
-                            if ($property->value != 'kilowattHour') {
-                                $this->SendDebug($name, 'Unit = ' . $property->value . ' (Expected kilowattHour)', 0);
-                            }
+                            //We use this for profile detection above
                             break;
                         case 'day':
                         case 'week':
@@ -390,11 +425,15 @@ class VitoConnect extends IPSModule
                         case 'year':
                             //If array has only single element then property is unsupported from device
                             if (count($property->value) > 1) {
-                                $updateVariable($entity->class[0], $name, $property->type, $property->value[0] /* 0 = current period */, 'Electricity');
+                                $updateVariable($entity->class[0], $name, $property->type, $property->value[0] /* 0 = current period */, $unitToProfile($searchUnit($entity->class[0])));
                             }
                             break;
                         default:
-                            $this->SendDebug($name, $entity->class[0] . ' = ' . print_r($property, true), 0);
+                            if (isset($this->failOnUnexpected)) {
+                                throw new Exception($entity->class[0] . ' = ' . print_r($property, true));
+                            } else {
+                                $this->SendDebug($name, $entity->class[0] . ' = ' . print_r($property, true), 0);
+                            }
                             break;
                     }
                 }
