@@ -28,6 +28,9 @@ class ViessmannDataTest extends TestCase
         if (!IPS\ProfileManager::variableProfileExists('~Electricity')) {
             IPS\ProfileManager::createVariableProfile('~Electricity', 2);
         }
+        if (!IPS\ProfileManager::variableProfileExists('~Gas')) {
+            IPS\ProfileManager::createVariableProfile('~Gas', 2);
+        }
 
         parent::setUp();
     }
@@ -168,6 +171,339 @@ class ViessmannDataTest extends TestCase
             'heating_circuits_0_geofencing_active'                       => false,
             'heating_circuits_1_geofencing_active'                       => false,
             'heating_circuits_2_geofencing_active'                       => false,
+        ];
+
+        $this->assertEquals(count($testValues), count($values));
+
+        foreach ($testValues as $key => $value) {
+            $this->assertTrue(isset($values[$key]));
+            $this->assertEquals($values[$key], $value);
+        }
+    }
+
+    public function testData3(): void
+    {
+        $iid = IPS_CreateInstance('{3BF2B1B8-BD31-4A06-8C70-FD0FF95FE22E}');
+        $interface = IPS\InstanceManager::getInstanceInterface($iid);
+        $interface->DebugParseDeviceData(json_decode(file_get_contents(__DIR__ . '/data/3.json')));
+
+        foreach (IPS_GetChildrenIDs($iid) as $id) {
+            $values[IPS_GetObject($id)['ObjectIdent']] = [
+                'value'   => IPS_GetVariable($id)['VariableValue'],
+                'profile' => IPS_GetVariable($id)['VariableProfile']
+            ];
+        }
+
+        //var_export($values);
+        $testValues = [
+            'heating_dhw_sensors_temperature_hotWaterStorage_value' => [
+                'value'   => 54.7,
+                'profile' => '~Temperature',
+            ],
+            'device_etn_value' => [
+                'value'   => '7470379002130126',
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_modes_heating_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_programs_normal_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_programs_normal_temperature' => [
+                'value'   => 60.0,
+                'profile' => '~Temperature',
+            ],
+            'heating_circuits_0_operating_programs_reduced_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_programs_reduced_temperature' => [
+                'value'   => 20.0,
+                'profile' => '~Temperature',
+            ],
+            'device_zigbee_active_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_sensors_pressure_supply_value' => [
+                'value'   => 1.8,
+                'profile' => '',
+            ],
+            'heating_gas_consumption_total_day' => [
+                'value'   => 0.0,
+                'profile' => '~Gas',
+            ],
+            'heating_gas_consumption_total_week' => [
+                'value'   => 1.1,
+                'profile' => '~Gas',
+            ],
+            'heating_gas_consumption_total_month' => [
+                'value'   => 4.3,
+                'profile' => '~Gas',
+            ],
+            'heating_gas_consumption_total_year' => [
+                'value'   => 4.3,
+                'profile' => '~Gas',
+            ],
+            'heating_boiler_sensors_temperature_commonSupply_value' => [
+                'value'   => 37.7,
+                'profile' => '~Temperature',
+            ],
+            'heating_circuits_0_sensors_temperature_supply_value' => [
+                'value'   => 37.7,
+                'profile' => '~Temperature',
+            ],
+            'heating_burner_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_power_consumption_total_day' => [
+                'value'   => 0.0,
+                'profile' => '~Electricity',
+            ],
+            'heating_power_consumption_total_week' => [
+                'value'   => 0.2,
+                'profile' => '~Electricity',
+            ],
+            'heating_power_consumption_total_month' => [
+                'value'   => 1.3,
+                'profile' => '~Electricity',
+            ],
+            'heating_power_consumption_total_year' => [
+                'value'   => 1.3,
+                'profile' => '~Electricity',
+            ],
+            'heating_circuits_0_operating_modes_dhw_active' => [
+                'value'   => true,
+                'profile' => '~Switch',
+            ],
+            'heating_configuration_multiFamilyHouse_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_power_consumption_dhw_day' => [
+                'value'   => 0.0,
+                'profile' => '~Electricity',
+            ],
+            'heating_power_consumption_dhw_week' => [
+                'value'   => 0.0,
+                'profile' => '~Electricity',
+            ],
+            'heating_power_consumption_dhw_month' => [
+                'value'   => 0.1,
+                'profile' => '~Electricity',
+            ],
+            'heating_power_consumption_dhw_year' => [
+                'value'   => 0.1,
+                'profile' => '~Electricity',
+            ],
+            'heating_dhw_temperature_main_value' => [
+                'value'   => 50.0,
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_modes_dhwAndHeating_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_boiler_temperature_value' => [
+                'value'   => 20.0,
+                'profile' => '~Temperature',
+            ],
+            'heating_power_consumption_day' => [
+                'value'   => 0.0,
+                'profile' => '~Electricity',
+            ],
+            'heating_power_consumption_week' => [
+                'value'   => 0.2,
+                'profile' => '~Electricity',
+            ],
+            'heating_power_consumption_month' => [
+                'value'   => 1.3,
+                'profile' => '~Electricity',
+            ],
+            'heating_power_consumption_year' => [
+                'value'   => 1.3,
+                'profile' => '~Electricity',
+            ],
+            'heating_dhw_schedule_active' => [
+                'value'   => true,
+                'profile' => '~Switch',
+            ],
+            'heating_burner_modulation_value' => [
+                'value'   => 0.0,
+                'profile' => '',
+            ],
+            'heating_flue_sensors_temperature_main_value' => [
+                'value'   => 36.7,
+                'profile' => '~Temperature',
+            ],
+            'heating_circuits_0_operating_programs_comfort_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_programs_comfort_temperature' => [
+                'value'   => 70.0,
+                'profile' => '~Temperature',
+            ],
+            'heating_operating_programs_holidayAtHome_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_programs_forcedLastFromSchedule_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_dhw_active' => [
+                'value'   => true,
+                'profile' => '~Switch',
+            ],
+            'heating_gas_consumption_heating_day' => [
+                'value'   => 0.0,
+                'profile' => '~Gas',
+            ],
+            'heating_gas_consumption_heating_week' => [
+                'value'   => 0.0,
+                'profile' => '~Gas',
+            ],
+            'heating_gas_consumption_heating_month' => [
+                'value'   => 0.1,
+                'profile' => '~Gas',
+            ],
+            'heating_gas_consumption_heating_year' => [
+                'value'   => 0.1,
+                'profile' => '~Gas',
+            ],
+            'heating_circuits_0_operating_programs_holidayAtHome_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_operating_programs_holiday_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_heat_production_day' => [
+                'value'   => 0.0,
+                'profile' => '~Electricity',
+            ],
+            'heating_heat_production_week' => [
+                'value'   => 0.0,
+                'profile' => '~Electricity',
+            ],
+            'heating_heat_production_month' => [
+                'value'   => 1.0,
+                'profile' => '~Electricity',
+            ],
+            'heating_heat_production_year' => [
+                'value'   => 1.0,
+                'profile' => '~Electricity',
+            ],
+            'heating_boiler_serial_value' => [
+                'value'   => '7722310001608124',
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_programs_holiday_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_dhw_oneTimeCharge_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_power_consumption_heating_day' => [
+                'value'   => 0.0,
+                'profile' => '~Electricity',
+            ],
+            'heating_power_consumption_heating_week' => [
+                'value'   => 0.2,
+                'profile' => '~Electricity',
+            ],
+            'heating_power_consumption_heating_month' => [
+                'value'   => 1.2,
+                'profile' => '~Electricity',
+            ],
+            'heating_power_consumption_heating_year' => [
+                'value'   => 1.2,
+                'profile' => '~Electricity',
+            ],
+            'heating_device_time_offset_value' => [
+                'value'   => 119.0,
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_programs_active_value' => [
+                'value'   => 'standby',
+                'profile' => '',
+            ],
+            'heating_circuits_0_active' => [
+                'value'   => true,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_name' => [
+                'value'   => '',
+                'profile' => '',
+            ],
+            'heating_configuration_regulation_mode' => [
+                'value'   => 'ConstantControlled',
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_modes_standby_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_dhw_temperature_value' => [
+                'value'   => 50.0,
+                'profile' => '',
+            ],
+            'heating_circuits_0_heating_schedule_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_gas_consumption_dhw_day' => [
+                'value'   => 0.0,
+                'profile' => '~Gas',
+            ],
+            'heating_gas_consumption_dhw_week' => [
+                'value'   => 1.1,
+                'profile' => '~Gas',
+            ],
+            'heating_gas_consumption_dhw_month' => [
+                'value'   => 4.2,
+                'profile' => '~Gas',
+            ],
+            'heating_gas_consumption_dhw_year' => [
+                'value'   => 4.2,
+                'profile' => '~Gas',
+            ],
+            'device_serial_value' => [
+                'value'   => '7722310001608124',
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_modes_active_value' => [
+                'value'   => 'dhw',
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_programs_standby_active' => [
+                'value'   => true,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_geofencing_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_1_geofencing_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_2_geofencing_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_3_geofencing_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
         ];
 
         $this->assertEquals(count($testValues), count($values));
