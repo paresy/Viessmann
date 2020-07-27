@@ -56,17 +56,20 @@ class VitoConnect extends IPSModule
         parent::ApplyChanges();
 
         if ($this->ReadPropertyString('Username') && $this->ReadPropertyString('Username')) {
-            //Fetch Gateway ID and Serial for later reuse
-            $gateway = $this->FetchData($this->gateway_data_url);
+            //Fetch Gateway ID and Serial for later reuse. 
+            //We do not need to do this if IP-Symcon is restarting. Those values only change if Username/Password changed
+            if(IPS_GetKernelRunlevel() == KR_READY) {
+                $gateway = $this->FetchData($this->gateway_data_url);
 
-            $id = $gateway->entities[0]->properties->id;
-            $serial = $gateway->entities[0]->entities[0]->properties->serial;
+                $id = $gateway->entities[0]->properties->id;
+                $serial = $gateway->entities[0]->entities[0]->properties->serial;
 
-            $this->SendDebug('GatewayID', $id, 0);
-            $this->SendDebug('GatewaySerial', print_r($serial, true), 0);
+                $this->SendDebug('GatewayID', $id, 0);
+                $this->SendDebug('GatewaySerial', print_r($serial, true), 0);
 
-            $this->WriteAttributeInteger('GatewayID', $id);
-            $this->WriteAttributeString('GatewaySerial', $serial);
+                $this->WriteAttributeInteger('GatewayID', $id);
+                $this->WriteAttributeString('GatewaySerial', $serial);
+            }
 
             //Set Timer only if valid credential are available
             $this->SetTimerInterval('Update', $this->ReadPropertyInteger('Interval') * 60 * 1000);
