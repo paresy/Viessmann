@@ -55,7 +55,7 @@ class VitoConnect extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
 
-        if ($this->ReadPropertyString('Username') && $this->ReadPropertyString('Username')) {
+        if ($this->ReadPropertyString('Username') && $this->ReadPropertyString('Password')) {
             //Fetch Gateway ID and Serial for later reuse. 
             //We do not need to do this if IP-Symcon is restarting. Those values only change if Username/Password changed
             if(IPS_GetKernelRunlevel() == KR_READY) {
