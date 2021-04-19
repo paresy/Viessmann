@@ -31,6 +31,12 @@ class ViessmannDataTest extends TestCase
         if (!IPS\ProfileManager::variableProfileExists('~Gas')) {
             IPS\ProfileManager::createVariableProfile('~Gas', 2);
         }
+        if (!IPS\ProfileManager::variableProfileExists('~Watt.3680')) {
+            IPS\ProfileManager::createVariableProfile('~Watt.3680', 2);
+        }
+        if (!IPS\ProfileManager::variableProfileExists('~Power')) {
+            IPS\ProfileManager::createVariableProfile('~Power', 2);
+        }
 
         parent::setUp();
     }
@@ -41,6 +47,7 @@ class ViessmannDataTest extends TestCase
         $interface = IPS\InstanceManager::getInstanceInterface($iid);
         $interface->DebugParseDeviceData(json_decode(file_get_contents(__DIR__ . '/data/1.json')));
 
+        $values = [];
         foreach (IPS_GetChildrenIDs($iid) as $id) {
             $values[IPS_GetObject($id)['ObjectIdent']] = GetValue($id);
         }
@@ -115,6 +122,7 @@ class ViessmannDataTest extends TestCase
         $interface = IPS\InstanceManager::getInstanceInterface($iid);
         $interface->DebugParseDeviceData(json_decode(file_get_contents(__DIR__ . '/data/2.json')));
 
+        $values = [];
         foreach (IPS_GetChildrenIDs($iid) as $id) {
             $values[IPS_GetObject($id)['ObjectIdent']] = GetValue($id);
         }
@@ -187,6 +195,7 @@ class ViessmannDataTest extends TestCase
         $interface = IPS\InstanceManager::getInstanceInterface($iid);
         $interface->DebugParseDeviceData(json_decode(file_get_contents(__DIR__ . '/data/3.json')));
 
+        $values = [];
         foreach (IPS_GetChildrenIDs($iid) as $id) {
             $values[IPS_GetObject($id)['ObjectIdent']] = [
                 'value'   => IPS_GetVariable($id)['VariableValue'],
@@ -503,6 +512,372 @@ class ViessmannDataTest extends TestCase
             'heating_circuits_3_geofencing_active' => [
                 'value'   => false,
                 'profile' => '~Switch',
+            ],
+        ];
+
+        $this->assertEquals(count($testValues), count($values));
+
+        foreach ($testValues as $key => $value) {
+            $this->assertTrue(isset($values[$key]));
+            $this->assertEquals($values[$key], $value);
+        }
+    }
+
+    public function testData4(): void
+    {
+        $iid = IPS_CreateInstance('{3BF2B1B8-BD31-4A06-8C70-FD0FF95FE22E}');
+        $interface = IPS\InstanceManager::getInstanceInterface($iid);
+        $interface->DebugParseDeviceData(json_decode(file_get_contents(__DIR__ . '/data/4.json')));
+
+        $values = [];
+        foreach (IPS_GetChildrenIDs($iid) as $id) {
+            $values[IPS_GetObject($id)['ObjectIdent']] = [
+                'value'   => IPS_GetVariable($id)['VariableValue'],
+                'profile' => IPS_GetVariable($id)['VariableProfile']
+            ];
+        }
+
+        //var_export($values);
+        $testValues = [
+            'heating_circuits_0_active' => [
+                'value'   => true,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_name' => [
+                'value'   => 'Fussbodenheizung',
+                'profile' => '',
+            ],
+            'heating_circuits_2_temperature_value' => [
+                'value'   => 0.0,
+                'profile' => '',
+            ],
+            'heating_dhw_temperature_main_value' => [
+                'value'   => 45.0,
+                'profile' => '',
+            ],
+            'heating_device_mainECU_runtime' => [
+                'value'   => 214685558.0,
+                'profile' => '',
+            ],
+            'heating_sensors_temperature_return_value' => [
+                'value'   => 24.8,
+                'profile' => '~Temperature',
+            ],
+            'heating_circuits_0_sensors_temperature_supply_value' => [
+                'value'   => 24.8,
+                'profile' => '~Temperature',
+            ],
+            'heating_circuits_0_operating_programs_normal_active' => [
+                'value'   => true,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_programs_normal_demand' => [
+                'value'   => 'unknown',
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_programs_normal_temperature' => [
+                'value'   => 19.0,
+                'profile' => '~Temperature',
+            ],
+            'heating_compressors_0_power_consumption_current_value' => [
+                'value'   => 0.0,
+                'profile' => '~Watt.3680',
+            ],
+            'heating_circuits_0_operating_modes_dhwAndHeatingCooling_active' => [
+                'value'   => true,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_modes_active_value' => [
+                'value'   => 'dhwAndHeatingCooling',
+                'profile' => '',
+            ],
+            'heating_circuits_0_heating_curve_shift' => [
+                'value'   => -2.0,
+                'profile' => '',
+            ],
+            'heating_circuits_0_heating_curve_slope' => [
+                'value'   => 0.3,
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_programs_comfort_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_programs_comfort_demand' => [
+                'value'   => 'unknown',
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_programs_comfort_temperature' => [
+                'value'   => 20.0,
+                'profile' => '~Temperature',
+            ],
+            'heating_compressors_0_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_compressors_0_phase' => [
+                'value'   => 'off',
+                'profile' => '',
+            ],
+            'heating_circuits_1_temperature_value' => [
+                'value'   => 0.0,
+                'profile' => '',
+            ],
+            'heating_secondaryCircuit_sensors_temperature_supply_value' => [
+                'value'   => 24.8,
+                'profile' => '~Temperature',
+            ],
+            'heating_circuits_0_operating_modes_forcedNormal_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_programs_screedDrying_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_programs_screedDrying_profile' => [
+                'value'   => 'none',
+                'profile' => '',
+            ],
+            'heating_compressors_0_heat_production_current_value' => [
+                'value'   => 0.0,
+                'profile' => '~Watt.3680',
+            ],
+            'heating_circuits_0_operating_modes_forcedReduced_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_1_heating_curve_shift' => [
+                'value'   => 0.0,
+                'profile' => '',
+            ],
+            'heating_circuits_1_heating_curve_slope' => [
+                'value'   => 0.6,
+                'profile' => '',
+            ],
+            'heating_configuration_cooling_mode' => [
+                'value'   => 'active',
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_modes_normalStandby_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_operating_programs_holiday_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_temperature_levels_min' => [
+                'value'   => 15.0,
+                'profile' => '~Temperature',
+            ],
+            'heating_circuits_0_temperature_levels_max' => [
+                'value'   => 45.0,
+                'profile' => '~Temperature',
+            ],
+            'heating_dhw_pumps_circulation_schedule_active' => [
+                'value'   => true,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_modes_cooling_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_dhw_oneTimeCharge_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_compressor_statistics_starts' => [
+                'value'   => 54177072.0,
+                'profile' => '',
+            ],
+            'heating_compressor_statistics_hours' => [
+                'value'   => 15049.2,
+                'profile' => '',
+            ],
+            'heating_dhw_temperature_value' => [
+                'value'   => 45.0,
+                'profile' => '',
+            ],
+            'heating_dhw_temperature_temp2_value' => [
+                'value'   => 50.0,
+                'profile' => '',
+            ],
+            'heating_dhw_sensors_temperature_hotWaterStorage_top_value' => [
+                'value'   => 43.7,
+                'profile' => '~Temperature',
+            ],
+            'heating_boiler_serial_value' => [
+                'value'   => '7502078401718109',
+                'profile' => '',
+            ],
+            'heating_circuits_0_temperature_value' => [
+                'value'   => 26.0,
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_programs_screedDrying_heatpump_useapproved' => [
+                'value'   => false,
+                'profile' => '',
+            ],
+            'heating_device_initialSetup_date' => [
+                'value'   => '2014-04-02',
+                'profile' => '',
+            ],
+            'heating_circuits_0_heating_schedule_active' => [
+                'value'   => true,
+                'profile' => '~Switch',
+            ],
+            'heating_compressor_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_coolingCircuits_0_type_value' => [
+                'value'   => 'unknown',
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_programs_eco_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_programs_eco_temperature' => [
+                'value'   => 19.0,
+                'profile' => '~Temperature',
+            ],
+            'heating_sensors_temperature_outside_value' => [
+                'value'   => 4.2,
+                'profile' => '~Temperature',
+            ],
+            'heating_secondaryCircuit_sensors_temperature_return_value' => [
+                'value'   => 24.8,
+                'profile' => '~Temperature',
+            ],
+            'heating_coolingCircuits_0_eev_type_value' => [
+                'value'   => 'Airwell',
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_modes_dhw_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_compressors_0_statistics_starts' => [
+                'value'   => 54177072.0,
+                'profile' => '',
+            ],
+            'heating_compressors_0_statistics_hours' => [
+                'value'   => 15049.2,
+                'profile' => '',
+            ],
+            'heating_compressors_0_statistics_hoursloadclassone' => [
+                'value'   => 1226.0,
+                'profile' => '',
+            ],
+            'heating_compressors_0_statistics_hoursloadclasstwo' => [
+                'value'   => 4279.0,
+                'profile' => '',
+            ],
+            'heating_compressors_0_statistics_hoursloadclassthree' => [
+                'value'   => 7628.0,
+                'profile' => '',
+            ],
+            'heating_compressors_0_statistics_hoursloadclassfour' => [
+                'value'   => 794.0,
+                'profile' => '',
+            ],
+            'heating_compressors_0_statistics_hoursloadclassfive' => [
+                'value'   => 383.0,
+                'profile' => '',
+            ],
+            'heating_device_time_offset_value' => [
+                'value'   => 120.0,
+                'profile' => '',
+            ],
+            'heating_circuits_0_circulation_schedule_active' => [
+                'value'   => true,
+                'profile' => '~Switch',
+            ],
+            'heating_dhw_schedule_active' => [
+                'value'   => true,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_2_heating_curve_shift' => [
+                'value'   => 0.0,
+                'profile' => '',
+            ],
+            'heating_circuits_2_heating_curve_slope' => [
+                'value'   => 0.6,
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_programs_reduced_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_programs_reduced_demand' => [
+                'value'   => 'unknown',
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_programs_reduced_temperature' => [
+                'value'   => 18.0,
+                'profile' => '~Temperature',
+            ],
+            'heating_circuits_0_operating_programs_fixed_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_compressors_0_power_value' => [
+                'value'   => 10.0,
+                'profile' => '~Power',
+            ],
+            'heating_dhw_active' => [
+                'value'   => true,
+                'profile' => '~Switch',
+            ],
+            'heating_configuration_multiFamilyHouse_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_programs_active_value' => [
+                'value'   => 'normal',
+                'profile' => '',
+            ],
+            'heating_dhw_temperature_hysteresis_value' => [
+                'value'   => 5.0,
+                'profile' => '',
+            ],
+            'heating_dhw_charging_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_circuits_0_operating_modes_standby_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_heatingRod_status_overall' => [
+                'value'   => false,
+                'profile' => '',
+            ],
+            'heating_heatingRod_status_level1' => [
+                'value'   => false,
+                'profile' => '',
+            ],
+            'heating_heatingRod_status_level2' => [
+                'value'   => false,
+                'profile' => '',
+            ],
+            'heating_heatingRod_status_level3' => [
+                'value'   => false,
+                'profile' => '',
+            ],
+            'heating_circuits_0_operating_programs_standby_active' => [
+                'value'   => false,
+                'profile' => '~Switch',
+            ],
+            'heating_controller_serial_value' => [
+                'value'   => '????????????????',
+                'profile' => '',
+            ],
+            'heating_dhw_sensors_temperature_hotWaterStorage_value' => [
+                'value'   => 43.7,
+                'profile' => '~Temperature',
             ],
         ];
 

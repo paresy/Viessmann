@@ -342,7 +342,7 @@ class VitoConnect extends IPSModule
                     $searchUnit = function ($id) use ($entity)
                     {
                         foreach ($entity->properties as $name => $property) {
-                            if ($entity->class[0] == $id && $name == 'unit') {
+                            if ($entity->class[0] == $id && in_array($name, ['unit', 'runtimeUnit', 'minUnit', 'maxUnit'])) {
                                 return $property->value;
                             }
                         }
@@ -363,6 +363,12 @@ class VitoConnect extends IPSModule
                                 return 'Temperature';
                             case 'kilowattHour':
                                 return 'Electricity';
+                            case 'watt':
+                                return 'Watt.3680';
+                            case 'kilowatt':
+                                return 'Power';
+                            case 'seconds':
+                                return ''; //We currently  do not have a profile for seconds
                             default:
                                 if (isset($this->failOnUnexpected)) {
                                     throw new Exception(sprintf('Unknown unit: %s', $unit));
@@ -391,8 +397,20 @@ class VitoConnect extends IPSModule
                         case 'name':
                         case 'hours':
                         case 'starts':
+                        case 'runtime':
                         case 'errorCode':
                         case 'mode':
+                        case 'demand':
+                        case 'phase':
+                        case 'profile':
+                        case 'min':
+                        case 'max':
+                        case 'useApproved':
+                        case 'date':
+                        case 'overall':
+                        case 'level1':
+                        case 'level2':
+                        case 'level3':
                         case 'hoursLoadClassOne':
                         case 'hoursLoadClassTwo':
                         case 'hoursLoadClassThree':
@@ -420,7 +438,16 @@ class VitoConnect extends IPSModule
                             //I don't need this
                             break;
                         case 'unit':
+                        case 'runtimeUnit':
+                        case 'minUnit':
+                        case 'maxUnit':
                             //We use this for profile detection above
+                            break;
+                        case 'dateFormat':
+                            //We show it as string and don't care
+                            break;
+                        case 'type':
+                            //This describes toplevel types
                             break;
                         case 'day':
                         case 'week':
@@ -433,9 +460,9 @@ class VitoConnect extends IPSModule
                             break;
                         default:
                             if (isset($this->failOnUnexpected)) {
-                                throw new Exception($entity->class[0] . ' = ' . print_r($property, true));
+                                throw new Exception($entity->class[0] . ' | ' . $name . ' = ' . print_r($property, true));
                             } else {
-                                $this->SendDebug($name, $entity->class[0] . ' = ' . print_r($property, true), 0);
+                                $this->SendDebug($name, $entity->class[0] . ' | ' . $name . ' = ' . print_r($property, true), 0);
                             }
                             break;
                     }
