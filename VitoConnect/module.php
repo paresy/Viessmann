@@ -302,8 +302,12 @@ class VitoConnect extends IPSModule
                     $this->RegisterVariableString($ident, computeName($id, $name), $profile);
                     $this->SetValue($ident, $value);
                     break;
+                case 'object':
+                    $this->RegisterVariableString($ident, computeName($id, $name), $profile);
+                    $this->SetValue($ident, json_encode($value));
+                    break;
                 default:
-                    die('Unsupported variable type:' . $type);
+                    die('Unsupported variable type:' . $type . ', id: ' . $id . ', value:' . print_r($value, true));
             }
         };
 
@@ -367,6 +371,8 @@ class VitoConnect extends IPSModule
                                 return 'Watt.3680';
                             case 'kilowatt':
                                 return 'Power';
+                            case 'percent':
+                                return 'Intensity.100';
                             case 'seconds':
                                 return ''; //We currently  do not have a profile for seconds
                             default:
@@ -416,6 +422,20 @@ class VitoConnect extends IPSModule
                         case 'hoursLoadClassThree':
                         case 'hoursLoadClassFour':
                         case 'hoursLoadClassFive':
+                        case 'currentDay':
+                        case 'lastSevenDays':
+                        case 'currentMonth':
+                        case 'lastMonth':
+                        case 'currentYear':
+                        case 'lastYear':
+                        case 'countOne':
+                        case 'countTwo':
+                        case 'countThree':
+                        case 'countFour':
+                        case 'countFive':
+                        case 'countSix':
+                        case 'countSeven':
+                        case 'position':
                             $updateVariable($entity->class[0], $name, $property->type, $property->value, $unitToProfile($searchUnit($entity->class[0])));
                             break;
                         case 'temperature':
@@ -425,16 +445,35 @@ class VitoConnect extends IPSModule
                             break;
                         case 'entries':
                         case 'enabled':
+                        case 'weekdays':
+                        case 'startHour':
+                        case 'startMinute':
                             //Unsupported
                             break;
                         case 'start':
                         case 'end':
+                        case 'dayValueReadAt':
+                        case 'weekValueReadAt':
+                        case 'monthValueReadAt':
+                        case 'yearValueReadAt':
+                        case 'timestampOne':
+                        case 'timestampTwo':
+                        case 'timestampThree':
+                        case 'timestampFour':
+                        case 'timestampFive':
+                        case 'timestampSix':
+                        case 'timestampSeven':
                             //We may convert this to our UnixTimeStamp
                             break;
                         case 'serviceDue':
                         case 'serviceIntervalMonths':
                         case 'activeMonthSinceLastService':
                         case 'lastService':
+                        case 'latitude':
+                        case 'longitude':
+                        case 'altitude':
+                        case 'horizontal':
+                        case 'vertical':
                             //I don't need this
                             break;
                         case 'unit':
