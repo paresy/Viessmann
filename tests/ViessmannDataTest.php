@@ -37,8 +37,8 @@ class ViessmannDataTest extends TestCase
         if (!IPS\ProfileManager::variableProfileExists('~Power')) {
             IPS\ProfileManager::createVariableProfile('~Power', 2);
         }
-        if (!IPS\ProfileManager::variableProfileExists('~Intensity.100')) {
-            IPS\ProfileManager::createVariableProfile('~Intensity.100', 1);
+        if (!IPS\ProfileManager::variableProfileExists('~Valve.F')) {
+            IPS\ProfileManager::createVariableProfile('~Valve.F', 2);
         }
 
         parent::setUp();
@@ -1356,7 +1356,7 @@ class ViessmannDataTest extends TestCase
             ],
             'heating_burner_modulation_value' => [
                 'value'   => 63.7,
-                'profile' => '~Intensity.100',
+                'profile' => '~Valve.F',
             ],
             'heating_device_time_offset_value' => [
                 'value'   => '{"hour":9,"minutes":32,"seconds":0}',
@@ -1420,7 +1420,7 @@ class ViessmannDataTest extends TestCase
             ],
             'heating_burners_0_modulation_value' => [
                 'value'   => 63.7,
-                'profile' => '~Intensity.100',
+                'profile' => '~Valve.F',
             ],
             'heating_gas_consumption_summary_dhw_currentday' => [
                 'value'   => 0.0,
