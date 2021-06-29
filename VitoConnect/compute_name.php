@@ -85,7 +85,7 @@ define('READABLE_NAMES', [
     'hoursLoadClassTwo'   => ' ' . '(Laufzeit Belastungsklasse 2)',
     'hoursLoadClassOne'   => ' ' . '(Laufzeit Belastungsklasse 1)',
     'start'               => ' ' . '(Start)',
-    'end'                 > ' ' . '(Ende)',
+    'end'                 => ' ' . '(Ende)',
 ]);
 
 // Generated names are currently German only, as we only know the names within the German app
