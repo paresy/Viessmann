@@ -10,6 +10,6 @@
 	"actions":
 	[
 		{ "type": "Button", "label": "Register", "link": true, "onClick": "VVC_Register($id);" },
-		{ "type": "Button", "label": "Update", "onClick": "echo VVC_Update($id);" }
+		{ "type": "Button", "name": "Update", "label": "Update", "onClick": "echo VVC_Update($id);" }
 	]
 }

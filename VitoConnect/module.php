@@ -100,7 +100,7 @@ class VitoConnect extends WebHookModule
         
         $data->elements[1]->value = $this->GetCallbackURL();
             
-        $data->actions[0]->enabled = $this->ReadPropertyString('ClientID');
+        $data->actions[0]->enabled = strlen($this->ReadPropertyString('ClientID')) > 0;
         $data->actions[1]->enabled = strlen($this->ReadAttributeString('Token')) > 0;
 
         return json_encode($data);
@@ -153,6 +153,8 @@ class VitoConnect extends WebHookModule
         $this->SetBuffer('Expires', $data->expires_in);
         
         $this->Initialize();
+        
+        $this->UpdateFormField("Update", "enabled", true);
         
         echo 'OK';
     }
