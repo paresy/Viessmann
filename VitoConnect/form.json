@@ -2,7 +2,7 @@
 	"elements": 
 	[
 		{ "type": "Label", "caption": "Please register a unique ClientID on https://developer.viessmann.com/" },
-		{ "type": "ValidationTextBox", "caption": "Use this URL as your callback URL", "width":  "600px" },
+		{ "type": "ValidationTextBox", "caption": "Use this URL as your Redirect URI", "width":  "600px" },
 		{ "type": "Label", "caption": "" },
 		{ "name": "ClientID", "type": "ValidationTextBox", "caption": "ClientID" },
 		{ "type": "NumberSpinner", "name": "Interval", "caption": "Interval", "suffix": "Minutes" }

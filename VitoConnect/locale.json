@@ -1,11 +1,14 @@
 {
     "translations": {
         "de": {
-            "Username": "Benutzername",
-            "Password": "Passwort",
+            "ClientID": "ClientID",
             "Interval": "Intervall",
             "Minutes": "Minuten",
-            "Update": "Aktualisieren"
+            "Update": "Aktualisieren",
+            "Register": "Registrieren",
+            "Use this URL as your Redirect URI": "Diese URL als Redirect URI verwenden",
+            "Please register a unique ClientID on https://developer.viessmann.com/": "Bitte eine eindeutige ClientID unter https://developer.viessmann.com/ registrieren",
+            "Symcon Connect must be enabled!": "Symcon Connect muss aktiv sein!"
         }
     }
 }
