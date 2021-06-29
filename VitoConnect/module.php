@@ -156,14 +156,14 @@ class VitoConnect extends WebHookModule
         
         $this->UpdateFormField("Update", "enabled", true);
         
-        echo 'OK';
+        echo $this->Translate("Successful. You can now close this window and press 'Update' inside the instance.");
     }
     
     private function Initialize()
     {
         //Fetch Installation ID and Gateway Serial for later reuse.
         $installation = $this->FetchData($this->installation_data_url);
-        $this->SendDebug('InstallationID', $installation->data[0]->id, 0);
+        $this->SendDebug("InstallationID', $installation->data[0]->id, 0);
         $this->SendDebug('GatewaySerial', $installation->data[0]->gateways[0]->serial, 0);
 
         $this->WriteAttributeInteger('InstallationID', $installation->data[0]->id);
