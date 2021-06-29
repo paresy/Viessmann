@@ -1,12 +1,15 @@
 {
-	"elements":
+	"elements": 
 	[
-		{ "name": "Username", "type": "ValidationTextBox", "caption": "Username" },
-		{ "name": "Password", "type": "PasswordTextBox", "caption": "Password" },
+		{ "type": "Label", "caption": "Please register a unique ClientID on https://developer.viessmann.com/" },
+		{ "type": "ValidationTextBox", "caption": "Use this URL as your callback URL", "width":  "600px" },
+		{ "type": "Label", "caption": "" },
+		{ "name": "ClientID", "type": "ValidationTextBox", "caption": "ClientID" },
 		{ "type": "NumberSpinner", "name": "Interval", "caption": "Interval", "suffix": "Minutes" }
 	],
 	"actions":
 	[
+		{ "type": "Button", "label": "Register", "link": true, "onClick": "VVC_Register($id);" },
 		{ "type": "Button", "label": "Update", "onClick": "echo VVC_Update($id);" }
 	]
 }

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+include_once __DIR__ . '/../libs/WebHookModule.php';
 include_once __DIR__ . '/compute_name.php';
 
 if (defined('PHPUNIT_TESTSUITE')) {
@@ -19,31 +20,33 @@ if (defined('PHPUNIT_TESTSUITE')) {
     }
 }
 
-class VitoConnect extends IPSModule
+class VitoConnect extends WebHookModule
 {
     use Simulate;
-    private $client_id = '79742319e39245de5f91d15ff4cac2a8';
-    private $client_secret = '8ad97aceb92c5892e102b093c7c083fa';
 
-    private $authorize_url = 'https://iam.viessmann.com/idp/v1/authorize';
-    private $token_url = 'https://iam.viessmann.com/idp/v1/token';
+    private $authorize_url = 'https://iam.viessmann.com/idp/v2/authorize';
+    private $token_url = 'https://iam.viessmann.com/idp/v2/token';
 
-    private $gateway_data_url = 'https://api.viessmann-platform.io/general-management/installations?expanded=true';
-    private $device_data_url = 'https://api.viessmann-platform.io/operational-data/installations/%s/gateways/%s/devices/0/features/';
+    private $installation_data_url = 'https://api.viessmann.com/iot/v1/equipment/installations?includeGateways=true';
+    private $device_data_url = 'https://api.viessmann.com/iot/v1/equipment/installations/%s/gateways/%s/devices/0/features/';
 
-    private $callback_uri = 'vicare://oauth-callback/everest';
-
+    public function __construct($InstanceID)
+    {
+        parent::__construct($InstanceID, "viessmann/" . $InstanceID);
+    }
+    
     public function Create()
     {
         //Never delete this line!
         parent::Create();
 
-        $this->RegisterPropertyString('Username', '');
-        $this->RegisterPropertyString('Password', '');
-
+        $this->RegisterPropertyString('ClientID', '');
+        
         $this->RegisterPropertyInteger('Interval', 15);
 
-        $this->RegisterAttributeInteger('GatewayID', 0);
+        $this->RegisterAttributeString('Token', '');
+        
+        $this->RegisterAttributeInteger('InstallationID', 0);
         $this->RegisterAttributeString('GatewaySerial', '');
 
         $this->RegisterTimer('Update', 0, 'VVC_Update($_IPS[\'TARGET\']);');
@@ -55,29 +58,116 @@ class VitoConnect extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
 
-        if ($this->ReadPropertyString('Username') && $this->ReadPropertyString('Password')) {
-            //Fetch Gateway ID and Serial for later reuse.
-            //We do not need to do this if IP-Symcon is restarting. Those values only change if Username/Password changed
-            if (IPS_GetKernelRunlevel() == KR_READY) {
-                $gateway = $this->FetchData($this->gateway_data_url);
-
-                $id = $gateway->entities[0]->properties->id;
-                $serial = $gateway->entities[0]->entities[0]->properties->serial;
-
-                $this->SendDebug('GatewayID', $id, 0);
-                $this->SendDebug('GatewaySerial', print_r($serial, true), 0);
-
-                $this->WriteAttributeInteger('GatewayID', $id);
-                $this->WriteAttributeString('GatewaySerial', $serial);
-            }
-
-            //Set Timer only if valid credential are available
+        //Set Timer only if valid credential are available
+        if ($this->ReadAttributeString('Token')) {
             $this->SetTimerInterval('Update', $this->ReadPropertyInteger('Interval') * 60 * 1000);
         } else {
             $this->SetTimerInterval('Update', 0);
         }
     }
 
+    private function GetCallbackURL()
+    {
+        $cc_id = IPS_GetInstanceListByModuleID("{9486D575-BE8C-4ED8-B5B5-20930E26DE6F}")[0];
+        $cc_url = @CC_GetConnectURL($cc_id);
+        
+        if ($cc_url) {
+            return $cc_url . "/hook/viessmann/" . $this->InstanceID;
+        }
+        
+        return $this->Translate('Symcon Connect must be enabled!');
+    }
+    
+    public function Register()
+    {
+        $base64url_encode = function ($plainText) {
+            $base64 = base64_encode($plainText);
+            $base64 = trim($base64, "=");
+            $base64url = strtr($base64, '+/', '-_');
+            return ($base64url);
+        };
+            
+        $random = bin2hex(random_bytes(32));
+        $this->SetBuffer("Verifier", $base64url_encode(pack('H*', $random)));
+        $this->SetBuffer("Challenge", $base64url_encode(pack('H*', hash('sha256', $this->GetBuffer("Verifier")))));
+        
+        echo "https://iam.viessmann.com/idp/v2/authorize?client_id=" . $this->ReadPropertyString("ClientID")."&redirect_uri=" . $this->GetCallbackURL() . "&response_type=code&code_challenge=" . $this->GetBuffer("Verifier") . "&scope=IoT User offline_access";
+    }
+    
+    public function GetConfigurationForm()
+    {
+        $data = json_decode(file_get_contents(__DIR__ . "/form.json"));
+        
+        $data->elements[1]->value = $this->GetCallbackURL();
+            
+        $data->actions[0]->enabled = $this->ReadPropertyString('ClientID');
+        $data->actions[1]->enabled = strlen($this->ReadAttributeString('Token')) > 0;
+
+        return json_encode($data);
+    }
+    
+    protected function ProcessHookData()
+    {
+        $this->SendDebug('GET', print_r($_GET, true), 0);
+        $this->SendDebug('POST', file_get_contents("php://input"), 0);
+        
+        $this->SendDebug('ExchangeCodeToRefreshToken', '', 0);
+
+        $options = [
+            'http' => [
+                'header'  => "Content-Type: application/x-www-form-urlencoded;charset=utf-8\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query([
+                    'client_id'     => $this->ReadPropertyString('ClientID'),
+                    'code'          => $_GET['code'],
+                    'redirect_uri'  => $this->GetCallbackURL(),
+                    'grant_type'    => 'authorization_code',
+                    'code_verifier' => $this->GetBuffer('Verifier')
+                ]),
+                "ignore_errors" => true
+            ]
+        ];
+        $context = stream_context_create($options);
+        $result = file_get_contents($this->token_url, false, $context);
+
+        $this->SendDebug('RESULT', $result, 0);
+        
+        $data = json_decode($result);
+
+        if ($data === null) {
+            die('Invalid response while fetching access token!');
+        }
+
+        if (isset($data->error)) {
+            die($data->error);
+        }
+
+        if (!isset($data->token_type) || $data->token_type != 'Bearer') {
+            die('Bearer Token expected');
+        }
+
+        $this->SendDebug('GotRefreshToken', print_r($data, true), 0);
+        
+        $this->WriteAttributeString('Token', $data->refresh_token);
+        $this->SetBuffer('Token', $data->access_token);
+        $this->SetBuffer('Expires', $data->expires_in);
+        
+        $this->Initialize();
+        
+        echo 'OK';
+    }
+    
+    private function Initialize()
+    {
+        //Fetch Installation ID and Gateway Serial for later reuse.
+        $installation = $this->FetchData($this->installation_data_url);
+        $this->SendDebug('InstallationID', $installation->data[0]->id, 0);
+        $this->SendDebug('GatewaySerial', $installation->data[0]->gateways[0]->serial, 0);
+
+        $this->WriteAttributeInteger('InstallationID', $installation->data[0]->id);
+        $this->WriteAttributeString('GatewaySerial', $installation->data[0]->gateways[0]->serial);
+    }
+    
     public function Update()
     {
         $this->ParseDeviceData($this->RequestDeviceData());
@@ -108,88 +198,50 @@ class VitoConnect extends IPSModule
         }
     }
 
-    private function FetchAuthorizationCode()
-    {
-        $this->SendDebug('FetchAuthorizationCode', '', 0);
-
-        $basicAuth = base64_encode($this->ReadPropertyString('Username') . ':' . $this->ReadPropertyString('Password'));
-
-        $options = [
-            'http' => [
-                'header'  => 'Authorization: Basic ' . $basicAuth . "\r\nContent-Type: application/x-www-form-urlencoded\r\n",
-                'method'  => 'POST',
-                'content' => http_build_query([
-                    'client_id'     => $this->client_id,
-                    'scope'         => 'openid',
-                    'redirect_uri'  => $this->callback_uri,
-                    'response_type' => 'code'
-                ]),
-                'follow_location' => false
-            ]
-        ];
-
-        $context = stream_context_create($options);
-        $result = file_get_contents($this->authorize_url, false, $context);
-
-        if (!preg_match('/code=(.*)"/', $result, $matches)) {
-            die('Cannot fetch authorization code. Is your username/password correct?');
-        }
-
-        $this->SendDebug('GotAuthorizationCode', $matches[1], 0);
-
-        return $matches[1];
-    }
-
-    private function FetchAccessToken($code)
-    {
-        $this->SendDebug('FetchAccessToken', '', 0);
-
-        $options = [
-            'http' => [
-                'header'  => "Content-Type: application/x-www-form-urlencoded;charset=utf-8\r\n",
-                'method'  => 'POST',
-                'content' => http_build_query([
-                    'client_id'     => $this->client_id,
-                    'client_secret' => $this->client_secret,
-                    'code'          => $code,
-                    'redirect_uri'  => $this->callback_uri,
-                    'grant_type'    => 'authorization_code'
-                ])
-            ]
-        ];
-        $context = stream_context_create($options);
-        $result = file_get_contents($this->token_url, false, $context);
-
-        $data = json_decode($result);
-
-        if ($data === null) {
-            die('Invalid response while fetching access token!');
-        }
-
-        if (isset($data->error)) {
-            die($data->error);
-        }
-
-        if (!isset($data->token_type) || $data->token_type != 'Bearer') {
-            die('Bearer Token expected');
-        }
-
-        $this->SendDebug('GotAccessToken', print_r($data, true), 0);
-
-        return $data->access_token;
-    }
-
     private function UpdateAccessToken()
     {
 
         //Request a new Access Token if required
         $accessToken = $this->GetBuffer('Token');
         if ($accessToken == '' || time() >= intval($this->GetBuffer('Expires'))) {
-            $authorizationCode = $this->FetchAuthorizationCode();
-            $accessToken = $this->FetchAccessToken($authorizationCode);
+            $this->SendDebug('UpdateAccessToken', '', 0);
+            
+            $options = [
+                'http' => [
+                    'header'  => "Content-Type: application/x-www-form-urlencoded;charset=utf-8\r\n",
+                    'method'  => 'POST',
+                    'content' => http_build_query([
+                        'client_id'     => $this->ReadPropertyString('ClientID'),
+                        'grant_type'    => 'refresh_token',
+                        'refresh_token' => $this->ReadAttributeString('Token')
+                    ]),
+                    "ignore_errors" => true
+                ]
+            ];
+            $context = stream_context_create($options);
+            $result = file_get_contents($this->token_url, false, $context);
+    
+            $this->SendDebug('RESULT', $result, 0);
+            
+            $data = json_decode($result);
+    
+            if ($data === null) {
+                die('Invalid response while fetching access token!');
+            }
+    
+            if (isset($data->error)) {
+                die($data->error);
+            }
+    
+            if (!isset($data->token_type) || $data->token_type != 'Bearer') {
+                die('Bearer Token expected');
+            }
 
-            $this->SetBuffer('Token', $accessToken);
-            $this->SetBuffer('Expires', (time() + 3600));
+            $this->WriteAttributeString('Token', $data->refresh_token);
+            $this->SetBuffer('Token', $data->access_token);
+            $this->SetBuffer('Expires', $data->expires_in);
+            
+            $accessToken = $data->access_token;
         }
 
         return $accessToken;
@@ -257,11 +309,11 @@ class VitoConnect extends IPSModule
 
     private function RequestDeviceData($action = '', $post_data = null)
     {
-        $id = $this->ReadAttributeInteger('GatewayID');
+        $id = $this->ReadAttributeInteger('InstallationID');
         $serial = $this->ReadAttributeString('GatewaySerial');
 
         if ($id == 0 || $serial == '') {
-            die('GatewayID or GatewaySerial are missing');
+            die('InstallationID or GatewaySerial are missing');
         }
 
         if ($action) {
@@ -273,21 +325,7 @@ class VitoConnect extends IPSModule
 
     private function ParseDeviceData($device)
     {
-        $updateVariable = function ($id, $name, $type, $value, $profile)
-        {
-            if ($type == 'array') {
-                //Try to autodetect the type
-                if (is_bool($value)) {
-                    $type = 'boolean';
-                } elseif (is_numeric($value)) {
-                    $type = 'number';
-                } elseif (is_string($value)) {
-                    $type = 'string';
-                } else {
-                    //do nothing and fall through to the "die" function
-                }
-            }
-
+        $updateVariable = function ($id, $name, $type, $value, $profile) {
             $ident = str_replace('.', '_', $id) . '_' . strtolower($name);
             switch ($type) {
                 case 'boolean':
@@ -302,21 +340,23 @@ class VitoConnect extends IPSModule
                     $this->RegisterVariableString($ident, computeName($id, $name), $profile);
                     $this->SetValue($ident, $value);
                     break;
+                case 'array':
                 case 'object':
                     $this->RegisterVariableString($ident, computeName($id, $name), $profile);
                     $this->SetValue($ident, json_encode($value));
+                    break;
+                case 'Schedule':
+                    // Lets skip this
                     break;
                 default:
                     die('Unsupported variable type:' . $type . ', id: ' . $id . ', value:' . print_r($value, true));
             }
         };
 
-        $updateAction = function ($id, $name, $actions)
-        {
-            $hasAction = function ($name) use ($actions)
-            {
-                foreach ($actions as $action) {
-                    if ($action->name == $name) {
+        $updateAction = function ($id, $name, $commands) {
+            $hasCommand = function ($name) use ($commands) {
+                foreach ($commands as $command) {
+                    if ($command->name == $name) {
                         return true;
                     }
                 }
@@ -326,12 +366,12 @@ class VitoConnect extends IPSModule
             $ident = str_replace('.', '_', $id) . '_' . strtolower($name);
             switch ($name) {
                 case 'active':
-                    if ($hasAction('activate') && $hasAction('deactivate')) {
+                    if ($hasCommand('activate') && $hasCommand('deactivate')) {
                         $this->EnableAction($ident);
                     }
                     break;
                 case 'temperature':
-                    if ($hasAction('setTemperature')) {
+                    if ($hasCommand('setTemperature')) {
                         $this->EnableAction($ident);
                     }
                     break;
@@ -339,172 +379,61 @@ class VitoConnect extends IPSModule
         };
 
         //Parse data
-        foreach ($device->entities as $entity) {
-            if (isset($entity->properties)) {
-                foreach ($entity->properties as $name => $property) {
-                    //Search for unit for property
-                    $searchUnit = function ($id) use ($entity)
-                    {
-                        foreach ($entity->properties as $name => $property) {
-                            if ($entity->class[0] == $id && in_array($name, ['unit', 'runtimeUnit', 'minUnit', 'maxUnit'])) {
-                                return $property->value;
-                            }
-                        }
-                        return '';
-                    };
-
-                    //Convert unit to our profiles
-                    $unitToProfile = function ($unit)
-                    {
-                        switch ($unit) {
-                            case '':
-                                return '';
-                            case 'bar':
-                                return ''; //We currently  do not have a profile for bar
-                            case 'cubicMeter':
-                                return 'Gas';
-                            case 'celsius':
-                                return 'Temperature';
-                            case 'kilowattHour':
-                                return 'Electricity';
-                            case 'watt':
-                                return 'Watt.3680';
-                            case 'kilowatt':
-                                return 'Power';
-                            case 'percent':
-                                return 'Valve.F';
-                            case 'seconds':
-                                return ''; //We currently  do not have a profile for seconds
-                            default:
-                                if (isset($this->failOnUnexpected)) {
-                                    throw new Exception(sprintf('Unknown unit: %s', $unit));
-                                } else {
-                                    $this->SendDebug('Unknown Unit', $unit, 0);
-                                }
-                                return '';
-                        }
-                    };
-
-                    switch ($name) {
-                        case 'active':
-                            //Hard code the Switch profile. It is never set through the "unit"
-                            $updateVariable($entity->class[0], $name, $property->type, $property->value, 'Switch');
-                            $updateAction($entity->class[0], $name, $entity->actions);
-                            break;
-                        case 'status':
-                        case 'statusWired':
-                        case 'statusWireless':
-                            //This is not very interesting
-                            //$updateVariable($entity->class[0], $name, $property->type, $property->value, "");
-                            break;
-                        case 'value':
-                        case 'slope':
-                        case 'shift':
-                        case 'name':
-                        case 'hours':
-                        case 'starts':
-                        case 'runtime':
-                        case 'errorCode':
-                        case 'mode':
-                        case 'demand':
-                        case 'phase':
-                        case 'profile':
-                        case 'min':
-                        case 'max':
-                        case 'useApproved':
-                        case 'date':
-                        case 'overall':
-                        case 'level1':
-                        case 'level2':
-                        case 'level3':
-                        case 'hoursLoadClassOne':
-                        case 'hoursLoadClassTwo':
-                        case 'hoursLoadClassThree':
-                        case 'hoursLoadClassFour':
-                        case 'hoursLoadClassFive':
-                        case 'currentDay':
-                        case 'lastSevenDays':
-                        case 'currentMonth':
-                        case 'lastMonth':
-                        case 'currentYear':
-                        case 'lastYear':
-                        case 'countOne':
-                        case 'countTwo':
-                        case 'countThree':
-                        case 'countFour':
-                        case 'countFive':
-                        case 'countSix':
-                        case 'countSeven':
-                        case 'position':
-                            $updateVariable($entity->class[0], $name, $property->type, $property->value, $unitToProfile($searchUnit($entity->class[0])));
-                            break;
-                        case 'temperature':
-                            //Hard code the temperature profile. It is not always set through the "unit"
-                            $updateVariable($entity->class[0], $name, $property->type, $property->value, 'Temperature');
-                            $updateAction($entity->class[0], $name, $entity->actions);
-                            break;
-                        case 'entries':
-                        case 'enabled':
-                        case 'weekdays':
-                        case 'startHour':
-                        case 'startMinute':
-                            //Unsupported
-                            break;
-                        case 'start':
-                        case 'end':
-                        case 'dayValueReadAt':
-                        case 'weekValueReadAt':
-                        case 'monthValueReadAt':
-                        case 'yearValueReadAt':
-                        case 'timestampOne':
-                        case 'timestampTwo':
-                        case 'timestampThree':
-                        case 'timestampFour':
-                        case 'timestampFive':
-                        case 'timestampSix':
-                        case 'timestampSeven':
-                            //We may convert this to our UnixTimeStamp
-                            break;
-                        case 'serviceDue':
-                        case 'serviceIntervalMonths':
-                        case 'activeMonthSinceLastService':
-                        case 'lastService':
-                        case 'latitude':
-                        case 'longitude':
-                        case 'altitude':
-                        case 'horizontal':
-                        case 'vertical':
-                            //I don't need this
-                            break;
-                        case 'unit':
-                        case 'runtimeUnit':
-                        case 'minUnit':
-                        case 'maxUnit':
-                            //We use this for profile detection above
-                            break;
-                        case 'dateFormat':
-                            //We show it as string and don't care
-                            break;
-                        case 'type':
-                            //This describes toplevel types
-                            break;
-                        case 'day':
-                        case 'week':
-                        case 'month':
-                        case 'year':
-                            //If array has only single element then property is unsupported from device
-                            if (count($property->value) > 1) {
-                                $updateVariable($entity->class[0], $name, $property->type, $property->value[0] /* 0 = current period */, $unitToProfile($searchUnit($entity->class[0])));
-                            }
-                            break;
+        foreach ($device->data as $entity) {
+            foreach ($entity->properties as $name => $property) {
+                //Convert unit to our profiles
+                $unitToProfile = function ($unit) {
+                    switch ($unit) {
+                        case '':
+                            return '';
+                        case 'bar':
+                            return ''; //We currently  do not have a profile for bar
+                        case 'cubicMeter':
+                            return 'Gas';
+                        case 'celsius':
+                            return 'Temperature';
+                        case 'kilowattHour':
+                            return 'Electricity';
+                        case 'watt':
+                            return 'Watt.3680';
+                        case 'kilowatt':
+                            return 'Power';
+                        case 'percent':
+                            return 'Valve.F';
+                        case 'seconds':
+                            return ''; //We currently  do not have a profile for seconds
                         default:
                             if (isset($this->failOnUnexpected)) {
-                                throw new Exception($entity->class[0] . ' | ' . $name . ' = ' . print_r($property, true));
+                                throw new Exception(sprintf('Unknown unit: %s', $unit));
                             } else {
-                                $this->SendDebug($name, $entity->class[0] . ' | ' . $name . ' = ' . print_r($property, true), 0);
+                                $this->SendDebug('Unknown Unit', $unit, 0);
                             }
-                            break;
+                            return '';
                     }
+                };
+
+                //Convert name to our profiles
+                $nameToProfile = function ($name) {
+                    switch ($name) {
+                        case 'active':
+                            return 'Switch';
+                        case 'temperature':
+                            return 'Temperature';
+                        default:
+                            return '';
+                    }
+                };
+                
+                //We want to skip a few fields
+                switch ($name) {
+                    case 'unit':
+                    case 'status':
+                        break;
+                    default:
+                        $profile = isset($property->unit) ? $unitToProfile($property->unit) : $nameToProfile($name);
+                        $updateVariable($entity->feature, $name, $property->type, $property->value, $profile);
+                        $updateAction($entity->feature, $name, $entity->commands);
+                        break;
                 }
             }
         }

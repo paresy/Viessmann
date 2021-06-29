@@ -6,9 +6,11 @@ define('READABLE_IDS', [
     'heating compressors.%d.statistics'                   => 'Heizkreis %d: Verdichter',
     'heating.boiler.sensors.temperature.main'             => 'Kesseltemperatur',
     'heating.boiler.serial'                               => 'Meine Anlage: Seriennummer',
+    'heating.controller.serial'                           => 'Meine Steuerung: Seriennummer',
     'heating.burner.modulation'                           => 'Modulation',
     'heating.burner.statistics'                           => 'Brenner',
     'heating.burner'                                      => 'Brennerstatus',
+    'heating.operating.programs.holiday'                  => 'Ferienprogramm',
     'heating.circuits.%d.circulation.schedule.active'     => 'Zeitprogramm Zirkulation',
     'heating.circuits.%d.heating.curve'                   => 'Heizkreis %d: Heizkennlinie',
     'heating.circuits.%d.heating.schedule'                => 'Heizkreis %d: Zeitprogramm Heizen',
@@ -26,6 +28,7 @@ define('READABLE_IDS', [
     'heating.circuits.%d.operating.programs.reduced'      => 'Heizkreis %d: Reduziert',
     'heating.circuits.%d.operating.programs.standby'      => 'Heizkreis %d: Heizung Standby (AUS)',
     'heating.circuits.%d.sensors.temperature.supply'      => 'Heizkreis %d: Kesseltemperatur',
+    'heating.circuits.%d.sensors.temperature.room'        => 'Heizkreis %d: Raumtemperatur',
     'heating.circuits.%d'                                 => 'Heizkreis %d',
     'heating.compressor.%d.statistics'                    => 'Heizkreis %d: Verdichter',
     'heating.compressor.%d'                               => 'Heizkreis %d: Betrieb Verdichter',
@@ -81,6 +84,8 @@ define('READABLE_NAMES', [
     'hoursLoadClassThree' => ' ' . '(Laufzeit Belastungsklasse 3)',
     'hoursLoadClassTwo'   => ' ' . '(Laufzeit Belastungsklasse 2)',
     'hoursLoadClassOne'   => ' ' . '(Laufzeit Belastungsklasse 1)',
+    'start'               => ' ' . '(Start)',
+    'end'                 > ' ' . '(Ende)',
 ]);
 
 // Generated names are currently German only, as we only know the names within the German app
