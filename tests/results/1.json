@@ -31,7 +31,7 @@
     },
     "heating_circuits_0_operating_programs_normal_temperature": {
         "type": 2,
-        "profile": "",
+        "profile": "~Temperature",
         "action": true,
         "value": 21
     },
@@ -67,7 +67,7 @@
     },
     "heating_circuits_0_operating_programs_external_temperature": {
         "type": 2,
-        "profile": "",
+        "profile": "~Temperature",
         "action": false,
         "value": 0
     },
@@ -103,7 +103,7 @@
     },
     "heating_circuits_0_operating_programs_comfort_temperature": {
         "type": 2,
-        "profile": "",
+        "profile": "~Temperature",
         "action": true,
         "value": 22
     },
@@ -265,7 +265,7 @@
     },
     "heating_circuits_0_operating_programs_reduced_temperature": {
         "type": 2,
-        "profile": "",
+        "profile": "~Temperature",
         "action": true,
         "value": 18
     },
@@ -283,7 +283,7 @@
     },
     "heating_circuits_0_operating_programs_eco_temperature": {
         "type": 2,
-        "profile": "",
+        "profile": "~Temperature",
         "action": false,
         "value": 21
     },

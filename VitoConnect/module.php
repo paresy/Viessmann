@@ -465,7 +465,13 @@ class VitoConnect extends WebHookModule
                         $updateVariable($entity->feature, $name, "_Time", $property->value ? strtotime($property->value) : 0, "UnixTimestamp");
                         break;
                     default:
-                        $profile = isset($property->unit) ? $unitToProfile($property->unit) : $nameToProfile($name, $entity->commands);
+                        $profile = "";
+                        if (isset($property->unit)) {
+                            $profile = $unitToProfile($property->unit);
+                        }
+                        if (!$profile) {
+                            $profile = $nameToProfile($name, $entity->commands);
+                        }
                         $updateVariable($entity->feature, $name, $property->type, $property->value, $profile);
                         $updateAction($entity->feature, $name, $entity->commands);
                         break;
