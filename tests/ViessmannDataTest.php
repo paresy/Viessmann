@@ -81,11 +81,37 @@ class ViessmannDataTest extends TestCase
         $this->testData('6');
     }
 
+    private function supportedCommands(): array
+    {
+        return [
+            'setTemperature',
+            'setTargetTemperature',
+            'setMode',
+            'setHysteresis',
+            'setMin',
+            'setMax',
+            'setLevels', // This combines setMin/setMax which we support separately
+            'activate',
+            'deactivate',
+            'setName', // We don't need that
+            'setCurve', // TODO
+            'enable', // We probably don't need that [Hygiene related]
+            'disable', // We probably don't need that [Hygiene related]
+            'triggerDaily', // We probably don't need that [Hygiene related]
+            'triggerOncePerWeek', // We probably don't need that [Hygiene related]
+            'schedule', // We don't have a nice UI element for that [Holiday related]
+            'setSchedule', // We don't have a nice UI element for that [Holiday related]
+            'changeEndDate', // We don't have a nice UI element for that [Holiday related]
+            'unschedule', // We don't have a nice UI element for that [Holiday related]
+        ];
+    }
+
     private function testData($name, $write = false): void
     {
         $iid = IPS_CreateInstance('{3BF2B1B8-BD31-4A06-8C70-FD0FF95FE22E}');
         $interface = IPS\InstanceManager::getInstanceInterface($iid);
-        $interface->DebugParseDeviceData(json_decode(file_get_contents(__DIR__ . '/data/' . $name . '.json')));
+        $device = json_decode(file_get_contents(__DIR__ . '/data/' . $name . '.json'));
+        $interface->DebugParseDeviceData($device);
 
         $values = [];
         foreach (IPS_GetChildrenIDs($iid) as $id) {
@@ -108,6 +134,12 @@ class ViessmannDataTest extends TestCase
         foreach ($results as $key => $value) {
             $this->assertTrue(isset($values[$key]));
             $this->assertEquals($values[$key], $value);
+        }
+
+        foreach ($device->data as $entity) {
+            foreach ($entity->commands as $command) {
+                $this->assertTrue(in_array($command->name, $this->supportedCommands()), 'Unsupported command: ' . $command->name);
+            }
         }
     }
 }
