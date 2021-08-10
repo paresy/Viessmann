@@ -341,12 +341,12 @@ class VitoConnect extends WebHookModule
                     $this->SetValue($ident, $value);
                     break;
                 case 'string':
-                    $this->RegisterVariableString($ident, computeName($id, $name), $profile);
+                    $this->RegisterVariableString($ident, computeName($id, $name));
                     $this->SetValue($ident, $value);
                     break;
                 case 'array':
                 case 'object':
-                    $this->RegisterVariableString($ident, computeName($id, $name), $profile);
+                    $this->RegisterVariableString($ident, computeName($id, $name));
                     $this->SetValue($ident, json_encode($value));
                     break;
                 case 'Schedule':
