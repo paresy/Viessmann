@@ -1,0 +1,272 @@
+{
+    "heating_device_time_offset_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 105
+    },
+    "heating_controller_serial_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "7545825525025102"
+    },
+    "heating_circuits_0_operating_modes_standby_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_0_operating_programs_normal_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_0_operating_programs_normal_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "unknown"
+    },
+    "heating_circuits_0_operating_programs_normal_temperature": {
+        "type": 2,
+        "profile": "",
+        "action": true,
+        "value": 21
+    },
+    "heating_dhw_temperature_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 50
+    },
+    "heating_dhw_sensors_temperature_hotWaterStorage_value": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": false,
+        "value": 49.5
+    },
+    "heating_boiler_temperature_value": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": false,
+        "value": 5
+    },
+    "heating_circuits_0_operating_programs_external_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_0_operating_programs_external_temperature": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_dhw_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_0_operating_programs_comfort_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": false
+    },
+    "heating_circuits_0_operating_programs_comfort_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "unknown"
+    },
+    "heating_circuits_0_operating_programs_comfort_temperature": {
+        "type": 2,
+        "profile": "",
+        "action": true,
+        "value": 22
+    },
+    "heating_dhw_charging_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_0_operating_modes_dhwAndHeating_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_sensors_temperature_outside_value": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": false,
+        "value": 26.9
+    },
+    "heating_circuits_0_operating_programs_active_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "normal"
+    },
+    "heating_boiler_serial_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "7519080502092101"
+    },
+    "heating_circuits_enabled": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[\"0\"]"
+    },
+    "heating_boiler_sensors_temperature_main_value": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": false,
+        "value": 48
+    },
+    "heating_circuits_0_operating_modes_dhw_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_dhw_sensors_temperature_outlet_value": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": false,
+        "value": 35.8
+    },
+    "heating_circuits_0_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_0_name": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "Heizkreis 1"
+    },
+    "heating_circuits_0_type": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "heatingCircuit"
+    },
+    "heating_circuits_0_sensors_temperature_supply_value": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": false,
+        "value": 48
+    },
+    "heating_circuits_0_operating_programs_standby_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_configuration_multiFamilyHouse_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_0_sensors_temperature_room_value": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": false,
+        "value": 25.3
+    },
+    "heating_dhw_temperature_main_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 50
+    },
+    "heating_circuits_0_operating_programs_reduced_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_0_operating_programs_reduced_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "unknown"
+    },
+    "heating_circuits_0_operating_programs_reduced_temperature": {
+        "type": 2,
+        "profile": "",
+        "action": true,
+        "value": 18
+    },
+    "heating_dhw_schedule_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_0_operating_programs_eco_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": false
+    },
+    "heating_circuits_0_operating_programs_eco_temperature": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 21
+    },
+    "heating_burner_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_0_heating_schedule_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_dhw_pumps_circulation_schedule_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_operating_programs_holiday_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_operating_programs_holiday_start": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    },
+    "heating_operating_programs_holiday_end": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    },
+    "heating_circuits_0_operating_modes_active_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "dhwAndHeating"
+    }
+}

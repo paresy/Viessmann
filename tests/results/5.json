@@ -1,0 +1,458 @@
+{
+    "heating_dhw_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_0_operating_programs_active_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "standby"
+    },
+    "heating_boiler_serial_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "7722310001608124"
+    },
+    "heating_power_consumption_day": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[0,0.2,0.2,0.2,0.2,0.2,0.2,0.2]"
+    },
+    "heating_power_consumption_week": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[0.6000000000000001,1.4,1.4,1.4,1.4,1.4]"
+    },
+    "heating_power_consumption_month": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[4,8.5,10.3,15,19.400000000000002,15.4,28.2,30.7,30.5,25.9,9.700000000000001,8.7,8.3]"
+    },
+    "heating_power_consumption_year": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[101.4,114.2]"
+    },
+    "heating_power_consumption_dayvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1626331364
+    },
+    "heating_power_consumption_weekvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1626309629
+    },
+    "heating_power_consumption_monthvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1626331364
+    },
+    "heating_power_consumption_yearvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1626331364
+    },
+    "heating_boiler_temperature_value": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": false,
+        "value": 20
+    },
+    "heating_circuits_0_operating_programs_normal_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_0_operating_programs_normal_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "unknown"
+    },
+    "heating_circuits_0_operating_programs_normal_temperature": {
+        "type": 2,
+        "profile": "",
+        "action": true,
+        "value": 20
+    },
+    "heating_circuits_0_operating_modes_active_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "dhw"
+    },
+    "heating_circuits_0_operating_programs_comfort_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": false
+    },
+    "heating_circuits_0_operating_programs_comfort_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "unknown"
+    },
+    "heating_circuits_0_operating_programs_comfort_temperature": {
+        "type": 2,
+        "profile": "",
+        "action": true,
+        "value": 20
+    },
+    "heating_circuits_0_temperature_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_dhw_temperature_main_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 50
+    },
+    "heating_dhw_temperature_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 50
+    },
+    "heating_dhw_oneTimeCharge_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": false
+    },
+    "heating_circuits_0_operating_modes_heating_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_burners_0_statistics_hours": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 1096
+    },
+    "heating_burners_0_statistics_starts": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 3252
+    },
+    "heating_operating_programs_holidayAtHome_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_operating_programs_holidayAtHome_start": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    },
+    "heating_operating_programs_holidayAtHome_end": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    },
+    "heating_dhw_temperature_hygiene_value": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": false,
+        "value": 65
+    },
+    "heating_gas_consumption_dhw_day": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[0.1,0.8,0,1.1,0.7,0.7,0.7,0.7]"
+    },
+    "heating_gas_consumption_dhw_week": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[2,4.8,4.7,4.5,4.8,6.699999999999999]"
+    },
+    "heating_gas_consumption_dhw_month": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[9.5,22.8,34.9,37,34.4,43.5,36.5,31.8,23.9,19.6,23.2,22.6,23]"
+    },
+    "heating_gas_consumption_dhw_year": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[219,144.4]"
+    },
+    "heating_gas_consumption_dhw_dayvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1626330884
+    },
+    "heating_gas_consumption_dhw_weekvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1626330884
+    },
+    "heating_gas_consumption_dhw_monthvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1626330884
+    },
+    "heating_gas_consumption_dhw_yearvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1626330884
+    },
+    "device_serial_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "7722310001608124"
+    },
+    "heating_device_time_offset_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 65
+    },
+    "heating_operating_programs_holiday_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_operating_programs_holiday_start": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    },
+    "heating_operating_programs_holiday_end": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    },
+    "heating_dhw_hygiene_trigger_weekdays": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[\"Mon\"]"
+    },
+    "heating_dhw_hygiene_trigger_starthour": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 22
+    },
+    "heating_dhw_hygiene_trigger_startminute": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 30
+    },
+    "heating_dhw_sensors_temperature_hotWaterStorage_value": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": false,
+        "value": 52.7
+    },
+    "heating_dhw_schedule_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_0_heating_schedule_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_enabled": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[\"0\"]"
+    },
+    "heating_circuits_0_operating_modes_dhw_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_0_sensors_temperature_supply_value": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": false,
+        "value": 70.3
+    },
+    "heating_circuits_0_operating_programs_reduced_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_0_operating_programs_reduced_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "unknown"
+    },
+    "heating_circuits_0_operating_programs_reduced_temperature": {
+        "type": 2,
+        "profile": "",
+        "action": true,
+        "value": 20
+    },
+    "heating_circuits_0_operating_modes_standby_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_0_operating_modes_dhwAndHeating_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_burner_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_boiler_sensors_temperature_commonSupply_value": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": false,
+        "value": 70.1
+    },
+    "heating_circuits_0_operating_programs_forcedLastFromSchedule_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": false
+    },
+    "heating_dhw_hygiene_enabled": {
+        "type": 0,
+        "profile": "",
+        "action": false,
+        "value": true
+    },
+    "heating_dhw_hygiene_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_gas_consumption_heating_day": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[0,0,0,0,0,0,0,0]"
+    },
+    "heating_gas_consumption_heating_week": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[0,0,0,0,0,0]"
+    },
+    "heating_gas_consumption_heating_month": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[0,0,8.3,40.3,60.2,44.6,52.1,42.6,74.5,49.5,5.9,0,0.5]"
+    },
+    "heating_gas_consumption_heating_year": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[205.6,173.1]"
+    },
+    "heating_gas_consumption_heating_dayvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1626309627
+    },
+    "heating_gas_consumption_heating_weekvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1626309630
+    },
+    "heating_gas_consumption_heating_monthvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1626309627
+    },
+    "heating_gas_consumption_heating_yearvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1626309627
+    },
+    "heating_circuits_0_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_0_name": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "Heizkreis 1"
+    },
+    "heating_circuits_0_type": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "heatingCircuit"
+    },
+    "heating_burners_0_modulation_value": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 0
+    },
+    "heating_circuits_0_operating_programs_standby_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_configuration_multiFamilyHouse_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    }
+}
