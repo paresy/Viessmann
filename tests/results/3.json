@@ -173,23 +173,11 @@
         "action": false,
         "value": 10
     },
-    "heating_circuits_0_temperature_levels_minunit": {
-        "type": 3,
-        "profile": "",
-        "action": false,
-        "value": "celsius"
-    },
     "heating_circuits_0_temperature_levels_max": {
         "type": 2,
         "profile": "~Temperature",
         "action": false,
         "value": 40
-    },
-    "heating_circuits_0_temperature_levels_maxunit": {
-        "type": 3,
-        "profile": "",
-        "action": false,
-        "value": "celsius"
     },
     "ventilation_operating_modes_ventilation_active": {
         "type": 0,

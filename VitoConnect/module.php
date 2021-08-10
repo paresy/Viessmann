@@ -486,6 +486,8 @@ class VitoConnect extends WebHookModule
                 switch ($name) {
                     //We want to skip a few fields
                     case 'unit':
+                    case 'minUnit':
+                    case 'maxUnit':
                         break;
                     case 'dayValueReadAt':
                     case 'weekValueReadAt':
