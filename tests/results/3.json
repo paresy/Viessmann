@@ -170,13 +170,13 @@
     "heating_circuits_0_temperature_levels_min": {
         "type": 2,
         "profile": "~Temperature",
-        "action": false,
+        "action": true,
         "value": 10
     },
     "heating_circuits_0_temperature_levels_max": {
         "type": 2,
         "profile": "~Temperature",
-        "action": false,
+        "action": true,
         "value": 40
     },
     "ventilation_operating_modes_ventilation_active": {

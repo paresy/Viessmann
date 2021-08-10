@@ -143,6 +143,18 @@ class VitoConnect extends WebHookModule
                 ]);
                 $this->SetValue($Ident, $Value);
                 break;
+            case 'min':
+                $this->RequestDeviceData($id . '/setMin', [
+                    'temperature' => $Value
+                ]);
+                $this->SetValue($Ident, $Value);
+                break;
+            case 'max':
+                $this->RequestDeviceData($id . '/setMax', [
+                    'temperature' => $Value
+                ]);
+                $this->SetValue($Ident, $Value);
+                break;
             default:
                 throw new Exception('Invalid Ident');
         }
@@ -417,6 +429,16 @@ class VitoConnect extends WebHookModule
                     break;
                 case 'temperature':
                     if ($findCommand($commands, 'setTemperature')) {
+                        $this->EnableAction($ident);
+                    }
+                    break;
+                case 'min':
+                    if ($findCommand($commands, 'setMin')) {
+                        $this->EnableAction($ident);
+                    }
+                    break;
+                case 'max':
+                    if ($findCommand($commands, 'setMax')) {
                         $this->EnableAction($ident);
                     }
                     break;
