@@ -31,7 +31,7 @@
     },
     "heating_circuits_0_operating_programs_normal_temperature": {
         "type": 2,
-        "profile": "~Temperature",
+        "profile": "~Temperature.Room",
         "action": true,
         "value": 21
     },
@@ -43,7 +43,7 @@
     },
     "heating_dhw_sensors_temperature_hotWaterStorage_value": {
         "type": 2,
-        "profile": "~Temperature",
+        "profile": "~Temperature.Room",
         "action": false,
         "value": 49.5
     },
@@ -55,7 +55,7 @@
     },
     "heating_boiler_temperature_value": {
         "type": 2,
-        "profile": "~Temperature",
+        "profile": "~Temperature.Room",
         "action": false,
         "value": 5
     },
@@ -67,7 +67,7 @@
     },
     "heating_circuits_0_operating_programs_external_temperature": {
         "type": 2,
-        "profile": "~Temperature",
+        "profile": "~Temperature.Room",
         "action": false,
         "value": 0
     },
@@ -103,7 +103,7 @@
     },
     "heating_circuits_0_operating_programs_comfort_temperature": {
         "type": 2,
-        "profile": "~Temperature",
+        "profile": "~Temperature.Room",
         "action": true,
         "value": 22
     },
@@ -121,7 +121,7 @@
     },
     "heating_sensors_temperature_outside_value": {
         "type": 2,
-        "profile": "~Temperature",
+        "profile": "~Temperature.Room",
         "action": false,
         "value": 26.9
     },
@@ -157,7 +157,7 @@
     },
     "heating_boiler_sensors_temperature_main_value": {
         "type": 2,
-        "profile": "~Temperature",
+        "profile": "~Temperature.Room",
         "action": false,
         "value": 48
     },
@@ -175,7 +175,7 @@
     },
     "heating_dhw_sensors_temperature_outlet_value": {
         "type": 2,
-        "profile": "~Temperature",
+        "profile": "~Temperature.Room",
         "action": false,
         "value": 35.8
     },
@@ -205,7 +205,7 @@
     },
     "heating_circuits_0_sensors_temperature_supply_value": {
         "type": 2,
-        "profile": "~Temperature",
+        "profile": "~Temperature.Room",
         "action": false,
         "value": 48
     },
@@ -235,7 +235,7 @@
     },
     "heating_circuits_0_sensors_temperature_room_value": {
         "type": 2,
-        "profile": "~Temperature",
+        "profile": "~Temperature.Room",
         "action": false,
         "value": 25.3
     },
@@ -265,7 +265,7 @@
     },
     "heating_circuits_0_operating_programs_reduced_temperature": {
         "type": 2,
-        "profile": "~Temperature",
+        "profile": "~Temperature.Room",
         "action": true,
         "value": 18
     },
@@ -283,7 +283,7 @@
     },
     "heating_circuits_0_operating_programs_eco_temperature": {
         "type": 2,
-        "profile": "~Temperature",
+        "profile": "~Temperature.Room",
         "action": false,
         "value": 21
     },

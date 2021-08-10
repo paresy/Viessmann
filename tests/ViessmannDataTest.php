@@ -26,6 +26,9 @@ class ViessmannDataTest extends TestCase
         if (!IPS\ProfileManager::variableProfileExists('~Temperature')) {
             IPS\ProfileManager::createVariableProfile('~Temperature', 2);
         }
+        if (!IPS\ProfileManager::variableProfileExists('~Temperature.Room')) {
+            IPS\ProfileManager::createVariableProfile('~Temperature.Room', 2);
+        }
         if (!IPS\ProfileManager::variableProfileExists('~Electricity')) {
             IPS\ProfileManager::createVariableProfile('~Electricity', 2);
         }

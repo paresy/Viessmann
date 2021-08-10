@@ -459,7 +459,7 @@ class VitoConnect extends WebHookModule
                         case 'cubicMeter':
                             return 'Gas';
                         case 'celsius':
-                            return 'Temperature';
+                            return 'Temperature.Room';
                         case 'kilowattHour':
                             return 'Electricity';
                         case 'watt':
@@ -499,7 +499,7 @@ class VitoConnect extends WebHookModule
                             }
                             return '';
                         case 'temperature':
-                            return 'Temperature';
+                            return 'Temperature.Room';
                         default:
                             return '';
                     }
