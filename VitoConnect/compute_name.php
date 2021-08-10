@@ -109,3 +109,21 @@ function computeName($id, $name)
         return "$id ($name)";
     }
 }
+
+// Translate enums for profiles
+function enumToName($enum) {
+    switch($enum) {
+        case 'standby':
+            return 'Aus';
+        case 'dhw':
+            return 'Nur Warmwasser';
+        case 'dhwAndHeating':
+            return 'Heizung & Warmwasser';
+        case 'forcedReduced':
+            return 'Dauernd reduziert';
+        case 'forcedNormal':
+            return 'Dauernd Tagbetrieb';
+        default:
+            return $enum;
+    }
+}

@@ -247,8 +247,8 @@
     },
     "heating_circuits_1_operating_modes_active_value": {
         "type": 3,
-        "profile": "",
-        "action": false,
+        "profile": "VVC.Mode",
+        "action": true,
         "value": "dhw"
     },
     "heating_operating_programs_holiday_active": {

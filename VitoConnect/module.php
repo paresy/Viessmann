@@ -114,6 +114,12 @@ class VitoConnect extends WebHookModule
                 }
                 $this->SetValue($Ident, $Value);
                 break;
+            case 'value':
+                $this->RequestDeviceData($id . '/setMode', [
+                    'mode' => $Value
+                ]);
+                $this->SetValue($Ident, $Value);
+                break;
             case 'temperature':
                 $this->RequestDeviceData($id . '/setTemperature', [
                     'targetTemperature' => $Value
@@ -341,7 +347,7 @@ class VitoConnect extends WebHookModule
                     $this->SetValue($ident, $value);
                     break;
                 case 'string':
-                    $this->RegisterVariableString($ident, computeName($id, $name));
+                    $this->RegisterVariableString($ident, computeName($id, $name), $profile);
                     $this->SetValue($ident, $value);
                     break;
                 case 'array':
@@ -362,27 +368,32 @@ class VitoConnect extends WebHookModule
             }
         };
 
-        $updateAction = function ($id, $name, $commands)
+        $findCommand = function ($commands, $name)
         {
-            $hasCommand = function ($name) use ($commands)
-            {
-                foreach ($commands as $command) {
-                    if ($command->name == $name) {
-                        return true;
-                    }
+            foreach ($commands as $command) {
+                if ($command->name == $name) {
+                    return $command;
                 }
-                return false;
-            };
+            }
+            return false;
+        };
 
+        $updateAction = function ($id, $name, $commands) use ($findCommand)
+        {
             $ident = str_replace('.', '_', $id) . '_' . strtolower($name);
             switch ($name) {
                 case 'active':
-                    if ($hasCommand('activate') && $hasCommand('deactivate')) {
+                    if ($findCommand($commands, 'activate') && $findCommand($commands, 'deactivate')) {
+                        $this->EnableAction($ident);
+                    }
+                    break;
+                case 'value':
+                    if ($findCommand($commands, 'setMode')) {
                         $this->EnableAction($ident);
                     }
                     break;
                 case 'temperature':
-                    if ($hasCommand('setTemperature')) {
+                    if ($findCommand($commands, 'setTemperature')) {
                         $this->EnableAction($ident);
                     }
                     break;
@@ -399,7 +410,7 @@ class VitoConnect extends WebHookModule
                         case '':
                             return '';
                         case 'bar':
-                            return ''; //We currently  do not have a profile for bar
+                            return ''; // We currently do not have a profile for bar
                         case 'cubicMeter':
                             return 'Gas';
                         case 'celsius':
@@ -413,7 +424,7 @@ class VitoConnect extends WebHookModule
                         case 'percent':
                             return 'Valve.F';
                         case 'seconds':
-                            return ''; //We currently  do not have a profile for seconds
+                            return ''; // We currently do not have a profile for seconds
                         default:
                             if (isset($this->failOnUnexpected)) {
                                 throw new Exception(sprintf('Unknown unit: %s', $unit));
@@ -425,11 +436,17 @@ class VitoConnect extends WebHookModule
                 };
 
                 //Convert name to our profiles
-                $nameToProfile = function ($name)
+                $nameToProfile = function ($name, $commands) use ($findCommand)
                 {
                     switch ($name) {
                         case 'active':
                             return 'Switch';
+                        case 'value':
+                            $command = $findCommand($commands, 'setMode');
+                            if ($command) {
+                                return $this->CreateProfile("VVC.Mode", VARIABLETYPE_STRING, $command->params->mode->constraints->enum);
+                            }
+                            return '';
                         case 'temperature':
                             return 'Temperature';
                         default:
@@ -449,12 +466,22 @@ class VitoConnect extends WebHookModule
                         $updateVariable($entity->feature, $name, "_Time", $property->value ? strtotime($property->value) : 0, "UnixTimestamp");
                         break;
                     default:
-                        $profile = isset($property->unit) ? $unitToProfile($property->unit) : $nameToProfile($name);
+                        $profile = isset($property->unit) ? $unitToProfile($property->unit) : $nameToProfile($name, $entity->commands);
                         $updateVariable($entity->feature, $name, $property->type, $property->value, $profile);
                         $updateAction($entity->feature, $name, $entity->commands);
                         break;
                 }
             }
         }
+    }
+
+    private function CreateProfile($name, $type, $associations) {
+        if (!IPS_VariableProfileExists($name)) {
+            IPS_CreateVariableProfile($name, $type);
+            foreach ($associations as $association) {
+                IPS_SetVariableProfileAssociation($name, $association, enumToName($association), '', -1);
+            }
+        }
+        return $name;
     }
 }
