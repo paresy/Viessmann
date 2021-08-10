@@ -352,6 +352,11 @@ class VitoConnect extends WebHookModule
                 case 'Schedule':
                     // Lets skip this
                     break;
+                case '_Time':
+                    // This is not a real type. We defined it to enforce a real integer variable
+                    $this->RegisterVariableInteger($ident, computeName($id, $name), $profile);
+                    $this->SetValue($ident, $value);
+                    break;
                 default:
                     die('Unsupported variable type:' . $type . ', id: ' . $id . ', value:' . print_r($value, true));
             }
@@ -436,6 +441,12 @@ class VitoConnect extends WebHookModule
                 switch ($name) {
                     case 'unit':
                     case 'status':
+                        break;
+                    case 'dayValueReadAt':
+                    case 'weekValueReadAt':
+                    case 'monthValueReadAt':
+                    case 'yearValueReadAt':
+                        $updateVariable($entity->feature, $name, "_Time", $property->value ? strtotime($property->value) : 0, "UnixTimestamp");
                         break;
                     default:
                         $profile = isset($property->unit) ? $unitToProfile($property->unit) : $nameToProfile($name);
