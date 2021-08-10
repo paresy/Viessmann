@@ -73,8 +73,8 @@
     },
     "heating_dhw_temperature_main_value": {
         "type": 2,
-        "profile": "",
-        "action": false,
+        "profile": "~Temperature",
+        "action": true,
         "value": 57
     },
     "heating_configuration_multiFamilyHouse_active": {
@@ -235,8 +235,8 @@
     },
     "heating_dhw_temperature_value": {
         "type": 2,
-        "profile": "",
-        "action": false,
+        "profile": "~Temperature",
+        "action": true,
         "value": 57
     },
     "heating_dhw_sensors_temperature_hotWaterStorage_value": {

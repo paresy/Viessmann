@@ -37,8 +37,8 @@
     },
     "heating_dhw_temperature_value": {
         "type": 2,
-        "profile": "",
-        "action": false,
+        "profile": "~Temperature",
+        "action": true,
         "value": 50
     },
     "heating_dhw_sensors_temperature_hotWaterStorage_value": {
@@ -247,8 +247,8 @@
     },
     "heating_dhw_temperature_main_value": {
         "type": 2,
-        "profile": "",
-        "action": false,
+        "profile": "~Temperature",
+        "action": true,
         "value": 50
     },
     "heating_circuits_0_operating_programs_reduced_active": {
