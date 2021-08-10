@@ -113,11 +113,23 @@
         "action": false,
         "value": 34.4
     },
+    "heating_circuits_0_sensors_temperature_supply_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
     "heating_circuits_0_operating_modes_dhw_active": {
         "type": 0,
         "profile": "~Switch",
         "action": false,
         "value": true
+    },
+    "heating_circuits_0_circulation_pump_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "off"
     },
     "heating_circuits_0_temperature_value": {
         "type": 2,
@@ -136,6 +148,12 @@
         "profile": "~Temperature",
         "action": false,
         "value": 60.4
+    },
+    "heating_dhw_sensors_temperature_hotWaterStorage_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
     },
     "heating_dhw_temperature_main_value": {
         "type": 2,
@@ -179,6 +197,12 @@
         "action": false,
         "value": 34.4
     },
+    "heating_boiler_sensors_temperature_commonSupply_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
     "heating_dhw_hygiene_enabled": {
         "type": 0,
         "profile": "",
@@ -208,6 +232,12 @@
         "profile": "~Switch",
         "action": true,
         "value": false
+    },
+    "heating_dhw_sensors_temperature_outlet_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "notConnected"
     },
     "heating_circuits_enabled": {
         "type": 3,
@@ -239,6 +269,12 @@
         "action": false,
         "value": true
     },
+    "heating_dhw_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "on"
+    },
     "heating_circuits_0_operating_modes_dhwAndHeating_active": {
         "type": 0,
         "profile": "~Switch",
@@ -262,6 +298,12 @@
         "profile": "",
         "action": false,
         "value": "7722310001608124"
+    },
+    "heating_dhw_pumps_primary_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "off"
     },
     "heating_operating_programs_holiday_active": {
         "type": 0,

@@ -161,6 +161,12 @@
         "action": false,
         "value": 18.1
     },
+    "heating_sensors_temperature_outside_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
     "heating_circuits_0_operating_programs_normal_active": {
         "type": 0,
         "profile": "~Switch",
@@ -245,6 +251,12 @@
         "action": false,
         "value": true
     },
+    "heating_dhw_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "on"
+    },
     "heating_boiler_serial_value": {
         "type": 3,
         "profile": "",
@@ -287,6 +299,12 @@
         "action": true,
         "value": false
     },
+    "heating_circuits_0_frostprotection_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "off"
+    },
     "heating_circuits_enabled": {
         "type": 3,
         "profile": "",
@@ -298,6 +316,12 @@
         "profile": "~Temperature",
         "action": false,
         "value": 53.4
+    },
+    "heating_dhw_sensors_temperature_hotWaterStorage_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
     },
     "heating_dhw_hygiene_enabled": {
         "type": 0,
@@ -425,6 +449,12 @@
         "action": false,
         "value": 32.2
     },
+    "heating_boiler_sensors_temperature_commonSupply_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
     "heating_power_consumption_day": {
         "type": 3,
         "profile": "",
@@ -515,6 +545,12 @@
         "action": false,
         "value": false
     },
+    "heating_circuits_0_circulation_pump_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "off"
+    },
     "heating_burners_0_statistics_hours": {
         "type": 2,
         "profile": "",
@@ -538,6 +574,12 @@
         "profile": "~Switch",
         "action": false,
         "value": true
+    },
+    "heating_dhw_sensors_temperature_outlet_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "notConnected"
     },
     "heating_circuits_3_heating_curve_shift": {
         "type": 2,

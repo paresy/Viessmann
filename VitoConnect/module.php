@@ -454,10 +454,9 @@ class VitoConnect extends WebHookModule
                     }
                 };
 
-                //We want to skip a few fields
                 switch ($name) {
+                    //We want to skip a few fields
                     case 'unit':
-                    case 'status':
                         break;
                     case 'dayValueReadAt':
                     case 'weekValueReadAt':

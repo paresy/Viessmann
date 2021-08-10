@@ -41,6 +41,12 @@
         "action": false,
         "value": "7535651013161129"
     },
+    "heating_dhw_pumps_circulation_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "on"
+    },
     "heating_circuits_enabled": {
         "type": 3,
         "profile": "",
@@ -58,6 +64,12 @@
         "profile": "",
         "action": false,
         "value": 6702
+    },
+    "heating_dhw_sensors_temperature_outlet_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "error"
     },
     "heating_dhw_temperature_main_value": {
         "type": 2,
@@ -124,6 +136,12 @@
         "profile": "~Switch",
         "action": false,
         "value": true
+    },
+    "heating_dhw_pumps_primary_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "off"
     },
     "heating_circuits_1_operating_programs_normal_active": {
         "type": 0,
@@ -203,6 +221,18 @@
         "action": false,
         "value": 52
     },
+    "heating_boiler_sensors_temperature_main_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_solar_pumps_circuit_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "off"
+    },
     "heating_dhw_temperature_value": {
         "type": 2,
         "profile": "",
@@ -214,6 +244,12 @@
         "profile": "~Temperature",
         "action": false,
         "value": 52.1
+    },
+    "heating_dhw_sensors_temperature_hotWaterStorage_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
     },
     "heating_circuits_1_active": {
         "type": 0,
@@ -238,6 +274,12 @@
         "profile": "~Temperature",
         "action": false,
         "value": 34.9
+    },
+    "heating_solar_sensors_temperature_dhw_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
     },
     "heating_circuits_1_operating_modes_dhwAndHeating_active": {
         "type": 0,
@@ -269,11 +311,23 @@
         "action": false,
         "value": ""
     },
+    "heating_circuits_1_frostprotection_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "off"
+    },
     "heating_solar_sensors_temperature_collector_value": {
         "type": 2,
         "profile": "~Temperature",
         "action": false,
         "value": 23.1
+    },
+    "heating_solar_sensors_temperature_collector_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
     },
     "heating_circuits_2_heating_curve_shift": {
         "type": 2,
@@ -293,11 +347,23 @@
         "action": false,
         "value": 15
     },
+    "heating_sensors_temperature_outside_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
     "heating_circuits_1_sensors_temperature_supply_value": {
         "type": 2,
         "profile": "~Temperature",
         "action": false,
         "value": 38.5
+    },
+    "heating_circuits_1_sensors_temperature_supply_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
     },
     "heating_circuits_1_heating_curve_shift": {
         "type": 2,
@@ -316,6 +382,12 @@
         "profile": "~Switch",
         "action": false,
         "value": true
+    },
+    "heating_dhw_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "off"
     },
     "heating_boiler_temperature_value": {
         "type": 2,
@@ -352,6 +424,12 @@
         "profile": "",
         "action": false,
         "value": 21
+    },
+    "heating_circuits_1_circulation_pump_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "off"
     },
     "heating_device_time_offset_value": {
         "type": 2,
