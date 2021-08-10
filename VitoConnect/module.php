@@ -115,25 +115,22 @@ class VitoConnect extends WebHookModule
                 $this->SetValue($Ident, $Value);
                 break;
             case 'value':
-                if (strpos($Ident, "modes") !== false) {
+                if (strpos($Ident, 'modes') !== false) {
                     $this->RequestDeviceData($id . '/setMode', [
                         'mode' => $Value
                     ]);
                     $this->SetValue($Ident, $Value);
-                }
-                else if (strpos($Ident, "hysteresis") !== false) {
+                } elseif (strpos($Ident, 'hysteresis') !== false) {
                     $this->RequestDeviceData($id . '/setHysteresis', [
                         'hysteresis' => $Value
                     ]);
                     $this->SetValue($Ident, $Value);
-                }
-                else if (strpos($Ident, "temperature") !== false) {
+                } elseif (strpos($Ident, 'temperature') !== false) {
                     $this->RequestDeviceData($id . '/setTargetTemperature', [
                         'temperature' => $Value
                     ]);
                     $this->SetValue($Ident, $Value);
-                }
-                else {
+                } else {
                     throw new Exception('Invalid Ident');
                 }
                 break;
@@ -419,11 +416,9 @@ class VitoConnect extends WebHookModule
                 case 'value':
                     if ($findCommand($commands, 'setMode')) {
                         $this->EnableAction($ident);
-                    }
-                    else if ($findCommand($commands, 'setHysteresis')) {
+                    } elseif ($findCommand($commands, 'setHysteresis')) {
                         $this->EnableAction($ident);
-                    }
-                    else if ($findCommand($commands, 'setTargetTemperature')) {
+                    } elseif ($findCommand($commands, 'setTargetTemperature')) {
                         $this->EnableAction($ident);
                     }
                     break;
@@ -489,12 +484,10 @@ class VitoConnect extends WebHookModule
                         case 'value':
                             $command = $findCommand($commands, 'setMode');
                             if ($command) {
-                                return $this->CreateProfile("VVC.Mode", VARIABLETYPE_STRING, $command->params->mode->constraints->enum);
-                            }
-                            else if($findCommand($commands, 'setHysteresis')) {
+                                return $this->CreateProfile('VVC.Mode', VARIABLETYPE_STRING, $command->params->mode->constraints->enum);
+                            } elseif ($findCommand($commands, 'setHysteresis')) {
                                 return 'Temperature';
-                            }
-                            else if($findCommand($commands, 'setTargetTemperature')) {
+                            } elseif ($findCommand($commands, 'setTargetTemperature')) {
                                 return 'Temperature';
                             }
                             return '';
@@ -508,9 +501,9 @@ class VitoConnect extends WebHookModule
                 // If unit is not defined on this level, search if have a global defined unit
                 // For now we only need to fix array units. Therefore limit this to array.
                 // Maybe we should better read the docs on how to handle this global unit field
-                if (!isset($property->unit) && ($property->type == "array")) {
+                if (!isset($property->unit) && ($property->type == 'array')) {
                     foreach ($entity->properties as $n => $p) {
-                        if ($n == "unit") {
+                        if ($n == 'unit') {
                             $property->unit = $p->value;
                         }
                     }
@@ -526,11 +519,11 @@ class VitoConnect extends WebHookModule
                     case 'weekValueReadAt':
                     case 'monthValueReadAt':
                     case 'yearValueReadAt':
-                        $updateVariable($entity->feature, $name, "_Time", $property->value ? strtotime($property->value) : 0, "UnixTimestamp");
+                        $updateVariable($entity->feature, $name, '_Time', $property->value ? strtotime($property->value) : 0, 'UnixTimestamp');
                         break;
                     default:
                         // Deduct profile
-                        $profile = "";
+                        $profile = '';
                         if (isset($property->unit)) {
                             $profile = $unitToProfile($property->unit);
                         }
@@ -539,15 +532,14 @@ class VitoConnect extends WebHookModule
                         }
 
                         // Fix up a few array values, which we want to reduce to a single value
-                        if ($property->type == "array") {
-                            switch($profile) {
-                                case "Electricity":
-                                case "Gas":
-                                    $property->type = "number";
-                                    if (sizeof($property->value) == 0) {
+                        if ($property->type == 'array') {
+                            switch ($profile) {
+                                case 'Electricity':
+                                case 'Gas':
+                                    $property->type = 'number';
+                                    if (count($property->value) == 0) {
                                         $property->value = 0;
-                                    }
-                                    else {
+                                    } else {
                                         $property->value = $property->value[0];
                                     }
                                     break;
@@ -563,7 +555,8 @@ class VitoConnect extends WebHookModule
         }
     }
 
-    private function CreateProfile($name, $type, $associations) {
+    private function CreateProfile($name, $type, $associations)
+    {
         if (!IPS_VariableProfileExists($name)) {
             IPS_CreateVariableProfile($name, $type);
             foreach ($associations as $association) {

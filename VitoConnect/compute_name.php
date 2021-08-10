@@ -111,8 +111,9 @@ function computeName($id, $name)
 }
 
 // Translate enums for profiles
-function enumToName($enum) {
-    switch($enum) {
+function enumToName($enum)
+{
+    switch ($enum) {
         case 'standby':
             return 'Aus';
         case 'dhw':

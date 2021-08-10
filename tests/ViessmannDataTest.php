@@ -51,6 +51,36 @@ class ViessmannDataTest extends TestCase
         parent::setUp();
     }
 
+    public function testData1(): void
+    {
+        $this->testData('1');
+    }
+
+    public function testData2(): void
+    {
+        $this->testData('2');
+    }
+
+    public function testData3(): void
+    {
+        $this->testData('3');
+    }
+
+    public function testData4(): void
+    {
+        $this->testData('4');
+    }
+
+    public function testData5(): void
+    {
+        $this->testData('5');
+    }
+
+    public function testData6(): void
+    {
+        $this->testData('6');
+    }
+
     private function testData($name, $write = false): void
     {
         $iid = IPS_CreateInstance('{3BF2B1B8-BD31-4A06-8C70-FD0FF95FE22E}');
@@ -60,10 +90,10 @@ class ViessmannDataTest extends TestCase
         $values = [];
         foreach (IPS_GetChildrenIDs($iid) as $id) {
             $values[IPS_GetObject($id)['ObjectIdent']] = [
-                "type" => IPS_GetVariable($id)["VariableType"],
-                "profile" => IPS_GetVariable($id)["VariableProfile"],
-                "action" => IPS_GetVariable($id)["VariableAction"] > 0,
-                "value" => GetValue($id)
+                'type'    => IPS_GetVariable($id)['VariableType'],
+                'profile' => IPS_GetVariable($id)['VariableProfile'],
+                'action'  => IPS_GetVariable($id)['VariableAction'] > 0,
+                'value'   => GetValue($id)
             ];
         }
 
@@ -79,35 +109,5 @@ class ViessmannDataTest extends TestCase
             $this->assertTrue(isset($values[$key]));
             $this->assertEquals($values[$key], $value);
         }
-    }
-
-    public function testData1(): void
-    {
-        $this->testData("1");
-    }
-
-    public function testData2(): void
-    {
-        $this->testData("2");
-    }
-
-    public function testData3(): void
-    {
-        $this->testData("3");
-    }
-
-    public function testData4(): void
-    {
-        $this->testData("4");
-    }
-
-    public function testData5(): void
-    {
-        $this->testData("5");
-    }
-
-    public function testData6(): void
-    {
-        $this->testData("6");
     }
 }
