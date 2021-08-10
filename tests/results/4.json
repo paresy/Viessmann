@@ -348,28 +348,28 @@
         "value": 1.4
     },
     "heating_gas_consumption_heating_day": {
-        "type": 3,
-        "profile": "",
+        "type": 2,
+        "profile": "~Gas",
         "action": false,
-        "value": "[0,0,0,0,0,0,0,0]"
+        "value": 0
     },
     "heating_gas_consumption_heating_week": {
-        "type": 3,
-        "profile": "",
+        "type": 2,
+        "profile": "~Gas",
         "action": false,
-        "value": "[0,0,0,0,0,0]"
+        "value": 0
     },
     "heating_gas_consumption_heating_month": {
-        "type": 3,
-        "profile": "",
+        "type": 2,
+        "profile": "~Gas",
         "action": false,
-        "value": "[0,0,1.8,59.3,40.7,0,0,0,0,0,0,0,0]"
+        "value": 0
     },
     "heating_gas_consumption_heating_year": {
-        "type": 3,
-        "profile": "",
+        "type": 2,
+        "profile": "~Gas",
         "action": false,
-        "value": "[101.8,0]"
+        "value": 101.8
     },
     "heating_gas_consumption_heating_dayvaluereadat": {
         "type": 1,
@@ -396,28 +396,28 @@
         "value": 1628551495
     },
     "heating_gas_consumption_dhw_day": {
-        "type": 3,
-        "profile": "",
+        "type": 2,
+        "profile": "~Gas",
         "action": false,
-        "value": "[0,1.1,1.2,2.2,1.7,1.3,0.8,1.6]"
+        "value": 0
     },
     "heating_gas_consumption_dhw_week": {
-        "type": 3,
-        "profile": "",
+        "type": 2,
+        "profile": "~Gas",
         "action": false,
-        "value": "[1.1,9.700000000000001,9.4,8.200000000000001,7.7,7.1000000000000005]"
+        "value": 1.1
     },
     "heating_gas_consumption_dhw_month": {
-        "type": 3,
-        "profile": "",
+        "type": 2,
+        "profile": "~Gas",
         "action": false,
-        "value": "[12.6,36.5,38.6,55.7,13.9,0,0,0,0,0,0,0,0]"
+        "value": 12.6
     },
     "heating_gas_consumption_dhw_year": {
-        "type": 3,
-        "profile": "",
+        "type": 2,
+        "profile": "~Gas",
         "action": false,
-        "value": "[157.4,0]"
+        "value": 157.4
     },
     "heating_gas_consumption_dhw_dayvaluereadat": {
         "type": 1,
@@ -456,28 +456,28 @@
         "value": "connected"
     },
     "heating_power_consumption_day": {
-        "type": 3,
-        "profile": "",
+        "type": 2,
+        "profile": "~Electricity",
         "action": false,
-        "value": "[0,0.2,0.1,0.2,0.2,0.1,0.1,0.1]"
+        "value": 0
     },
     "heating_power_consumption_week": {
-        "type": 3,
-        "profile": "",
+        "type": 2,
+        "profile": "~Electricity",
         "action": false,
-        "value": "[0.2,0.8999999999999999,0.7999999999999999,0.7,0.7999999999999999,0.7999999999999999]"
+        "value": 0.2
     },
     "heating_power_consumption_month": {
-        "type": 3,
-        "profile": "",
+        "type": 2,
+        "profile": "~Electricity",
         "action": false,
-        "value": "[1.8,5.6,7.1000000000000005,21.900000000000002,8.5,0,0,0,0,0,0,0,0]"
+        "value": 1.8
     },
     "heating_power_consumption_year": {
-        "type": 3,
-        "profile": "",
+        "type": 2,
+        "profile": "~Electricity",
         "action": false,
-        "value": "[45.4,0]"
+        "value": 45.4
     },
     "heating_power_consumption_dayvaluereadat": {
         "type": 1,

@@ -505,6 +505,17 @@ class VitoConnect extends WebHookModule
                     }
                 };
 
+                // If unit is not defined on this level, search if have a global defined unit
+                // For now we only need to fix array units. Therefore limit this to array.
+                // Maybe we should better read the docs on how to handle this global unit field
+                if (!isset($property->unit) && ($property->type == "array")) {
+                    foreach ($entity->properties as $n => $p) {
+                        if ($n == "unit") {
+                            $property->unit = $p->value;
+                        }
+                    }
+                }
+
                 switch ($name) {
                     //We want to skip a few fields
                     case 'unit':
@@ -518,6 +529,7 @@ class VitoConnect extends WebHookModule
                         $updateVariable($entity->feature, $name, "_Time", $property->value ? strtotime($property->value) : 0, "UnixTimestamp");
                         break;
                     default:
+                        // Deduct profile
                         $profile = "";
                         if (isset($property->unit)) {
                             $profile = $unitToProfile($property->unit);
@@ -525,6 +537,24 @@ class VitoConnect extends WebHookModule
                         if (!$profile) {
                             $profile = $nameToProfile($name, $entity->commands);
                         }
+
+                        // Fix up a few array values, which we want to reduce to a single value
+                        if ($property->type == "array") {
+                            switch($profile) {
+                                case "Electricity":
+                                case "Gas":
+                                    $property->type = "number";
+                                    if (sizeof($property->value) == 0) {
+                                        $property->value = 0;
+                                    }
+                                    else {
+                                        $property->value = $property->value[0];
+                                    }
+                                    break;
+                            }
+                        }
+
+                        // Create and updates variables
                         $updateVariable($entity->feature, $name, $property->type, $property->value, $profile);
                         $updateAction($entity->feature, $name, $entity->commands);
                         break;
