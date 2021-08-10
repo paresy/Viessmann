@@ -121,6 +121,12 @@ class VitoConnect extends WebHookModule
                     ]);
                     $this->SetValue($Ident, $Value);
                 }
+                else if (strpos($Ident, "hysteresis") !== false) {
+                    $this->RequestDeviceData($id . '/setHysteresis', [
+                        'hysteresis' => $Value
+                    ]);
+                    $this->SetValue($Ident, $Value);
+                }
                 else if (strpos($Ident, "temperature") !== false) {
                     $this->RequestDeviceData($id . '/setTargetTemperature', [
                         'temperature' => $Value
@@ -402,6 +408,9 @@ class VitoConnect extends WebHookModule
                     if ($findCommand($commands, 'setMode')) {
                         $this->EnableAction($ident);
                     }
+                    else if ($findCommand($commands, 'setHysteresis')) {
+                        $this->EnableAction($ident);
+                    }
                     else if ($findCommand($commands, 'setTargetTemperature')) {
                         $this->EnableAction($ident);
                     }
@@ -459,6 +468,9 @@ class VitoConnect extends WebHookModule
                             $command = $findCommand($commands, 'setMode');
                             if ($command) {
                                 return $this->CreateProfile("VVC.Mode", VARIABLETYPE_STRING, $command->params->mode->constraints->enum);
+                            }
+                            else if($findCommand($commands, 'setHysteresis')) {
+                                return 'Temperature';
                             }
                             else if($findCommand($commands, 'setTargetTemperature')) {
                                 return 'Temperature';

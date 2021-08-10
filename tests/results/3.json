@@ -229,8 +229,8 @@
     },
     "heating_dhw_temperature_hysteresis_value": {
         "type": 2,
-        "profile": "",
-        "action": false,
+        "profile": "~Temperature",
+        "action": true,
         "value": 5
     },
     "heating_circuits_0_operating_programs_eco_active": {
