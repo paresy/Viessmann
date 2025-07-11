@@ -24,11 +24,11 @@ class VitoConnect extends WebHookModule
 {
     use Simulate;
 
-    private $authorize_url = 'https://iam.viessmann.com/idp/v2/authorize';
-    private $token_url = 'https://iam.viessmann.com/idp/v2/token';
+    private $authorize_url = 'https://iam.viessmann-climatesolutions.com/idp/v2/authorize';
+    private $token_url = 'https://iam.viessmann-climatesolutions.com/idp/v2/token';
 
-    private $installation_data_url = 'https://api.viessmann.com/iot/v1/equipment/installations?includeGateways=true';
-    private $device_data_url = 'https://api.viessmann.com/iot/v1/equipment/installations/%s/gateways/%s/devices/0/features/';
+    private $installation_data_url = 'https://api.viessmann-climatesolutions.com/iot/v1/equipment/installations?includeGateways=true';
+    private $device_data_url = 'https://api.viessmann-climatesolutions.com/iot/v1/equipment/installations/%s/gateways/%s/devices/0/features/';
 
     public function __construct($InstanceID)
     {
@@ -80,7 +80,7 @@ class VitoConnect extends WebHookModule
         $this->SetBuffer('Verifier', $base64url_encode(pack('H*', $random)));
         $this->SetBuffer('Challenge', $base64url_encode(pack('H*', hash('sha256', $this->GetBuffer('Verifier')))));
 
-        echo 'https://iam.viessmann.com/idp/v2/authorize?client_id=' . $this->ReadPropertyString('ClientID') . '&redirect_uri=' . $this->GetCallbackURL() . '&response_type=code&code_challenge=' . $this->GetBuffer('Verifier') . '&scope=IoT User offline_access';
+        echo 'https://iam.viessmann-climatesolutions.com/idp/v2/authorize?client_id=' . $this->ReadPropertyString('ClientID') . '&redirect_uri=' . $this->GetCallbackURL() . '&response_type=code&code_challenge=' . $this->GetBuffer('Verifier') . '&scope=IoT User offline_access';
     }
 
     public function GetConfigurationForm()
