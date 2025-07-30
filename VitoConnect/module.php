@@ -27,8 +27,8 @@ class VitoConnect extends WebHookModule
     private $authorize_url = 'https://iam.viessmann-climatesolutions.com/idp/v2/authorize';
     private $token_url = 'https://iam.viessmann-climatesolutions.com/idp/v2/token';
 
-    private $installation_data_url = 'https://api.viessmann-climatesolutions.com/iot/v1/equipment/installations?includeGateways=true';
-    private $device_data_url = 'https://api.viessmann-climatesolutions.com/iot/v1/equipment/installations/%s/gateways/%s/devices/0/features/';
+    private $installation_data_url = 'https://api.viessmann-climatesolutions.com/iot/v2/equipment/installations?includeGateways=true';
+    private $device_data_url = 'https://api.viessmann-climatesolutions.com/iot/v2/equipment/installations/%s/gateways/%s/devices/0/features/';
 
     public function __construct($InstanceID)
     {
