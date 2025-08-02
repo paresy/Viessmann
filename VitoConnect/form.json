@@ -10,6 +10,7 @@
 	"actions":
 	[
 		{ "type": "Button", "label": "Register", "link": true, "onClick": "VVC_Register($id);" },
-		{ "type": "Button", "name": "Update", "label": "Update", "onClick": "echo VVC_Update($id);" }
+		{ "type": "Button", "name": "Update", "label": "Update", "onClick": "echo VVC_Update($id);" },
+		{ "type": "Button", "name": "Dump", "label": "Show available devices", "onClick": "echo VVC_Dump($id);" }
 	]
 }

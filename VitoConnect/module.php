@@ -27,8 +27,10 @@ class VitoConnect extends WebHookModule
     private $authorize_url = 'https://iam.viessmann-climatesolutions.com/idp/v3/authorize';
     private $token_url = 'https://iam.viessmann-climatesolutions.com/idp/v3/token';
 
+    private $user_url = 'https://api.viessmann-climatesolutions.com/users/v1/users/me';
     private $installation_data_url = 'https://api.viessmann-climatesolutions.com/iot/v2/equipment/installations?includeGateways=true';
-    private $device_data_url = 'https://api.viessmann-climatesolutions.com/iot/v2/features/installations/%s/gateways/%s/devices/0/features/';
+    private $device_data_url = 'https://api.viessmann-climatesolutions.com/iot/v1/equipment/installations/%s/gateways/%s/devices';
+    private $feature_data_url = 'https://api.viessmann-climatesolutions.com/iot/v2/features/installations/%s/gateways/%s/devices/%d/features/';
 
     public function __construct($InstanceID)
     {
@@ -48,6 +50,7 @@ class VitoConnect extends WebHookModule
 
         $this->RegisterAttributeInteger('InstallationID', 0);
         $this->RegisterAttributeString('GatewaySerial', '');
+        $this->RegisterAttributeString('DeviceID', "0");
 
         $this->RegisterTimer('Update', 0, 'VVC_Update($_IPS[\'TARGET\']);');
     }
@@ -58,7 +61,7 @@ class VitoConnect extends WebHookModule
         //Never delete this line!
         parent::ApplyChanges();
 
-        //Set Timer only if valid credential are available
+        //Set Timer only if valid credentials are available
         if ($this->ReadAttributeString('Token')) {
             $this->SetTimerInterval('Update', $this->ReadPropertyInteger('Interval') * 60 * 1000);
         } else {
@@ -98,6 +101,24 @@ class VitoConnect extends WebHookModule
     public function Update()
     {
         $this->ParseDeviceData($this->RequestDeviceData());
+    }
+
+    public function Dump()
+    {
+        echo 'User: ' . $this->FetchData($this->user_url)->loginId . PHP_EOL;
+        $installations = $this->FetchData($this->installation_data_url);
+        foreach ($installations->data as $installation) {
+            echo PHP_EOL;
+            echo 'Installation Description: ' . $installation->description . PHP_EOL;
+            echo 'Installation ID: ' . $installation->id . PHP_EOL;
+            foreach($installation->gateways as $gateway) {
+                echo ' - Gateway Type: ' . $gateway->gatewayType . PHP_EOL;
+                echo ' - Gateway Serial: ' . $gateway->serial . PHP_EOL;
+                foreach ($gateway->devices as $device) {
+                    echo '   - Device: ' . $device->modelId . " (" . $device->id . ")" . PHP_EOL;
+                }
+            }
+        }
     }
 
     public function RequestAction($Ident, $Value)
@@ -197,7 +218,7 @@ class VitoConnect extends WebHookModule
             die('Bearer Token expected');
         }
 
-        $this->SendDebug('GotRefreshToken', print_r($data, true), 0);
+        $this->SendDebug('GotRefreshToken', $result, 0);
 
         $this->WriteAttributeString('Token', $data->refresh_token);
         $this->SetBuffer('Token', $data->access_token);
@@ -344,17 +365,18 @@ class VitoConnect extends WebHookModule
 
     private function RequestDeviceData($action = '', $post_data = null)
     {
-        $id = $this->ReadAttributeInteger('InstallationID');
-        $serial = $this->ReadAttributeString('GatewaySerial');
+        $i_id = $this->ReadAttributeInteger('InstallationID');
+        $g_serial = $this->ReadAttributeString('GatewaySerial');
+        $d_id = $this->ReadAttributeString('DeviceID');
 
-        if ($id == 0 || $serial == '') {
+        if ($i_id == 0 || $g_serial == '') {
             die('InstallationID or GatewaySerial are missing');
         }
 
         if ($action) {
-            return $this->SendAction(sprintf($this->device_data_url, $id, $serial) . $action, $post_data);
+            return $this->SendAction(sprintf($this->feature_data_url, $i_id, $g_serial, $d_id) . $action, $post_data);
         } else {
-            return $this->FetchData(sprintf($this->device_data_url, $id, $serial));
+            return $this->FetchData(sprintf($this->feature_data_url, $i_id, $g_serial, $d_id));
         }
     }
 
