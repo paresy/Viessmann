@@ -5,7 +5,53 @@
 		{ "type": "ValidationTextBox", "caption": "Use this URL as your Redirect URI", "width":  "600px" },
 		{ "type": "Label", "caption": "" },
 		{ "name": "ClientID", "type": "ValidationTextBox", "caption": "ClientID" },
-		{ "type": "NumberSpinner", "name": "Interval", "caption": "Interval", "suffix": "Minutes" }
+		{ "type": "NumberSpinner", "name": "Interval", "caption": "Interval", "suffix": "Minutes" },
+		{ "type": "Label", "caption": "" },
+		{
+			"type": "RowLayout",
+			"visible": false,
+			"items": [
+				{ "type": "Label", "caption": "Selected device", "italic": true },
+				{
+					"type": "PopupButton",
+					"caption": "Change Device",
+					"onClick": "VVC_UIShowChangeDevice($id);",
+					"popup": {
+						"caption": "Select device for next update",
+						"buttons": [
+							{
+								"type": "Button",
+								"name": "OK",
+								"caption": "OK",
+								"onClick": "VVC_UIChangeDevice($id, $Device);"
+							}
+						],
+						"items": [
+							{
+								"type": "Label",
+								"caption": "Loading available devices...",
+								"name": "Loading"
+							},
+							{
+								"type": "Select",
+								"name": "Device",
+								"caption": "Device",
+								"options": [],
+								"visible": false
+							},
+							{
+								"type": "Label",
+								"name": "Hint",
+								"caption": "Please select a device from the list above and confirm with OK.",
+								"visible": false
+							}
+						]
+					}
+				}
+			]
+		},
+		{ "type": "Label", "caption": "Installation ID: %d", "visible": false },
+		{ "type": "Label", "caption": "Gateway Serial: %s", "visible": false }
 	],
 	"actions":
 	[

@@ -10,7 +10,16 @@
             "Please register a unique ClientID on https://developer.viessmann.com/": "Bitte eine eindeutige ClientID unter https://developer.viessmann.com/ registrieren",
             "Symcon Connect must be enabled!": "Symcon Connect muss aktiv sein!",
             "Successful. You can now close this window and press 'Update' inside the instance.": "Erfolgreich. Sie können jetzt das Fenster schließen und 'Update' innerhalb der Instanz betätigen.",
-            "Show available devices": "Verfügbare Geräte anzeigen"
+            "Show available devices": "Verfügbare Geräte anzeigen",
+            "Selected device": "Ausgewähltes Gerät",
+            "Installation ID: %d": "Installations-ID: %d",
+            "Gateway Serial: %s": "Gateway-Seriennummer: %s",
+            "Select device for next update": "Gerät für die nächste Aktualisierung auswählen",
+            "Change Device": "Gerät ändern",
+            "Loading available devices...": "Lade verfügbare Geräte...",
+            "Please select a device from the list above and confirm with OK.": "Bitte wählen Sie ein Gerät aus der oberen Liste und bestätigen Sie mit OK.",
+            "OK": "OK",
+            "Device": "Gerät"
         }
     }
 }

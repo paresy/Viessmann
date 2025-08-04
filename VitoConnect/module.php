@@ -92,8 +92,22 @@ class VitoConnect extends WebHookModule
 
         $data->elements[1]->value = $this->GetCallbackURL();
 
+        if ($this->ReadAttributeInteger('InstallationID') > 0) {
+            $data->elements[7]->visible = true;
+            $data->elements[7]->caption = sprintf($this->Translate($data->elements[7]->caption), $this->ReadAttributeInteger('InstallationID'));
+        }
+        if (strlen($this->ReadAttributeString('GatewaySerial')) > 0) {
+            $data->elements[8]->visible = true;
+            $data->elements[8]->caption = sprintf($this->Translate($data->elements[8]->caption), $this->ReadAttributeString('GatewaySerial'));
+        }
+        if ($data->elements[7]->visible || $data->elements[8]->visible) {
+            $data->elements[6]->visible = true;
+        }
+
         $data->actions[0]->enabled = strlen($this->ReadPropertyString('ClientID')) > 0;
         $data->actions[1]->enabled = strlen($this->ReadAttributeString('Token')) > 0;
+        $data->actions[2]->enabled = strlen($this->ReadAttributeString('Token')) > 0;
+
 
         return json_encode($data);
     }
@@ -119,6 +133,31 @@ class VitoConnect extends WebHookModule
                 }
             }
         }
+    }
+
+    public function UIShowChangeDevice() {
+        $installations = $this->FetchData($this->installation_data_url);
+        $values = [];
+        foreach ($installations->data as $installation) {
+            foreach($installation->gateways as $gateway) {
+                $values[] = [
+                    "caption" => $installation->description. " (" . $gateway->gatewayType . ")",
+                    "value" => $installation->id . "," . $gateway->serial,
+                ];
+            }
+        }
+        $this->UpdateFormField("Device", "options", json_encode($values));
+        $this->UpdateFormField("Device", "value", $this->ReadAttributeInteger('InstallationID') . "," . $this->ReadAttributeString('GatewaySerial'));
+        $this->UpdateFormField("Loading", "visible", false);
+        $this->UpdateFormField("Device", "visible", true);
+        $this->UpdateFormField("Hint", "visible", true);
+    }
+
+    public function UIChangeDevice($Device) {
+        $split = explode(",", $Device);
+        $this->WriteAttributeInteger('InstallationID', $split[0]);
+        $this->WriteAttributeString('GatewaySerial', $split[1]);
+        $this->ReloadForm();
     }
 
     public function RequestAction($Ident, $Value)
