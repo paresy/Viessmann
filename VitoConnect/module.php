@@ -168,25 +168,25 @@ class VitoConnect extends WebHookModule
         switch ($name) {
             case 'active':
                 if ($Value) {
-                    $this->RequestDeviceData($id . '/activate');
+                    $this->RequestDeviceData($id . '/commands/activate');
                 } else {
-                    $this->RequestDeviceData($id . '/deactivate');
+                    $this->RequestDeviceData($id . '/commands/deactivate');
                 }
                 $this->SetValue($Ident, $Value);
                 break;
             case 'value':
                 if (strpos($Ident, 'modes') !== false) {
-                    $this->RequestDeviceData($id . '/setMode', [
+                    $this->RequestDeviceData($id . '/commands/setMode', [
                         'mode' => $Value
                     ]);
                     $this->SetValue($Ident, $Value);
                 } elseif (strpos($Ident, 'hysteresis') !== false) {
-                    $this->RequestDeviceData($id . '/setHysteresis', [
+                    $this->RequestDeviceData($id . '/commands/setHysteresis', [
                         'hysteresis' => $Value
                     ]);
                     $this->SetValue($Ident, $Value);
                 } elseif (strpos($Ident, 'temperature') !== false) {
-                    $this->RequestDeviceData($id . '/setTargetTemperature', [
+                    $this->RequestDeviceData($id . '/commands/setTargetTemperature', [
                         'temperature' => $Value
                     ]);
                     $this->SetValue($Ident, $Value);
@@ -195,19 +195,19 @@ class VitoConnect extends WebHookModule
                 }
                 break;
             case 'temperature':
-                $this->RequestDeviceData($id . '/setTemperature', [
+                $this->RequestDeviceData($id . '/commands/setTemperature', [
                     'targetTemperature' => $Value
                 ]);
                 $this->SetValue($Ident, $Value);
                 break;
             case 'min':
-                $this->RequestDeviceData($id . '/setMin', [
+                $this->RequestDeviceData($id . '/commands/setMin', [
                     'temperature' => $Value
                 ]);
                 $this->SetValue($Ident, $Value);
                 break;
             case 'max':
-                $this->RequestDeviceData($id . '/setMax', [
+                $this->RequestDeviceData($id . '/commands/setMax', [
                     'temperature' => $Value
                 ]);
                 $this->SetValue($Ident, $Value);
