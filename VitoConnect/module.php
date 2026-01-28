@@ -371,8 +371,8 @@ class VitoConnect extends WebHookModule
             die('Invalid response while fetching data!');
         }
 
-        if (isset($data->error)) {
-            die($data->error);
+        if (isset($data->errorType)) {
+            die($data->message);
         }
 
         return $data;
