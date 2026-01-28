@@ -352,6 +352,7 @@ class VitoConnect extends WebHookModule
         $options = [
             'http' => [
                 'header' => 'Authorization: Bearer ' . $accessToken . "\r\n",
+                'ignore_errors' => true,
             ]
         ];
 
