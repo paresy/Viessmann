@@ -83,7 +83,7 @@ class VitoConnect extends WebHookModule
         // Remember the verifier for later use
         $this->SetBuffer('Verifier', $verifier);
 
-        echo $this->authorize_url . '?client_id=' . $this->ReadPropertyString('ClientID') . '&redirect_uri=' . $this->GetCallbackURL() . '&response_type=code&code_challenge_method=S256&code_challenge=' . $code_challenge . '&scope=IoT%20User%20offline_access';
+        return $this->authorize_url . '?client_id=' . $this->ReadPropertyString('ClientID') . '&redirect_uri=' . $this->GetCallbackURL() . '&response_type=code&code_challenge_method=S256&code_challenge=' . $code_challenge . '&scope=IoT%20User%20offline_access';
     }
 
     public function GetConfigurationForm()
