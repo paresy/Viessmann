@@ -91,6 +91,80 @@ class ViessmannDataTest extends TestCase
         $this->testData('8');
     }
 
+    public function testActions(): void
+    {
+        $iid = $this->createInstance('1');
+        $this->assertEquals([['action' => 'heating.circuits.0.operating.programs.comfort/commands/setTemperature', 'params' => ['targetTemperature' => 21]]], $this->requestAction($iid, 'heating_circuits_0_operating_programs_comfort_temperature', 21));
+        $this->assertEquals([['action' => 'heating.circuits.0.operating.programs.comfort/commands/activate', 'params' => []]], $this->requestAction($iid, 'heating_circuits_0_operating_programs_comfort_active', true));
+        $this->assertEquals([['action' => 'heating.circuits.0.operating.modes.active/commands/setMode', 'params' => ['mode' => 'standby']]], $this->requestAction($iid, 'heating_circuits_0_operating_modes_active_value', 'standby'));
+        $this->assertEquals([['action' => 'heating.dhw.temperature.main/commands/setTargetTemperature', 'params' => ['temperature' => 45]]], $this->requestAction($iid, 'heating_dhw_temperature_main_value', 45));
+
+        $iid = $this->createInstance('7');
+        // Required parameters are filled with the current values of the other properties
+        $this->assertEquals([['action' => 'device.time.daylightSaving/commands/activate', 'params' => ['begin' => '25-03', 'end' => '25-10']]], $this->requestAction($iid, 'device_time_daylightSaving_active', true));
+        $this->assertEquals([['action' => 'device.time.daylightSaving/commands/deactivate', 'params' => []]], $this->requestAction($iid, 'device_time_daylightSaving_active', false));
+        $this->assertEquals([['action' => 'heating.dhw.hygiene/commands/setEnabled', 'params' => ['enabled' => true]]], $this->requestAction($iid, 'heating_dhw_hygiene_enabled', true));
+
+        $iid = $this->createInstance('8');
+        $this->assertEquals([['action' => 'heating.dhw.temperature.hysteresis/commands/setHysteresisSwitchOnValue', 'params' => ['hysteresis' => 4]]], $this->requestAction($iid, 'heating_dhw_temperature_hysteresis_switchonvalue', 4));
+        $this->assertEquals([['action' => 'heating.compressors.0/commands/setActive', 'params' => ['active' => false]]], $this->requestAction($iid, 'heating_compressors_0_active', false));
+    }
+
+    public function testActionsWithParameters(): void
+    {
+        $feature = function ($commands)
+        {
+            return json_decode(json_encode(['data' => [[
+                'feature'    => 'heating.test',
+                'properties' => [
+                    'active' => ['type' => 'boolean', 'value' => false],
+                    'begin'  => ['type' => 'string', 'value' => '25-03'],
+                ],
+                'commands' => $commands
+            ]]]));
+        };
+
+        $iid = IPS_CreateInstance('{3BF2B1B8-BD31-4A06-8C70-FD0FF95FE22E}');
+        $interface = IPS\InstanceManager::getInstanceInterface($iid);
+
+        // setActive requires all parameters, which are filled from the other properties
+        $interface->DebugParseDeviceData($feature(['setActive' => ['name' => 'setActive', 'params' => [
+            'active' => ['type' => 'boolean', 'required' => true],
+            'begin'  => ['type' => 'string', 'required' => true],
+        ]]]));
+        $this->assertEquals([['action' => 'heating.test/commands/setActive', 'params' => ['active' => true, 'begin' => '25-03']]], $this->requestAction($iid, 'heating_test_active', true));
+
+        // We cannot fill a required parameter without a matching property. Therefore, no action
+        $interface->DebugParseDeviceData($feature(['setActive' => ['name' => 'setActive', 'params' => [
+            'active' => ['type' => 'boolean', 'required' => true],
+            'end'    => ['type' => 'string', 'required' => true],
+        ]]]));
+        $this->assertFalse(IPS_GetVariable(IPS_GetObjectIDByIdent('heating_test_active', $iid))['VariableAction'] > 0);
+
+        // Actions are disabled, if the command is not available anymore
+        $interface->DebugParseDeviceData($feature(['setActive' => ['name' => 'setActive', 'params' => [
+            'active' => ['type' => 'boolean', 'required' => true],
+        ]]]));
+        $this->assertTrue(IPS_GetVariable(IPS_GetObjectIDByIdent('heating_test_active', $iid))['VariableAction'] > 0);
+        $interface->DebugParseDeviceData($feature([]));
+        $this->assertFalse(IPS_GetVariable(IPS_GetObjectIDByIdent('heating_test_active', $iid))['VariableAction'] > 0);
+
+        $this->expectExceptionMessage('Invalid Ident');
+        $this->requestAction($iid, 'heating_test_active', true);
+    }
+
+    private function createInstance($name)
+    {
+        $iid = IPS_CreateInstance('{3BF2B1B8-BD31-4A06-8C70-FD0FF95FE22E}');
+        IPS\InstanceManager::getInstanceInterface($iid)->DebugParseDeviceData(json_decode(file_get_contents(__DIR__ . '/data/' . $name . '.json')));
+        return $iid;
+    }
+
+    private function requestAction($iid, $ident, $value)
+    {
+        return IPS\InstanceManager::getInstanceInterface($iid)->DebugRequestAction($ident, $value);
+    }
+
     private function supportedCommands(): array
     {
         return [

@@ -823,7 +823,7 @@
     },
     "heating_circuits_0_operating_modes_active_value": {
         "type": 3,
-        "profile": "VVC.Mode",
+        "profile": "VVC.Mode.9b93ef6b",
         "action": true,
         "value": "standby"
     },
@@ -1039,7 +1039,7 @@
     },
     "heating_dhw_operating_modes_active_value": {
         "type": 3,
-        "profile": "VVC.Mode",
+        "profile": "VVC.Mode.eeed1e62",
         "action": true,
         "value": "balanced"
     },

@@ -13,6 +13,15 @@ if (defined('PHPUNIT_TESTSUITE')) {
             $this->failOnUnexpected = true;
             return $this->ParseDeviceData($device);
         }
+
+        public function DebugRequestAction(string $Ident, mixed $Value)
+        {
+            $this->recordedActions = [];
+            $this->RequestAction($Ident, $Value);
+            $actions = $this->recordedActions;
+            $this->recordedActions = null;
+            return $actions;
+        }
     }
 } else {
     trait Simulate
@@ -27,12 +36,15 @@ class VitoConnect extends WebHookModule
     // If set, variables will be renamed to our computed names while parsing the device data
     private $renameVariables = false;
 
+    // Used by our tests: throw on unexpected data and record actions instead of sending them
+    private $failOnUnexpected = false;
+    private $recordedActions = null;
+
     private $authorize_url = 'https://iam.viessmann-climatesolutions.com/idp/v3/authorize';
     private $token_url = 'https://iam.viessmann-climatesolutions.com/idp/v3/token';
 
     private $user_url = 'https://api.viessmann-climatesolutions.com/users/v1/users/me';
     private $installation_data_url = 'https://api.viessmann-climatesolutions.com/iot/v2/equipment/installations?includeGateways=true';
-    private $device_data_url = 'https://api.viessmann-climatesolutions.com/iot/v1/equipment/installations/%s/gateways/%s/devices';
     private $feature_data_url = 'https://api.viessmann-climatesolutions.com/iot/v2/features/installations/%s/gateways/%s/devices/%d/features/';
 
     public function __construct($InstanceID)
@@ -169,102 +181,60 @@ class VitoConnect extends WebHookModule
         $this->UpdateFormField("Hint", "visible", true);
     }
 
-    public function UIChangeDevice($Device) {
+    public function UIChangeDevice(string $Device) {
         $split = explode(",", $Device);
-        $this->WriteAttributeInteger('InstallationID', $split[0]);
+        $this->WriteAttributeInteger('InstallationID', intval($split[0]));
         $this->WriteAttributeString('GatewaySerial', $split[1]);
         $this->ReloadForm();
     }
 
     public function RequestAction($Ident, $Value)
     {
-        $parts = explode('_', $Ident);
-        $name = array_pop($parts);
-        $id = implode('.', $parts);
         $commands = json_decode($this->ReadAttributeString('Commands'), true);
-        if (isset($commands[$Ident])) {
-            // Commands like setActive/setEnabled require all parameters. Fill them with our current values
-            $params = [];
-            foreach ($commands[$Ident]['params'] as $param) {
-                if (strtolower($param) == $name) {
-                    $params[$param] = $Value;
-                } else {
-                    $params[$param] = $this->GetValue(str_replace('.', '_', $id) . '_' . strtolower($param));
-                }
-            }
-            $this->RequestDeviceData($id . '/commands/' . $commands[$Ident]['command'], $params);
-            $this->SetValue($Ident, $Value);
-            return;
+        $isKnown = function ($commands) use ($Ident)
+        {
+            return isset($commands[$Ident]['name']) || isset($commands[$Ident]['on']);
+        };
+
+        // Commands are collected while parsing the device data. Refresh them, if we do not know this ident yet
+        if (!$isKnown($commands) && !is_array($this->recordedActions)) {
+            $this->Update();
+            $commands = json_decode($this->ReadAttributeString('Commands'), true);
         }
 
-        switch ($name) {
-            case 'active':
-                if ($Value) {
-                    $this->RequestDeviceData($id . '/commands/activate');
-                } else {
-                    $this->RequestDeviceData($id . '/commands/deactivate');
-                }
-                $this->SetValue($Ident, $Value);
-                break;
-            case 'value':
-                if (strpos($Ident, 'modes') !== false) {
-                    $this->RequestDeviceData($id . '/commands/setMode', [
-                        'mode' => $Value
-                    ]);
-                    $this->SetValue($Ident, $Value);
-                } elseif (strpos($Ident, 'hysteresis') !== false) {
-                    $this->RequestDeviceData($id . '/commands/setHysteresis', [
-                        'hysteresis' => $Value
-                    ]);
-                    $this->SetValue($Ident, $Value);
-                } elseif (strpos($Ident, 'temperature') !== false) {
-                    $this->RequestDeviceData($id . '/commands/setTargetTemperature', [
-                        'temperature' => $Value
-                    ]);
-                    $this->SetValue($Ident, $Value);
-                } else {
-                    throw new Exception('Invalid Ident');
-                }
-                break;
-            case 'switchonvalue':
-                $this->RequestDeviceData($id . '/commands/setHysteresisSwitchOnValue', [
-                    'hysteresis' => $Value
-                ]);
-                $this->SetValue($Ident, $Value);
-                break;
-            case 'switchoffvalue':
-                $this->RequestDeviceData($id . '/commands/setHysteresisSwitchOffValue', [
-                    'hysteresis' => $Value
-                ]);
-                $this->SetValue($Ident, $Value);
-                break;
-            case 'temperature':
-                $this->RequestDeviceData($id . '/commands/setTemperature', [
-                    'targetTemperature' => $Value
-                ]);
-                $this->SetValue($Ident, $Value);
-                break;
-            case 'min':
-                $this->RequestDeviceData($id . '/commands/setMin', [
-                    'temperature' => $Value
-                ]);
-                $this->SetValue($Ident, $Value);
-                break;
-            case 'max':
-                $this->RequestDeviceData($id . '/commands/setMax', [
-                    'temperature' => $Value
-                ]);
-                $this->SetValue($Ident, $Value);
-                break;
-            default:
-                throw new Exception('Invalid Ident');
+        if (!$isKnown($commands)) {
+            throw new Exception('Invalid Ident');
         }
+
+        $command = $commands[$Ident];
+
+        // Booleans may be switched by two separate commands, e.g. activate/deactivate
+        if (isset($command['on'])) {
+            $command = $Value ? $command['on'] : $command['off'];
+        }
+
+        // Parameters are either our new value or have to be filled with the current value of another property
+        $params = [];
+        foreach ($command['params'] as $param => $property) {
+            if ($property === null) {
+                $params[$param] = $Value;
+            } else {
+                $params[$param] = $this->GetValue(str_replace('.', '_', $command['feature']) . '_' . strtolower($property));
+            }
+        }
+
+        $this->RequestDeviceData($command['feature'] . '/commands/' . $command['name'], $params);
+        $this->SetValue($Ident, $Value);
     }
 
     protected function ProcessHookData()
     {
         $this->SendDebug('GET', print_r($_GET, true), 0);
         $this->SendDebug('POST', file_get_contents('php://input'), 0);
+
+        if (!isset($_GET['code'])) {
+            die(isset($_GET['error_description']) ? $_GET['error_description'] : (isset($_GET['error']) ? $_GET['error'] : 'Authorization code is missing'));
+        }
 
         $this->SendDebug('ExchangeCodeToRefreshToken', '', 0);
 
@@ -305,19 +275,23 @@ class VitoConnect extends WebHookModule
 
         $this->WriteAttributeString('Token', $data->refresh_token);
         $this->SetBuffer('Token', $data->access_token);
-        $this->SetBuffer('Expires', $data->expires_in);
+        $this->SetBuffer('Expires', time() + $data->expires_in - 60);
 
         $this->Initialize();
 
+        $this->SetTimerInterval('Update', $this->ReadPropertyInteger('Interval') * 60 * 1000);
+
         $this->UpdateFormField('Update', 'enabled', true);
+        $this->UpdateFormField('Dump', 'enabled', true);
+        $this->UpdateFormField('RenameVariables', 'enabled', true);
 
         echo $this->Translate("Successful. You can now close this window and press 'Update' inside the instance.");
     }
 
     private function GetCallbackURL()
     {
-        $cc_id = IPS_GetInstanceListByModuleID('{9486D575-BE8C-4ED8-B5B5-20930E26DE6F}')[0];
-        $cc_url = @CC_GetConnectURL($cc_id);
+        $cc_ids = IPS_GetInstanceListByModuleID('{9486D575-BE8C-4ED8-B5B5-20930E26DE6F}');
+        $cc_url = (count($cc_ids) > 0) ? @CC_GetConnectURL($cc_ids[0]) : false;
 
         if ($cc_url) {
             return $cc_url . '/hook/viessmann/' . $this->InstanceID;
@@ -378,7 +352,7 @@ class VitoConnect extends WebHookModule
 
             $this->WriteAttributeString('Token', $data->refresh_token);
             $this->SetBuffer('Token', $data->access_token);
-            $this->SetBuffer('Expires', $data->expires_in);
+            $this->SetBuffer('Expires', time() + $data->expires_in - 60);
 
             $accessToken = $data->access_token;
         }
@@ -433,7 +407,8 @@ class VitoConnect extends WebHookModule
             'http' => [
                 'method'  => 'POST',
                 'header'  => 'Authorization: Bearer ' . $accessToken . "\r\nContent-Type: application/json\r\nAccept: application/vnd.siren+json\r\n",
-                'content' => ($post_data == null) ? '{}' : json_encode($post_data)
+                'content' => ($post_data == null) ? '{}' : json_encode($post_data),
+                'ignore_errors' => true
             ]
         ];
 
@@ -441,7 +416,13 @@ class VitoConnect extends WebHookModule
         $result = file_get_contents($url, false, $context);
 
         if ($result === false) {
-            die('Fetching data failed!');
+            die('Sending action failed!');
+        }
+
+        $data = json_decode($result);
+        if (isset($data->errorType)) {
+            $this->SendDebug('Error', $result, 0);
+            die(isset($data->message) ? $data->message : $data->errorType);
         }
 
         $this->SendDebug('Success', $result, 0);
@@ -449,6 +430,12 @@ class VitoConnect extends WebHookModule
 
     private function RequestDeviceData($action = '', $post_data = null)
     {
+        // Our tests record actions instead of sending them
+        if ($action && is_array($this->recordedActions)) {
+            $this->recordedActions[] = ['action' => $action, 'params' => $post_data];
+            return;
+        }
+
         $i_id = $this->ReadAttributeInteger('InstallationID');
         $g_serial = $this->ReadAttributeString('GatewaySerial');
         $d_id = $this->ReadAttributeString('DeviceID');
@@ -500,7 +487,7 @@ class VitoConnect extends WebHookModule
                     if (is_object($value) || is_array($value)) {
                         $this->RegisterVariableString($ident, computeName($id, $name));
                         $this->SetValue($ident, json_encode($value));
-                    } elseif (isset($this->failOnUnexpected)) {
+                    } elseif ($this->failOnUnexpected) {
                         throw new Exception(sprintf('Unsupported variable type: %s, id: %s', $type, $id));
                     } else {
                         $this->SendDebug('Unsupported Type', $type . ', id: ' . $id . ', value: ' . print_r($value, true), 0);
@@ -524,81 +511,76 @@ class VitoConnect extends WebHookModule
             return false;
         };
 
-        // Commands which require all parameters, which we will fill from our variables
-        $parameterCommands = [];
+        // Commands which can be used to change a property. The first available command will be used
+        // A pair of commands is used to switch a boolean on/off
+        $propertyCommands = [
+            'active'         => [['activate', 'deactivate'], 'setActive'],
+            'enabled'        => ['setEnabled'],
+            'value'          => ['setMode', 'setHysteresis', 'setTargetTemperature'],
+            'temperature'    => ['setTemperature'],
+            'switchOnValue'  => ['setHysteresisSwitchOnValue'],
+            'switchOffValue' => ['setHysteresisSwitchOffValue'],
+            'min'            => ['setMin'],
+            'max'            => ['setMax'],
+        ];
 
-        $findParameterCommand = function ($properties, $commands, $commandName, $name) use ($findCommand)
+        // All commands of the parsed device data by variable ident, which will be used in RequestAction
+        $identCommands = [];
+
+        // Map all parameters of a command to our new value (null) or to another property of the feature
+        $buildCommand = function ($feature, $properties, $command, $name, $hasValue)
         {
-            $command = $findCommand($commands, $commandName);
-            if (!$command || !isset($command->params->$name)) {
-                return false;
-            }
             $params = [];
             foreach ($command->params as $param => $definition) {
-                // We can only fill parameters, for which we have a variable
-                if (($param != $name) && !isset($properties->$param)) {
-                    if (isset($definition->required) && $definition->required) {
+                if ($hasValue && (($param == $name) || (count((array) $command->params) == 1))) {
+                    $params[$param] = null;
+                } elseif (isset($definition->required) && $definition->required) {
+                    // We can only fill required parameters, for which we have a variable
+                    if (!isset($properties->$param)) {
                         return false;
                     }
-                    continue;
+                    $params[$param] = $param;
                 }
-                $params[] = $param;
             }
-            return $params;
+            // We need to be able to pass our new value
+            if ($hasValue && !in_array(null, $params, true)) {
+                return false;
+            }
+            return ['feature' => $feature, 'name' => $command->name, 'params' => $params];
         };
 
-        $updateAction = function ($id, $name, $properties, $commands) use ($findCommand, $findParameterCommand, &$parameterCommands)
+        $updateAction = function ($feature, $name, $properties, $commands) use ($findCommand, $buildCommand, $propertyCommands, &$identCommands)
         {
-            $ident = str_replace('.', '_', $id) . '_' . strtolower($name);
-            switch ($name) {
-                case 'active':
-                    if ($findCommand($commands, 'activate') && $findCommand($commands, 'deactivate')) {
-                        $this->EnableAction($ident);
-                    } elseif (($params = $findParameterCommand($properties, $commands, 'setActive', 'active')) !== false) {
-                        $parameterCommands[$ident] = ['command' => 'setActive', 'params' => $params];
-                        $this->EnableAction($ident);
+            $ident = str_replace('.', '_', $feature) . '_' . strtolower($name);
+
+            $identCommand = false;
+            if (isset($propertyCommands[$name])) {
+                foreach ($propertyCommands[$name] as $candidate) {
+                    if (is_array($candidate)) {
+                        $on = $findCommand($commands, $candidate[0]);
+                        $off = $findCommand($commands, $candidate[1]);
+                        if ($on && $off) {
+                            $on = $buildCommand($feature, $properties, $on, $name, false);
+                            $off = $buildCommand($feature, $properties, $off, $name, false);
+                            if ($on && $off) {
+                                $identCommand = ['on' => $on, 'off' => $off];
+                            }
+                        }
+                    } elseif ($command = $findCommand($commands, $candidate)) {
+                        $identCommand = $buildCommand($feature, $properties, $command, $name, true);
                     }
-                    break;
-                case 'enabled':
-                    if (($params = $findParameterCommand($properties, $commands, 'setEnabled', 'enabled')) !== false) {
-                        $parameterCommands[$ident] = ['command' => 'setEnabled', 'params' => $params];
-                        $this->EnableAction($ident);
+                    if ($identCommand) {
+                        break;
                     }
-                    break;
-                case 'value':
-                    if ($findCommand($commands, 'setMode')) {
-                        $this->EnableAction($ident);
-                    } elseif ($findCommand($commands, 'setHysteresis')) {
-                        $this->EnableAction($ident);
-                    } elseif ($findCommand($commands, 'setTargetTemperature')) {
-                        $this->EnableAction($ident);
-                    }
-                    break;
-                case 'temperature':
-                    if ($findCommand($commands, 'setTemperature')) {
-                        $this->EnableAction($ident);
-                    }
-                    break;
-                case 'switchOnValue':
-                    if ($findCommand($commands, 'setHysteresisSwitchOnValue')) {
-                        $this->EnableAction($ident);
-                    }
-                    break;
-                case 'switchOffValue':
-                    if ($findCommand($commands, 'setHysteresisSwitchOffValue')) {
-                        $this->EnableAction($ident);
-                    }
-                    break;
-                case 'min':
-                    if ($findCommand($commands, 'setMin')) {
-                        $this->EnableAction($ident);
-                    }
-                    break;
-                case 'max':
-                    if ($findCommand($commands, 'setMax')) {
-                        $this->EnableAction($ident);
-                    }
-                    break;
+                }
+            }
+
+            if ($identCommand) {
+                $identCommands[$ident] = $identCommand;
+                $this->EnableAction($ident);
+            } elseif (($id = @$this->GetIDForIdent($ident)) && (IPS_GetVariable($id)['VariableAction'] == $this->InstanceID)) {
+                // The device does not offer a command anymore
+                $this->DisableAction($ident);
             }
         };
 
@@ -648,7 +630,7 @@ class VitoConnect extends WebHookModule
                         case 'liter/hour':
                             return $this->CreateNumberProfile('VVC.VolumetricFlow', ' l/h', 0, 'Drops');
                         default:
-                            if (isset($this->failOnUnexpected)) {
+                            if ($this->failOnUnexpected) {
                                 throw new Exception(sprintf('Unknown unit: %s', $unit));
                             } else {
                                 $this->SendDebug('Unknown Unit', $unit, 0);
@@ -668,7 +650,9 @@ class VitoConnect extends WebHookModule
                         case 'value':
                             $command = $findCommand($commands, 'setMode');
                             if ($command) {
-                                return $this->CreateProfile('VVC.Mode', VARIABLETYPE_STRING, $command->params->mode->constraints->enum);
+                                // Every feature has its own set of modes. Therefore, we need a profile for every set
+                                $enum = $command->params->mode->constraints->enum;
+                                return $this->CreateProfile('VVC.Mode.' . substr(md5(json_encode($enum)), 0, 8), VARIABLETYPE_STRING, $enum);
                             } elseif ($findCommand($commands, 'setHysteresis')) {
                                 return 'Temperature';
                             } elseif ($findCommand($commands, 'setTargetTemperature')) {
@@ -742,9 +726,9 @@ class VitoConnect extends WebHookModule
             }
         }
 
-        $parameterCommands = json_encode($parameterCommands);
-        if ($this->ReadAttributeString('Commands') != $parameterCommands) {
-            $this->WriteAttributeString('Commands', $parameterCommands);
+        $identCommands = json_encode($identCommands);
+        if ($this->ReadAttributeString('Commands') != $identCommands) {
+            $this->WriteAttributeString('Commands', $identCommands);
         }
     }
 

@@ -199,7 +199,7 @@
     },
     "ventilation_operating_modes_active_value": {
         "type": 3,
-        "profile": "VVC.Mode",
+        "profile": "VVC.Mode.5fa6bb93",
         "action": true,
         "value": "standard"
     },
@@ -409,7 +409,7 @@
     },
     "heating_circuits_0_operating_modes_active_value": {
         "type": 3,
-        "profile": "VVC.Mode",
+        "profile": "VVC.Mode.3d663c8e",
         "action": true,
         "value": "dhw"
     },

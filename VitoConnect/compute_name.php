@@ -386,6 +386,20 @@ function enumToName($enum)
             return 'Dauernd reduziert';
         case 'forcedNormal':
             return 'Dauernd Tagbetrieb';
+        case 'heating':
+            return 'Nur Heizen';
+        case 'off':
+            return 'Aus';
+        case 'balanced':
+            return 'Ausgewogen';
+        case 'efficient':
+            return 'Effizient';
+        case 'efficientWithMinComfort':
+            return 'Effizient mit Mindestkomfort';
+        case 'standard':
+            return 'Grundbetrieb';
+        case 'ventilation':
+            return 'Lüftungsautomatik';
         default:
             return $enum;
     }

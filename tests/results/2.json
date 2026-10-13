@@ -217,7 +217,7 @@
     },
     "heating_circuits_0_operating_modes_active_value": {
         "type": 3,
-        "profile": "VVC.Mode",
+        "profile": "VVC.Mode.8ad20326",
         "action": true,
         "value": "dhw"
     },
