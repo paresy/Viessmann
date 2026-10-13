@@ -4,9 +4,9 @@
 	"name": "Viessmann",
 	"url": "https://github.com/paresy/Viessmann",
 	"compatibility": {
-		"version": "6.0"
+		"version": "8.1"
 	},
-	"version": "2.2",
+	"version": "3.0",
 	"build": 0,
 	"date": 0
 }

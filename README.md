@@ -1,6 +1,6 @@
 # Viessmann for IP-Symcon
 
-[![IP-Symcon is awesome!](https://img.shields.io/badge/IP--Symcon-5.x-blue.svg)](https://www.symcon.de)
+[![IP-Symcon is awesome!](https://img.shields.io/badge/IP--Symcon-8.1-blue.svg)](https://www.symcon.de)
 [![Check Style](https://github.com/paresy/Viessmann/workflows/Check%20Style/badge.svg)](https://github.com/paresy/Viessmann/actions)
 [![Run Tests](https://github.com/paresy/Viessmann/workflows/Run%20Tests/badge.svg)](https://github.com/paresy/Viessmann/actions)
 

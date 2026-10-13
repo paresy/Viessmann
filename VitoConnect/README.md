@@ -18,7 +18,7 @@ Das Modul dient dazu die VitoConnect Cloud-API abzufragen und alle relevanten In
 
 ### 2. Voraussetzungen
 
-- IP-Symcon ab Version 5.1
+- IP-Symcon ab Version 8.1
 
 ### 3. Software-Installation
 

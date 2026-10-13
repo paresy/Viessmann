@@ -2,25 +2,30 @@
 
 declare(strict_types=1);
 
-include_once __DIR__ . '/../libs/WebHookModule.php';
 include_once __DIR__ . '/compute_name.php';
 
 if (defined('PHPUNIT_TESTSUITE')) {
     trait Simulate
     {
-        public function DebugParseDeviceData(object $device)
+        public function DebugParseDeviceData(object $device): void
         {
             $this->failOnUnexpected = true;
-            return $this->ParseDeviceData($device);
+            $this->ParseDeviceData($device);
         }
 
-        public function DebugRequestAction(string $Ident, mixed $Value)
+        public function DebugRequestAction(string $Ident, mixed $Value): array
         {
             $this->recordedActions = [];
             $this->RequestAction($Ident, $Value);
             $actions = $this->recordedActions;
             $this->recordedActions = null;
             return $actions;
+        }
+
+        // Required by the stubs for our timers
+        protected function getTime(): int
+        {
+            return time();
         }
     }
 } else {
@@ -29,7 +34,7 @@ if (defined('PHPUNIT_TESTSUITE')) {
     }
 }
 
-class VitoConnect extends WebHookModule
+class VitoConnect extends IPSModuleStrict
 {
     use Simulate;
 
@@ -47,12 +52,7 @@ class VitoConnect extends WebHookModule
     private $installation_data_url = 'https://api.viessmann-climatesolutions.com/iot/v2/equipment/installations?includeGateways=true';
     private $feature_data_url = 'https://api.viessmann-climatesolutions.com/iot/v2/features/installations/%s/gateways/%s/devices/%d/features/';
 
-    public function __construct($InstanceID)
-    {
-        parent::__construct($InstanceID, 'viessmann/' . $InstanceID);
-    }
-
-    public function Create()
+    public function Create(): void
     {
         //Never delete this line!
         parent::Create();
@@ -71,9 +71,12 @@ class VitoConnect extends WebHookModule
         $this->RegisterAttributeString('Commands', '{}');
 
         $this->RegisterTimer('Update', 0, 'VVC_Update($_IPS[\'TARGET\']);');
+
+        // This is our redirect URI for the OAuth process
+        $this->RegisterHook('viessmann/' . $this->InstanceID);
     }
 
-    public function ApplyChanges()
+    public function ApplyChanges(): void
     {
 
         //Never delete this line!
@@ -87,7 +90,7 @@ class VitoConnect extends WebHookModule
         }
     }
 
-    public function Register()
+    public function Register(): string
     {
         $base64url_encode = function ($data)
         {
@@ -104,7 +107,7 @@ class VitoConnect extends WebHookModule
         return $this->authorize_url . '?client_id=' . $this->ReadPropertyString('ClientID') . '&redirect_uri=' . $this->GetCallbackURL() . '&response_type=code&code_challenge_method=S256&code_challenge=' . $code_challenge . '&scope=IoT%20User%20offline_access';
     }
 
-    public function GetConfigurationForm()
+    public function GetConfigurationForm(): string
     {
         $data = json_decode(file_get_contents(__DIR__ . '/form.json'));
 
@@ -131,12 +134,12 @@ class VitoConnect extends WebHookModule
         return json_encode($data);
     }
 
-    public function Update()
+    public function Update(): void
     {
         $this->ParseDeviceData($this->RequestDeviceData());
     }
 
-    public function RenameVariables()
+    public function RenameVariables(): string
     {
         $this->renameVariables = true;
         $this->ParseDeviceData($this->RequestDeviceData());
@@ -145,7 +148,7 @@ class VitoConnect extends WebHookModule
         return $this->Translate('Variables have been renamed.');
     }
 
-    public function Dump()
+    public function Dump(): void
     {
         echo 'User: ' . $this->FetchData($this->user_url)->loginId . PHP_EOL;
         $installations = $this->FetchData($this->installation_data_url);
@@ -163,7 +166,8 @@ class VitoConnect extends WebHookModule
         }
     }
 
-    public function UIShowChangeDevice() {
+    public function UIShowChangeDevice(): void
+    {
         $installations = $this->FetchData($this->installation_data_url);
         $values = [];
         foreach ($installations->data as $installation) {
@@ -181,14 +185,15 @@ class VitoConnect extends WebHookModule
         $this->UpdateFormField("Hint", "visible", true);
     }
 
-    public function UIChangeDevice(string $Device) {
+    public function UIChangeDevice(string $Device): void
+    {
         $split = explode(",", $Device);
         $this->WriteAttributeInteger('InstallationID', intval($split[0]));
-        $this->WriteAttributeString('GatewaySerial', $split[1]);
+        $this->WriteAttributeString('GatewaySerial', strval($split[1]));
         $this->ReloadForm();
     }
 
-    public function RequestAction($Ident, $Value)
+    public function RequestAction(string $Ident, mixed $Value): void
     {
         $commands = json_decode($this->ReadAttributeString('Commands'), true);
         $isKnown = function ($commands) use ($Ident)
@@ -223,11 +228,11 @@ class VitoConnect extends WebHookModule
             }
         }
 
-        $this->RequestDeviceData($command['feature'] . '/commands/' . $command['name'], $params);
+        $this->SendDeviceAction($command['feature'] . '/commands/' . $command['name'], $params);
         $this->SetValue($Ident, $Value);
     }
 
-    protected function ProcessHookData()
+    protected function ProcessHookData(): void
     {
         $this->SendDebug('GET', print_r($_GET, true), 0);
         $this->SendDebug('POST', file_get_contents('php://input'), 0);
@@ -275,7 +280,7 @@ class VitoConnect extends WebHookModule
 
         $this->WriteAttributeString('Token', $data->refresh_token);
         $this->SetBuffer('Token', $data->access_token);
-        $this->SetBuffer('Expires', time() + $data->expires_in - 60);
+        $this->SetBuffer('Expires', strval(time() + $data->expires_in - 60));
 
         $this->Initialize();
 
@@ -288,7 +293,7 @@ class VitoConnect extends WebHookModule
         echo $this->Translate("Successful. You can now close this window and press 'Update' inside the instance.");
     }
 
-    private function GetCallbackURL()
+    private function GetCallbackURL(): string
     {
         $cc_ids = IPS_GetInstanceListByModuleID('{9486D575-BE8C-4ED8-B5B5-20930E26DE6F}');
         $cc_url = (count($cc_ids) > 0) ? @CC_GetConnectURL($cc_ids[0]) : false;
@@ -300,18 +305,18 @@ class VitoConnect extends WebHookModule
         return $this->Translate('Symcon Connect must be enabled!');
     }
 
-    private function Initialize()
+    private function Initialize(): void
     {
         //Fetch Installation ID and Gateway Serial for later reuse.
         $installation = $this->FetchData($this->installation_data_url);
-        $this->SendDebug('InstallationID', $installation->data[0]->id, 0);
-        $this->SendDebug('GatewaySerial', $installation->data[0]->gateways[0]->serial, 0);
+        $this->SendDebug('InstallationID', strval($installation->data[0]->id), 0);
+        $this->SendDebug('GatewaySerial', strval($installation->data[0]->gateways[0]->serial), 0);
 
-        $this->WriteAttributeInteger('InstallationID', $installation->data[0]->id);
-        $this->WriteAttributeString('GatewaySerial', $installation->data[0]->gateways[0]->serial);
+        $this->WriteAttributeInteger('InstallationID', intval($installation->data[0]->id));
+        $this->WriteAttributeString('GatewaySerial', strval($installation->data[0]->gateways[0]->serial));
     }
 
-    private function UpdateAccessToken()
+    private function UpdateAccessToken(): string
     {
 
         //Request a new Access Token if required
@@ -352,7 +357,7 @@ class VitoConnect extends WebHookModule
 
             $this->WriteAttributeString('Token', $data->refresh_token);
             $this->SetBuffer('Token', $data->access_token);
-            $this->SetBuffer('Expires', time() + $data->expires_in - 60);
+            $this->SetBuffer('Expires', strval(time() + $data->expires_in - 60));
 
             $accessToken = $data->access_token;
         }
@@ -360,7 +365,7 @@ class VitoConnect extends WebHookModule
         return $accessToken;
     }
 
-    private function FetchData($url)
+    private function FetchData(string $url): object
     {
         $accessToken = $this->UpdateAccessToken();
 
@@ -396,7 +401,7 @@ class VitoConnect extends WebHookModule
         return $data;
     }
 
-    private function SendAction($url, $post_data = null)
+    private function SendAction(string $url, ?array $post_data = null): void
     {
         $accessToken = $this->UpdateAccessToken();
 
@@ -428,14 +433,24 @@ class VitoConnect extends WebHookModule
         $this->SendDebug('Success', $result, 0);
     }
 
-    private function RequestDeviceData($action = '', $post_data = null)
+    private function RequestDeviceData(): object
+    {
+        return $this->FetchData($this->GetFeatureURL());
+    }
+
+    private function SendDeviceAction(string $action, array $post_data): void
     {
         // Our tests record actions instead of sending them
-        if ($action && is_array($this->recordedActions)) {
+        if (is_array($this->recordedActions)) {
             $this->recordedActions[] = ['action' => $action, 'params' => $post_data];
             return;
         }
 
+        $this->SendAction($this->GetFeatureURL() . $action, $post_data);
+    }
+
+    private function GetFeatureURL(): string
+    {
         $i_id = $this->ReadAttributeInteger('InstallationID');
         $g_serial = $this->ReadAttributeString('GatewaySerial');
         $d_id = $this->ReadAttributeString('DeviceID');
@@ -444,14 +459,10 @@ class VitoConnect extends WebHookModule
             die('InstallationID or GatewaySerial are missing');
         }
 
-        if ($action) {
-            return $this->SendAction(sprintf($this->feature_data_url, $i_id, $g_serial, $d_id) . $action, $post_data);
-        } else {
-            return $this->FetchData(sprintf($this->feature_data_url, $i_id, $g_serial, $d_id));
-        }
+        return sprintf($this->feature_data_url, $i_id, $g_serial, $d_id);
     }
 
-    private function ParseDeviceData($device)
+    private function ParseDeviceData(object $device): void
     {
         $updateVariable = function ($id, $name, $type, $value, $profile)
         {
@@ -732,7 +743,7 @@ class VitoConnect extends WebHookModule
         }
     }
 
-    private function CreateNumberProfile($name, $suffix, $digits, $icon)
+    private function CreateNumberProfile(string $name, string $suffix, int $digits, string $icon): string
     {
         if (!IPS_VariableProfileExists($name)) {
             IPS_CreateVariableProfile($name, VARIABLETYPE_FLOAT);
@@ -743,7 +754,7 @@ class VitoConnect extends WebHookModule
         return $name;
     }
 
-    private function CreateProfile($name, $type, $associations)
+    private function CreateProfile(string $name, int $type, array $associations): string
     {
         if (!IPS_VariableProfileExists($name)) {
             IPS_CreateVariableProfile($name, $type);
