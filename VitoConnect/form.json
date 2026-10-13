@@ -57,6 +57,7 @@
 	[
 		{ "type": "Button", "label": "Register", "link": true, "onClick": "echo VVC_Register($id);" },
 		{ "type": "Button", "name": "Update", "label": "Update", "onClick": "echo VVC_Update($id);" },
-		{ "type": "Button", "name": "Dump", "label": "Show available devices", "onClick": "echo VVC_Dump($id);" }
+		{ "type": "Button", "name": "Dump", "label": "Show available devices", "onClick": "echo VVC_Dump($id);" },
+		{ "type": "Button", "name": "RenameVariables", "label": "Rename variables", "onClick": "echo VVC_RenameVariables($id);", "confirm": "All variables of this instance, which are provided by the current device data, will be reset to the names suggested by this module. Names you have changed yourself will be overwritten. Variables which are no longer provided by the device are not affected. Do you want to continue?" }
 	]
 }

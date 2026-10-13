@@ -24,6 +24,9 @@ class VitoConnect extends WebHookModule
 {
     use Simulate;
 
+    // If set, variables will be renamed to our computed names while parsing the device data
+    private $renameVariables = false;
+
     private $authorize_url = 'https://iam.viessmann-climatesolutions.com/idp/v3/authorize';
     private $token_url = 'https://iam.viessmann-climatesolutions.com/idp/v3/token';
 
@@ -110,6 +113,7 @@ class VitoConnect extends WebHookModule
         $data->actions[0]->enabled = strlen($this->ReadPropertyString('ClientID')) > 0;
         $data->actions[1]->enabled = strlen($this->ReadAttributeString('Token')) > 0;
         $data->actions[2]->enabled = strlen($this->ReadAttributeString('Token')) > 0;
+        $data->actions[3]->enabled = strlen($this->ReadAttributeString('Token')) > 0;
 
 
         return json_encode($data);
@@ -118,6 +122,15 @@ class VitoConnect extends WebHookModule
     public function Update()
     {
         $this->ParseDeviceData($this->RequestDeviceData());
+    }
+
+    public function RenameVariables()
+    {
+        $this->renameVariables = true;
+        $this->ParseDeviceData($this->RequestDeviceData());
+        $this->renameVariables = false;
+
+        return $this->Translate('Variables have been renamed.');
     }
 
     public function Dump()
@@ -481,6 +494,11 @@ class VitoConnect extends WebHookModule
                         $this->SendDebug('Unsupported Type', $type . ', id: ' . $id . ', value: ' . print_r($value, true), 0);
                     }
                     break;
+            }
+
+            // Overwrite names which might have been changed by the user or by an older version of this module
+            if ($this->renameVariables && @$this->GetIDForIdent($ident)) {
+                IPS_SetName($this->GetIDForIdent($ident), computeName($id, $name));
             }
         };
 
