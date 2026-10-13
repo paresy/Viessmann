@@ -1,7 +1,7 @@
 {
     "device_configuration_houseLocation_altitude": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Meter",
         "action": false,
         "value": 0
     },
@@ -769,7 +769,7 @@
     },
     "heating_burners_0_statistics_hours": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Hours",
         "action": false,
         "value": 3108
     },
@@ -931,19 +931,19 @@
     },
     "heating_configuration_bufferCylinderSize_value": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Liter",
         "action": false,
         "value": 300
     },
     "heating_configuration_centralHeatingCylinderSize_value": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Liter",
         "action": false,
         "value": 0
     },
     "heating_configuration_dhwCylinderSize_value": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Liter",
         "action": false,
         "value": 0
     },
@@ -955,61 +955,61 @@
     },
     "heating_configuration_houseHeatingLoad_value": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.EnergyPerYear",
         "action": false,
         "value": 0
     },
     "heating_configuration_houseLocation_latitude": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Degree",
         "action": false,
         "value": 0
     },
     "heating_configuration_houseLocation_longitude": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Degree",
         "action": false,
         "value": 0
     },
     "heating_configuration_houseLocation_altitude": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Meter",
         "action": false,
         "value": 0
     },
     "heating_configuration_houseOrientation_horizontal": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Degree",
         "action": false,
         "value": 0
     },
     "heating_configuration_houseOrientation_vertical": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Degree",
         "action": false,
         "value": 0
     },
     "heating_configuration_pressure_total_defaultpressure": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Pressure",
         "action": false,
         "value": 1.5
     },
     "heating_configuration_pressure_total_normalpressuredelta": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Pressure",
         "action": false,
         "value": 0.5
     },
     "heating_configuration_pressure_total_maximumpressure": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Pressure",
         "action": false,
         "value": 2.7
     },
     "heating_configuration_pressure_total_errorthreshold": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Pressure",
         "action": false,
         "value": 3.5
     },
@@ -1651,7 +1651,7 @@
     },
     "heating_sensors_pressure_supply_value": {
         "type": 2,
-        "profile": "",
+        "profile": "VVC.Pressure",
         "action": false,
         "value": 1.2
     },

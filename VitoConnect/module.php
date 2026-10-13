@@ -612,7 +612,7 @@ class VitoConnect extends WebHookModule
                         case '':
                             return '';
                         case 'bar':
-                            return ''; // We currently do not have a profile for bar
+                            return $this->CreateNumberProfile('VVC.Pressure', ' bar', 1, 'Gauge');
                         case 'cubicMeter':
                             return 'Gas';
                         case 'celsius':
@@ -626,27 +626,27 @@ class VitoConnect extends WebHookModule
                         case 'percent':
                             return 'Valve.F';
                         case 'seconds':
-                            return ''; // We currently do not have a profile for seconds
+                            return $this->CreateNumberProfile('VVC.Seconds', ' s', 0, 'Clock');
                         case 'meter':
-                            return ''; // We currently do not have a profile for meter
+                            return $this->CreateNumberProfile('VVC.Meter', ' m', 0, 'Distance');
                         case 'hour':
-                            return ''; // We currently do not have a profile for hour
+                            return $this->CreateNumberProfile('VVC.Hours', ' h', 0, 'Clock');
                         case 'degree':
-                            return ''; // We currently do not have a profile for degree
+                            return $this->CreateNumberProfile('VVC.Degree', '°', 1, 'Compass');
                         case 'liter':
-                            return ''; // We currently do not have a profile for liter
+                            return $this->CreateNumberProfile('VVC.Liter', ' l', 0, 'Drops');
                         case 'kilowattHour/year':
-                            return ''; // We currently do not have a profile for kilowattHour/year
+                            return $this->CreateNumberProfile('VVC.EnergyPerYear', ' kWh/a', 0, 'Electricity');
                         case 'kelvin':
-                            return ''; // We currently do not have a profile for kelvin
+                            return $this->CreateNumberProfile('VVC.Kelvin', ' K', 1, 'Temperature');
                         case 'minute':
-                            return ''; // We currently do not have a profile for minute
+                            return $this->CreateNumberProfile('VVC.Minutes', ' min', 0, 'Clock');
                         case 'ampere':
-                            return ''; // We currently do not have a profile for ampere
+                            return $this->CreateNumberProfile('VVC.Ampere', ' A', 1, 'Electricity');
                         case 'revolutionsPerSecond':
-                            return ''; // We currently do not have a profile for revolutionsPerSecond
+                            return $this->CreateNumberProfile('VVC.RevolutionsPerSecond', ' U/s', 1, 'Ventilation');
                         case 'liter/hour':
-                            return ''; // We currently do not have a profile for liter/hour
+                            return $this->CreateNumberProfile('VVC.VolumetricFlow', ' l/h', 0, 'Drops');
                         default:
                             if (isset($this->failOnUnexpected)) {
                                 throw new Exception(sprintf('Unknown unit: %s', $unit));
@@ -746,6 +746,17 @@ class VitoConnect extends WebHookModule
         if ($this->ReadAttributeString('Commands') != $parameterCommands) {
             $this->WriteAttributeString('Commands', $parameterCommands);
         }
+    }
+
+    private function CreateNumberProfile($name, $suffix, $digits, $icon)
+    {
+        if (!IPS_VariableProfileExists($name)) {
+            IPS_CreateVariableProfile($name, VARIABLETYPE_FLOAT);
+            IPS_SetVariableProfileText($name, '', $suffix);
+            IPS_SetVariableProfileDigits($name, $digits);
+            IPS_SetVariableProfileIcon($name, $icon);
+        }
+        return $name;
     }
 
     private function CreateProfile($name, $type, $associations)
