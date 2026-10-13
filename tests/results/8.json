@@ -1,0 +1,1778 @@
+{
+    "device_actorSensorTest_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "device_actorSensorTest_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "standby"
+    },
+    "device_brand_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "Viessmann"
+    },
+    "device_configuration_houseLocation_altitude": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_lock_external_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "device_lock_malfunction_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "device_messages_info_raw_entries": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[{\"errorCode\":\"I.99\",\"timestamp\":\"2026-09-05T08:08:17.000Z\",\"busAddress\":\"1\",\"busType\":\"OwnBus\",\"accessLevel\":\"customer\",\"priority\":\"info\",\"audiences\":[\"IS-SUPPLIER\",\"IS-DEVELOPMENT\",\"IS-MANUFACTURING\",\"IS-AFTERSALES\",\"IS-AFTERMARKET\",\"IS-DEVELOPER-VEG\",\"IS-BIG-DATA\",\"IS-MANUFACTURING-VEG\"]},{\"errorCode\":\"I.114\",\"timestamp\":\"2026-09-04T12:00:53.000Z\",\"busAddress\":\"1\",\"busType\":\"OwnBus\",\"accessLevel\":\"customer\",\"priority\":\"info\",\"audiences\":[\"IS-SUPPLIER\",\"IS-DEVELOPMENT\",\"IS-MANUFACTURING\",\"IS-AFTERSALES\",\"IS-AFTERMARKET\",\"IS-DEVELOPER-VEG\",\"IS-BIG-DATA\",\"IS-MANUFACTURING-VEG\"]}]"
+    },
+    "device_messages_service_raw_entries": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[]"
+    },
+    "device_messages_status_raw_entries": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[{\"errorCode\":\"S.125\",\"timestamp\":\"2026-10-13T17:47:10.000Z\",\"busAddress\":\"1\",\"busType\":\"OwnBus\",\"accessLevel\":\"customer\",\"priority\":\"status\",\"audiences\":[\"IS-SUPPLIER\",\"IS-DEVELOPMENT\",\"IS-MANUFACTURING\",\"IS-AFTERSALES\",\"IS-AFTERMARKET\",\"IS-DEVELOPER-VEG\",\"IS-BIG-DATA\",\"IS-MANUFACTURING-VEG\"]},{\"errorCode\":\"S.118\",\"timestamp\":\"2026-10-13T17:45:02.000Z\",\"busAddress\":\"1\",\"busType\":\"OwnBus\",\"accessLevel\":\"customer\",\"priority\":\"status\",\"audiences\":[\"IS-SUPPLIER\",\"IS-DEVELOPMENT\",\"IS-MANUFACTURING\",\"IS-AFTERSALES\",\"IS-AFTERMARKET\",\"IS-DEVELOPER-VEG\",\"IS-BIG-DATA\",\"IS-MANUFACTURING-VEG\"]},{\"errorCode\":\"S.165\",\"timestamp\":\"2026-09-04T12:01:04.000Z\",\"busAddress\":\"54\",\"busType\":\"CanInternal\",\"accessLevel\":\"customer\",\"priority\":\"status\",\"audiences\":[\"IS-SUPPLIER\",\"IS-DEVELOPMENT\",\"IS-MANUFACTURING\",\"IS-AFTERSALES\",\"IS-AFTERMARKET\",\"IS-DEVELOPER-VEG\",\"IS-BIG-DATA\",\"IS-MANUFACTURING-VEG\"]},{\"errorCode\":\"S.219\",\"timestamp\":\"2026-09-04T12:00:53.000Z\",\"busAddress\":\"1\",\"busType\":\"OwnBus\",\"accessLevel\":\"customer\",\"priority\":\"status\",\"audiences\":[\"IS-SUPPLIER\",\"IS-DEVELOPMENT\",\"IS-MANUFACTURING\",\"IS-AFTERSALES\",\"IS-AFTERMARKET\",\"IS-DEVELOPER-VEG\",\"IS-BIG-DATA\",\"IS-MANUFACTURING-VEG\"]},{\"errorCode\":\"S.218\",\"timestamp\":\"2026-09-04T12:00:53.000Z\",\"busAddress\":\"1\",\"busType\":\"OwnBus\",\"accessLevel\":\"customer\",\"priority\":\"status\",\"audiences\":[\"IS-SUPPLIER\",\"IS-DEVELOPMENT\",\"IS-MANUFACTURING\",\"IS-AFTERSALES\",\"IS-AFTERMARKET\",\"IS-DEVELOPER-VEG\",\"IS-BIG-DATA\",\"IS-MANUFACTURING-VEG\"]},{\"errorCode\":\"S.217\",\"timestamp\":\"2026-09-04T12:00:53.000Z\",\"busAddress\":\"1\",\"busType\":\"OwnBus\",\"accessLevel\":\"customer\",\"priority\":\"status\",\"audiences\":[\"IS-SUPPLIER\",\"IS-DEVELOPMENT\",\"IS-MANUFACTURING\",\"IS-AFTERSALES\",\"IS-AFTERMARKET\",\"IS-DEVELOPER-VEG\",\"IS-BIG-DATA\",\"IS-MANUFACTURING-VEG\"]},{\"errorCode\":\"S.120\",\"timestamp\":\"2026-09-04T12:00:53.000Z\",\"busAddress\":\"1\",\"busType\":\"OwnBus\",\"accessLevel\":\"customer\",\"priority\":\"status\",\"audiences\":[\"IS-SUPPLIER\",\"IS-DEVELOPMENT\",\"IS-MANUFACTURING\",\"IS-AFTERSALES\",\"IS-AFTERMARKET\",\"IS-DEVELOPER-VEG\",\"IS-BIG-DATA\",\"IS-MANUFACTURING-VEG\"]},{\"errorCode\":\"S.165\",\"timestamp\":\"2026-09-04T12:00:50.000Z\",\"busAddress\":\"1\",\"busType\":\"OwnBus\",\"accessLevel\":\"customer\",\"priority\":\"status\",\"audiences\":[\"IS-SUPPLIER\",\"IS-DEVELOPMENT\",\"IS-MANUFACTURING\",\"IS-AFTERSALES\",\"IS-AFTERMARKET\",\"IS-DEVELOPER-VEG\",\"IS-BIG-DATA\",\"IS-MANUFACTURING-VEG\"]},{\"errorCode\":\"S.1\",\"timestamp\":\"2026-09-04T12:00:50.000Z\",\"busAddress\":\"1\",\"busType\":\"OwnBus\",\"accessLevel\":\"customer\",\"priority\":\"status\",\"audiences\":[\"IS-SUPPLIER\",\"IS-DEVELOPMENT\",\"IS-MANUFACTURING\",\"IS-AFTERSALES\",\"IS-AFTERMARKET\",\"IS-DEVELOPER-VEG\",\"IS-BIG-DATA\",\"IS-MANUFACTURING-VEG\"]}]"
+    },
+    "device_parameterIdentification_version_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "0030.0517.2523.0061"
+    },
+    "device_power_consumption_limitation_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "14aOff"
+    },
+    "device_power_statusReport_consumption_limit": {
+        "type": 2,
+        "profile": "~Watt.3680",
+        "action": false,
+        "value": -1
+    },
+    "device_power_statusReport_consumption_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "unlimitedAutonomous"
+    },
+    "device_power_statusReport_production_limit": {
+        "type": 2,
+        "profile": "~Watt.3680",
+        "action": false,
+        "value": 0
+    },
+    "device_power_statusReport_production_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "init"
+    },
+    "device_productIdentification_product": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "{\"busType\":\"CanExternal\",\"busAddress\":1,\"viessmannIdentificationNumber\":\"0000000000000000\",\"productFamily\":\"VC252\"}"
+    },
+    "device_productMatrix_product": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[{\"busType\":\"CanExternal\",\"busAddress\":1,\"viessmannIdentificationNumber\":\"0000000000000000\",\"productFamily\":\"VC252\"}]"
+    },
+    "device_serial_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "0000000000000000"
+    },
+    "device_serial_vin": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "{\"uid\":null,\"profile\":null}"
+    },
+    "device_serial_materialid": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "{\"uid\":null,\"profile\":null}"
+    },
+    "device_time_daylightSaving_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": true
+    },
+    "device_time_daylightSaving_begin": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "25-03"
+    },
+    "device_time_daylightSaving_end": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "25-10"
+    },
+    "device_type_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "mono"
+    },
+    "device_variant_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "Vitocal252A"
+    },
+    "device_zigbee_active_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "device_zigbee_status_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "notConnected"
+    },
+    "heating_boiler_pumps_internal_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "on"
+    },
+    "heating_boiler_pumps_internal_current_value": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 96
+    },
+    "heating_boiler_pumps_internal_target_value": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 95
+    },
+    "heating_boiler_sensors_temperature_commonSupply_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 30.5
+    },
+    "heating_boiler_sensors_temperature_commonSupply_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_boiler_serial_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "0000000000000000"
+    },
+    "heating_boiler_temperature_current_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 27.5
+    },
+    "heating_buffer_sensors_temperature_main_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 27.6
+    },
+    "heating_buffer_sensors_temperature_main_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_bufferCylinder_sensors_temperature_main_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 27.6
+    },
+    "heating_bufferCylinder_sensors_temperature_main_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_circuits_enabled": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[\"1\"]"
+    },
+    "heating_circuits_internal": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[]"
+    },
+    "heating_circuits_1_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_1_name": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "Heizkreis"
+    },
+    "heating_circuits_1_type": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "heatingCircuit"
+    },
+    "heating_circuits_1_circulation_pump_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "on"
+    },
+    "heating_circuits_1_configuration_summerEco_absolute_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_1_configuration_summerEco_absolute_threshold": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 25
+    },
+    "heating_circuits_1_frostprotection_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "off"
+    },
+    "heating_circuits_1_heating_curve_slope": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 1
+    },
+    "heating_circuits_1_heating_curve_shift": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_circuits_1_heating_schedule_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_1_operating_modes_active_value": {
+        "type": 3,
+        "profile": "VVC.Mode",
+        "action": true,
+        "value": "heating"
+    },
+    "heating_circuits_1_operating_modes_heating_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_1_operating_modes_standby_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_1_operating_programs_active_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "comfortHeating"
+    },
+    "heating_circuits_1_operating_programs_comfortCoolingEnergySaving_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_1_operating_programs_comfortCoolingEnergySaving_reason": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "summerEco"
+    },
+    "heating_circuits_1_operating_programs_comfortCoolingEnergySaving_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "cooling"
+    },
+    "heating_circuits_1_operating_programs_comfortEnergySaving_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_1_operating_programs_comfortEnergySaving_reason": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "summerEco"
+    },
+    "heating_circuits_1_operating_programs_comfortEnergySaving_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "heating"
+    },
+    "heating_circuits_1_operating_programs_comfortHeating_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": true
+    },
+    "heating_circuits_1_operating_programs_comfortHeating_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "heating"
+    },
+    "heating_circuits_1_operating_programs_comfortHeating_temperature": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": true,
+        "value": 21
+    },
+    "heating_circuits_1_operating_programs_fixed_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_1_operating_programs_forcedLastFromSchedule_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": false
+    },
+    "heating_circuits_1_operating_programs_frostprotection_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_1_operating_programs_normalCoolingEnergySaving_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_1_operating_programs_normalCoolingEnergySaving_reason": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "summerEco"
+    },
+    "heating_circuits_1_operating_programs_normalCoolingEnergySaving_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "cooling"
+    },
+    "heating_circuits_1_operating_programs_normalEnergySaving_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_1_operating_programs_normalEnergySaving_reason": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "summerEco"
+    },
+    "heating_circuits_1_operating_programs_normalEnergySaving_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "heating"
+    },
+    "heating_circuits_1_operating_programs_normalHeating_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": false
+    },
+    "heating_circuits_1_operating_programs_normalHeating_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "heating"
+    },
+    "heating_circuits_1_operating_programs_normalHeating_temperature": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": true,
+        "value": 19
+    },
+    "heating_circuits_1_operating_programs_reducedCoolingEnergySaving_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_1_operating_programs_reducedCoolingEnergySaving_reason": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "summerEco"
+    },
+    "heating_circuits_1_operating_programs_reducedCoolingEnergySaving_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "cooling"
+    },
+    "heating_circuits_1_operating_programs_reducedEnergySaving_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_1_operating_programs_reducedEnergySaving_reason": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "unknown"
+    },
+    "heating_circuits_1_operating_programs_reducedEnergySaving_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "heating"
+    },
+    "heating_circuits_1_operating_programs_reducedHeating_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": false
+    },
+    "heating_circuits_1_operating_programs_reducedHeating_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "heating"
+    },
+    "heating_circuits_1_operating_programs_reducedHeating_temperature": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": true,
+        "value": 17
+    },
+    "heating_circuits_1_operating_programs_standby_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_1_operating_programs_summerEco_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_1_sensors_temperature_supply_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 28.1
+    },
+    "heating_circuits_1_sensors_temperature_supply_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_circuits_1_temperature_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 27.5
+    },
+    "heating_circuits_1_temperature_levels_min": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": true,
+        "value": 20
+    },
+    "heating_circuits_1_temperature_levels_max": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": true,
+        "value": 60
+    },
+    "heating_circuits_1_zone_mode_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_compressors_enabled": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[\"0\"]"
+    },
+    "heating_compressors_0_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": true
+    },
+    "heating_compressors_0_phase": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "ready"
+    },
+    "heating_compressors_0_heater_crankcase_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_compressors_0_sensors_pressure_inlet_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 5.86
+    },
+    "heating_compressors_0_sensors_pressure_inlet_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_compressors_0_sensors_temperature_inlet_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_compressors_0_sensors_temperature_inlet_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 18.6
+    },
+    "heating_compressors_0_sensors_temperature_motorChamber_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_compressors_0_sensors_temperature_motorChamber_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 28.3
+    },
+    "heating_compressors_0_sensors_temperature_oil_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 49.5
+    },
+    "heating_compressors_0_sensors_temperature_oil_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_compressors_0_sensors_temperature_outlet_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_compressors_0_sensors_temperature_outlet_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 52.1
+    },
+    "heating_compressors_0_speed_current_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 59.9
+    },
+    "heating_compressors_0_speed_setpoint_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 59.9
+    },
+    "heating_compressors_0_statistics_starts": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 157
+    },
+    "heating_compressors_0_statistics_hours": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 109
+    },
+    "heating_condensors_0_sensors_temperature_liquid_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 27.1
+    },
+    "heating_condensors_0_sensors_temperature_liquid_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_configuration_bufferCylinderSize_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_centralHeatingCylinderSize_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_dhwCylinderSize_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_heatingRod_dhw_useapproved": {
+        "type": 0,
+        "profile": "",
+        "action": false,
+        "value": true
+    },
+    "heating_configuration_heatingRod_heating_useapproved": {
+        "type": 0,
+        "profile": "",
+        "action": false,
+        "value": true
+    },
+    "heating_configuration_houseHeatingLoad_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_houseLocation_latitude": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_houseLocation_longitude": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_houseLocation_altitude": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_houseOrientation_horizontal": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_houseOrientation_vertical": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_internalPumpOne_minimumlimit": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 20
+    },
+    "heating_configuration_internalPumpOne_maximumlimit": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 100
+    },
+    "heating_configuration_internalPumpOne_defaultlimit": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 90
+    },
+    "heating_configuration_internalPumps_minimumlimit": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 20
+    },
+    "heating_configuration_internalPumps_maximumlimit": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 100
+    },
+    "heating_configuration_internalPumps_defaultlimit": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 95
+    },
+    "heating_configuration_internalPumpTwo_minimumlimit": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 20
+    },
+    "heating_configuration_internalPumpTwo_maximumlimit": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 100
+    },
+    "heating_configuration_internalPumpTwo_defaultlimit": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 90
+    },
+    "heating_configuration_pressure_total_defaultpressure": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 1.5
+    },
+    "heating_configuration_pressure_total_normalpressuredelta": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0.5
+    },
+    "heating_configuration_pressure_total_maximumpressure": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 2.7
+    },
+    "heating_configuration_pressure_total_errorthreshold": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 3.5
+    },
+    "heating_configuration_temperature_outside_DampingFactor_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 10
+    },
+    "heating_device_variant_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "Vitocal252A"
+    },
+    "heating_dhw_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_dhw_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "on"
+    },
+    "heating_dhw_hygiene_enabled": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": false
+    },
+    "heating_dhw_oneTimeCharge_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": false
+    },
+    "heating_dhw_operating_modes_active_value": {
+        "type": 3,
+        "profile": "VVC.Mode",
+        "action": true,
+        "value": "efficientWithMinComfort"
+    },
+    "heating_dhw_operating_modes_efficient_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_dhw_operating_modes_efficientWithMinComfort_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_dhw_operating_modes_off_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_dhw_scaldProtection_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_dhw_schedule_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_dhw_sensors_temperature_dhwCylinder_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 47.4
+    },
+    "heating_dhw_sensors_temperature_dhwCylinder_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_dhw_sensors_temperature_hotWaterStorage_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 47.4
+    },
+    "heating_dhw_sensors_temperature_hotWaterStorage_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_dhw_temperature_hysteresis_value": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": true,
+        "value": 5
+    },
+    "heating_dhw_temperature_hysteresis_switchonvalue": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": true,
+        "value": 5
+    },
+    "heating_dhw_temperature_hysteresis_switchoffvalue": {
+        "type": 2,
+        "profile": "~Temperature",
+        "action": true,
+        "value": 0
+    },
+    "heating_dhw_temperature_levels_min": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 10
+    },
+    "heating_dhw_temperature_levels_max": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 10
+    },
+    "heating_dhw_temperature_levels_default": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 50
+    },
+    "heating_dhw_temperature_main_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": true,
+        "value": 52
+    },
+    "heating_economizers_0_sensors_temperature_liquid_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 26.9
+    },
+    "heating_economizers_0_sensors_temperature_liquid_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_evaporators_0_heater_base_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_evaporators_0_sensors_temperature_liquid_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 9.7
+    },
+    "heating_evaporators_0_sensors_temperature_liquid_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_evaporators_0_sensors_temperature_overheat_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 8.6
+    },
+    "heating_evaporators_0_sensors_temperature_overheat_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_external_lock_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_heat_production_current_value": {
+        "type": 2,
+        "profile": "~Power",
+        "action": false,
+        "value": 7.811
+    },
+    "heating_heat_production_current_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_heat_production_summary_cooling_currentday": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heat_production_summary_cooling_lastsevendays": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heat_production_summary_cooling_currentmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heat_production_summary_cooling_lastmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heat_production_summary_cooling_currentyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heat_production_summary_cooling_lastyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heat_production_summary_dhw_currentday": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 13.3
+    },
+    "heating_heat_production_summary_dhw_lastsevendays": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 91.2
+    },
+    "heating_heat_production_summary_dhw_currentmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 169
+    },
+    "heating_heat_production_summary_dhw_lastmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 307.3
+    },
+    "heating_heat_production_summary_dhw_currentyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 583.2
+    },
+    "heating_heat_production_summary_dhw_lastyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heat_production_summary_heating_currentday": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 4.8
+    },
+    "heating_heat_production_summary_heating_lastsevendays": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 66.3
+    },
+    "heating_heat_production_summary_heating_currentmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 77.1
+    },
+    "heating_heat_production_summary_heating_lastmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 25.9
+    },
+    "heating_heat_production_summary_heating_currentyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 103
+    },
+    "heating_heat_production_summary_heating_lastyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heater_condensatePan_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_heater_fanRing_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_heatingRod_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_heatingRod_power_consumption_summary_dhw_currentday": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heatingRod_power_consumption_summary_dhw_lastsevendays": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heatingRod_power_consumption_summary_dhw_currentmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heatingRod_power_consumption_summary_dhw_lastmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0.9
+    },
+    "heating_heatingRod_power_consumption_summary_dhw_currentyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0.9
+    },
+    "heating_heatingRod_power_consumption_summary_dhw_lastyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heatingRod_power_consumption_summary_heating_currentday": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heatingRod_power_consumption_summary_heating_lastsevendays": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heatingRod_power_consumption_summary_heating_currentmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heatingRod_power_consumption_summary_heating_lastmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heatingRod_power_consumption_summary_heating_currentyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heatingRod_power_consumption_summary_heating_lastyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heatingRod_statistics_starts": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 3
+    },
+    "heating_heatingRod_statistics_hours": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_inverters_0_sensors_power_current_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 3.7
+    },
+    "heating_inverters_0_sensors_power_current_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_inverters_0_sensors_power_output_value": {
+        "type": 2,
+        "profile": "~Watt.3680",
+        "action": false,
+        "value": 1115
+    },
+    "heating_inverters_0_sensors_power_output_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_inverters_0_sensors_temperature_powerModule_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 29.4
+    },
+    "heating_inverters_0_sensors_temperature_powerModule_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_operating_programs_holiday_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_operating_programs_holiday_start": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "2026-09-21"
+    },
+    "heating_operating_programs_holiday_end": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "2026-09-25"
+    },
+    "heating_operating_programs_holidayAtHome_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_operating_programs_holidayAtHome_start": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    },
+    "heating_operating_programs_holidayAtHome_end": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    },
+    "heating_outdoor_defrosting_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_power_consumption_current_value": {
+        "type": 2,
+        "profile": "~Power",
+        "action": false,
+        "value": 1.117
+    },
+    "heating_power_consumption_current_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_power_consumption_dhw_day": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 3.7
+    },
+    "heating_power_consumption_dhw_week": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 7.5
+    },
+    "heating_power_consumption_dhw_month": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 46.5
+    },
+    "heating_power_consumption_dhw_year": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 148.20000000000002
+    },
+    "heating_power_consumption_dhw_dayvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791899164
+    },
+    "heating_power_consumption_dhw_weekvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791899164
+    },
+    "heating_power_consumption_dhw_monthvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791899164
+    },
+    "heating_power_consumption_dhw_yearvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791899164
+    },
+    "heating_power_consumption_heating_day": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0.9
+    },
+    "heating_power_consumption_heating_week": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 3.3
+    },
+    "heating_power_consumption_heating_month": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 14.2
+    },
+    "heating_power_consumption_heating_year": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 19
+    },
+    "heating_power_consumption_heating_dayvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791899164
+    },
+    "heating_power_consumption_heating_weekvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791899164
+    },
+    "heating_power_consumption_heating_monthvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791899164
+    },
+    "heating_power_consumption_heating_yearvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791899164
+    },
+    "heating_power_consumption_summary_cooling_currentday": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_power_consumption_summary_cooling_lastsevendays": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_power_consumption_summary_cooling_currentmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_power_consumption_summary_cooling_lastmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_power_consumption_summary_cooling_currentyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_power_consumption_summary_cooling_lastyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_power_consumption_summary_dhw_currentday": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 3.7
+    },
+    "heating_power_consumption_summary_dhw_lastsevendays": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 25.8
+    },
+    "heating_power_consumption_summary_dhw_currentmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 46.5
+    },
+    "heating_power_consumption_summary_dhw_lastmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 76.7
+    },
+    "heating_power_consumption_summary_dhw_currentyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 148.20000000000002
+    },
+    "heating_power_consumption_summary_dhw_lastyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_power_consumption_summary_heating_currentday": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0.8
+    },
+    "heating_power_consumption_summary_heating_lastsevendays": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 12
+    },
+    "heating_power_consumption_summary_heating_currentmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 14.2
+    },
+    "heating_power_consumption_summary_heating_lastmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 4.8
+    },
+    "heating_power_consumption_summary_heating_currentyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 19
+    },
+    "heating_power_consumption_summary_heating_lastyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_power_consumption_total_day": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 4.6000000000000005
+    },
+    "heating_power_consumption_total_week": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 10.8
+    },
+    "heating_power_consumption_total_month": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 60.7
+    },
+    "heating_power_consumption_total_year": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 167.20000000000002
+    },
+    "heating_power_consumption_total_dayvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791899164
+    },
+    "heating_power_consumption_total_weekvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791899164
+    },
+    "heating_power_consumption_total_monthvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791899164
+    },
+    "heating_power_consumption_total_yearvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791899164
+    },
+    "heating_primaryCircuit_fans_0_current_value": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 51
+    },
+    "heating_primaryCircuit_fans_0_current_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_primaryCircuit_sensors_temperature_supply_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 17
+    },
+    "heating_primaryCircuit_sensors_temperature_supply_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_primaryCircuit_valves_fourThreeWay_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_scop_dhw_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 4
+    },
+    "heating_scop_heating_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 5.3
+    },
+    "heating_scop_total_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 4.1
+    },
+    "heating_secondaryCircuit_operation_state_currentvalue": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "heating"
+    },
+    "heating_secondaryCircuit_operation_state_targetvalue": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "heating"
+    },
+    "heating_secondaryCircuit_sensors_temperature_supply_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 30.6
+    },
+    "heating_secondaryCircuit_sensors_temperature_supply_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_secondaryCircuit_temperature_return_minimum_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 5
+    },
+    "heating_secondaryCircuit_valves_fourThreeWay_target": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 50
+    },
+    "heating_secondaryCircuit_valves_fourThreeWay_current": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 55
+    },
+    "heating_secondaryHeatGenerator_connectiontype": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "unknown"
+    },
+    "heating_secondaryHeatGenerator_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_sensors_pressure_supply_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 1.3
+    },
+    "heating_sensors_pressure_supply_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_sensors_temperature_allengra_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_sensors_temperature_allengra_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 0
+    },
+    "heating_sensors_temperature_outside_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 16.3
+    },
+    "heating_sensors_temperature_outside_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_sensors_temperature_return_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 27.3
+    },
+    "heating_sensors_temperature_return_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_sensors_valve_0_expansion_target_value": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 82
+    },
+    "heating_sensors_valve_1_expansion_target_value": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 32
+    },
+    "heating_sensors_volumetricFlow_allengra_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_sensors_volumetricFlow_allengra_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 2016
+    },
+    "heating_spf_dhw_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 4
+    },
+    "heating_spf_heating_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 5.3
+    },
+    "heating_spf_total_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 4.1
+    },
+    "heating_valves_fourThreeWay_position_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "climateCircuitOne"
+    },
+    "tcu_wifi_strength": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": -120
+    },
+    "heating_circuits_1_name_name": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "Heizkreis"
+    }
+}

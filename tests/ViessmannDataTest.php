@@ -86,6 +86,11 @@ class ViessmannDataTest extends TestCase
         $this->testData('7');
     }
 
+    public function testData8(): void
+    {
+        $this->testData('8');
+    }
+
     private function supportedCommands(): array
     {
         return [
@@ -93,6 +98,8 @@ class ViessmannDataTest extends TestCase
             'setTargetTemperature',
             'setMode',
             'setHysteresis',
+            'setHysteresisSwitchOnValue',
+            'setHysteresisSwitchOffValue',
             'setMin',
             'setMax',
             'setLevels', // This combines setMin/setMax which we support separately
@@ -113,6 +120,7 @@ class ViessmannDataTest extends TestCase
             'setActive', // Supported as fallback, if activate/deactivate are not available
             'setEnabled',
             'setPrin', // We don't need that [Serial related]
+            'setPhase', // We don't need that [Compressor related]
         ];
     }
 

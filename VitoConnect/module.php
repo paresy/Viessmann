@@ -226,6 +226,18 @@ class VitoConnect extends WebHookModule
                     throw new Exception('Invalid Ident');
                 }
                 break;
+            case 'switchonvalue':
+                $this->RequestDeviceData($id . '/commands/setHysteresisSwitchOnValue', [
+                    'hysteresis' => $Value
+                ]);
+                $this->SetValue($Ident, $Value);
+                break;
+            case 'switchoffvalue':
+                $this->RequestDeviceData($id . '/commands/setHysteresisSwitchOffValue', [
+                    'hysteresis' => $Value
+                ]);
+                $this->SetValue($Ident, $Value);
+                break;
             case 'temperature':
                 $this->RequestDeviceData($id . '/commands/setTemperature', [
                     'targetTemperature' => $Value
@@ -567,6 +579,16 @@ class VitoConnect extends WebHookModule
                         $this->EnableAction($ident);
                     }
                     break;
+                case 'switchOnValue':
+                    if ($findCommand($commands, 'setHysteresisSwitchOnValue')) {
+                        $this->EnableAction($ident);
+                    }
+                    break;
+                case 'switchOffValue':
+                    if ($findCommand($commands, 'setHysteresisSwitchOffValue')) {
+                        $this->EnableAction($ident);
+                    }
+                    break;
                 case 'min':
                     if ($findCommand($commands, 'setMin')) {
                         $this->EnableAction($ident);
@@ -615,6 +637,16 @@ class VitoConnect extends WebHookModule
                             return ''; // We currently do not have a profile for liter
                         case 'kilowattHour/year':
                             return ''; // We currently do not have a profile for kilowattHour/year
+                        case 'kelvin':
+                            return ''; // We currently do not have a profile for kelvin
+                        case 'minute':
+                            return ''; // We currently do not have a profile for minute
+                        case 'ampere':
+                            return ''; // We currently do not have a profile for ampere
+                        case 'revolutionsPerSecond':
+                            return ''; // We currently do not have a profile for revolutionsPerSecond
+                        case 'liter/hour':
+                            return ''; // We currently do not have a profile for liter/hour
                         default:
                             if (isset($this->failOnUnexpected)) {
                                 throw new Exception(sprintf('Unknown unit: %s', $unit));
@@ -645,6 +677,10 @@ class VitoConnect extends WebHookModule
                             return '';
                         case 'temperature':
                             return 'Temperature.Room';
+                        case 'switchOnValue':
+                            return $findCommand($commands, 'setHysteresisSwitchOnValue') ? 'Temperature' : '';
+                        case 'switchOffValue':
+                            return $findCommand($commands, 'setHysteresisSwitchOffValue') ? 'Temperature' : '';
                         default:
                             return '';
                     }
