@@ -1027,8 +1027,8 @@
     },
     "heating_dhw_hygiene_enabled": {
         "type": 0,
-        "profile": "",
-        "action": false,
+        "profile": "~Switch",
+        "action": true,
         "value": false
     },
     "heating_dhw_oneTimeCharge_active": {

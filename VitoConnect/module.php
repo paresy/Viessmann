@@ -52,6 +52,9 @@ class VitoConnect extends WebHookModule
         $this->RegisterAttributeString('GatewaySerial', '');
         $this->RegisterAttributeString('DeviceID', "0");
 
+        // Maps variable idents to commands, which are set up while parsing the device data
+        $this->RegisterAttributeString('Commands', '{}');
+
         $this->RegisterTimer('Update', 0, 'VVC_Update($_IPS[\'TARGET\']);');
     }
 
@@ -165,6 +168,22 @@ class VitoConnect extends WebHookModule
         $parts = explode('_', $Ident);
         $name = array_pop($parts);
         $id = implode('.', $parts);
+        $commands = json_decode($this->ReadAttributeString('Commands'), true);
+        if (isset($commands[$Ident])) {
+            // Commands like setActive/setEnabled require all parameters. Fill them with our current values
+            $params = [];
+            foreach ($commands[$Ident]['params'] as $param) {
+                if (strtolower($param) == $name) {
+                    $params[$param] = $Value;
+                } else {
+                    $params[$param] = $this->GetValue(str_replace('.', '_', $id) . '_' . strtolower($param));
+                }
+            }
+            $this->RequestDeviceData($id . '/commands/' . $commands[$Ident]['command'], $params);
+            $this->SetValue($Ident, $Value);
+            return;
+        }
+
         switch ($name) {
             case 'active':
                 if ($Value) {
@@ -475,12 +494,44 @@ class VitoConnect extends WebHookModule
             return false;
         };
 
-        $updateAction = function ($id, $name, $commands) use ($findCommand)
+        // Commands which require all parameters, which we will fill from our variables
+        $parameterCommands = [];
+
+        $findParameterCommand = function ($properties, $commands, $commandName, $name) use ($findCommand)
+        {
+            $command = $findCommand($commands, $commandName);
+            if (!$command || !isset($command->params->$name)) {
+                return false;
+            }
+            $params = [];
+            foreach ($command->params as $param => $definition) {
+                // We can only fill parameters, for which we have a variable
+                if (($param != $name) && !isset($properties->$param)) {
+                    if (isset($definition->required) && $definition->required) {
+                        return false;
+                    }
+                    continue;
+                }
+                $params[] = $param;
+            }
+            return $params;
+        };
+
+        $updateAction = function ($id, $name, $properties, $commands) use ($findCommand, $findParameterCommand, &$parameterCommands)
         {
             $ident = str_replace('.', '_', $id) . '_' . strtolower($name);
             switch ($name) {
                 case 'active':
                     if ($findCommand($commands, 'activate') && $findCommand($commands, 'deactivate')) {
+                        $this->EnableAction($ident);
+                    } elseif (($params = $findParameterCommand($properties, $commands, 'setActive', 'active')) !== false) {
+                        $parameterCommands[$ident] = ['command' => 'setActive', 'params' => $params];
+                        $this->EnableAction($ident);
+                    }
+                    break;
+                case 'enabled':
+                    if (($params = $findParameterCommand($properties, $commands, 'setEnabled', 'enabled')) !== false) {
+                        $parameterCommands[$ident] = ['command' => 'setEnabled', 'params' => $params];
                         $this->EnableAction($ident);
                     }
                     break;
@@ -562,6 +613,8 @@ class VitoConnect extends WebHookModule
                     switch ($name) {
                         case 'active':
                             return 'Switch';
+                        case 'enabled':
+                            return $findCommand($commands, 'setEnabled') ? 'Switch' : '';
                         case 'value':
                             $command = $findCommand($commands, 'setMode');
                             if ($command) {
@@ -629,10 +682,15 @@ class VitoConnect extends WebHookModule
 
                         // Create and updates variables
                         $updateVariable($entity->feature, $name, $property->type, $property->value, $profile);
-                        $updateAction($entity->feature, $name, $entity->commands);
+                        $updateAction($entity->feature, $name, $entity->properties, $entity->commands);
                         break;
                 }
             }
+        }
+
+        $parameterCommands = json_encode($parameterCommands);
+        if ($this->ReadAttributeString('Commands') != $parameterCommands) {
+            $this->WriteAttributeString('Commands', $parameterCommands);
         }
     }
 

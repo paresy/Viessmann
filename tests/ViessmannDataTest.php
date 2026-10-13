@@ -110,8 +110,8 @@ class ViessmannDataTest extends TestCase
             'unschedule', // We don't have a nice UI element for that [Holiday related]
             'resetSchedule', // We don't have a nice UI element for that [Schedule related]
             'resetDay', // We don't have a nice UI element for that [Schedule related]
-            'setActive', // TODO [DHW one time charge, hygiene, daylight saving]
-            'setEnabled', // We probably don't need that [Hygiene related]
+            'setActive', // Supported as fallback, if activate/deactivate are not available
+            'setEnabled',
             'setPrin', // We don't need that [Serial related]
         ];
     }
