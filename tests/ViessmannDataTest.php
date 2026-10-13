@@ -81,6 +81,11 @@ class ViessmannDataTest extends TestCase
         $this->testData('6');
     }
 
+    public function testData7(): void
+    {
+        $this->testData('7');
+    }
+
     private function supportedCommands(): array
     {
         return [
@@ -103,6 +108,11 @@ class ViessmannDataTest extends TestCase
             'setSchedule', // We don't have a nice UI element for that [Holiday related]
             'changeEndDate', // We don't have a nice UI element for that [Holiday related]
             'unschedule', // We don't have a nice UI element for that [Holiday related]
+            'resetSchedule', // We don't have a nice UI element for that [Schedule related]
+            'resetDay', // We don't have a nice UI element for that [Schedule related]
+            'setActive', // TODO [DHW one time charge, hygiene, daylight saving]
+            'setEnabled', // We probably don't need that [Hygiene related]
+            'setPrin', // We don't need that [Serial related]
         ];
     }
 

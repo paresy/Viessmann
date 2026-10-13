@@ -452,7 +452,16 @@ class VitoConnect extends WebHookModule
                     $this->SetValue($ident, $value);
                     break;
                 default:
-                    die('Unsupported variable type:' . $type . ', id: ' . $id . ', value:' . print_r($value, true));
+                    // Unknown structured types (e.g. VinEntry, MaterialIdEntry) are stored as JSON
+                    if (is_object($value) || is_array($value)) {
+                        $this->RegisterVariableString($ident, computeName($id, $name));
+                        $this->SetValue($ident, json_encode($value));
+                    } elseif (isset($this->failOnUnexpected)) {
+                        throw new Exception(sprintf('Unsupported variable type: %s, id: %s', $type, $id));
+                    } else {
+                        $this->SendDebug('Unsupported Type', $type . ', id: ' . $id . ', value: ' . print_r($value, true), 0);
+                    }
+                    break;
             }
         };
 
@@ -527,6 +536,16 @@ class VitoConnect extends WebHookModule
                             return 'Valve.F';
                         case 'seconds':
                             return ''; // We currently do not have a profile for seconds
+                        case 'meter':
+                            return ''; // We currently do not have a profile for meter
+                        case 'hour':
+                            return ''; // We currently do not have a profile for hour
+                        case 'degree':
+                            return ''; // We currently do not have a profile for degree
+                        case 'liter':
+                            return ''; // We currently do not have a profile for liter
+                        case 'kilowattHour/year':
+                            return ''; // We currently do not have a profile for kilowattHour/year
                         default:
                             if (isset($this->failOnUnexpected)) {
                                 throw new Exception(sprintf('Unknown unit: %s', $unit));

@@ -1,0 +1,1676 @@
+{
+    "device_configuration_houseLocation_altitude": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_etn_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "0000000000000000"
+    },
+    "device_lock_external_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "device_lock_malfunction_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "device_messages_info_raw_entries": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[]"
+    },
+    "device_messages_service_raw_entries": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[]"
+    },
+    "device_messages_status_raw_entries": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[]"
+    },
+    "device_parameterIdentification_version_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "0014.0401.0019.0002"
+    },
+    "device_serial_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "0000000000000000"
+    },
+    "device_serial_vin": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "{\"uid\":null,\"profile\":null}"
+    },
+    "device_serial_materialid": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "{\"uid\":null,\"profile\":null}"
+    },
+    "device_time_daylightSaving_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": true
+    },
+    "device_time_daylightSaving_begin": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "25-03"
+    },
+    "device_time_daylightSaving_end": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "25-10"
+    },
+    "device_timeseries_burner_stops_timeallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 846
+    },
+    "device_timeseries_burner_stops_timelaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 846
+    },
+    "device_timeseries_burner_stops_flamelossduringoperationallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_flamelossduringoperationlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_temperaturemonitorallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_temperaturemonitorlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_stabilisationprocessallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_stabilisationprocesslaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_ionizationalignmentallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_ionizationalignmentlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_undervoltageallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_undervoltagelaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_safetyshutdownallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_safetyshutdownlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_temperaturemonitorionizationcomparisonallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_temperaturemonitorionizationcomparisonlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_safetytimeallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_safetytimelaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_fluegastemperaturesensorallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_fluegastemperaturesensorlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_noionizationatstartallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_noionizationatstartlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_nogasatstartallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_nogasatstartlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_noignitionatstartallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_noignitionatstartlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_safetyshutdownerrorshutdownallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_safetyshutdownerrorshutdownlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_burner_stops_normalstopallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 1
+    },
+    "device_timeseries_burner_stops_normalstoplaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 1
+    },
+    "device_timeseries_dhw_burner_stops_timeallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 43526
+    },
+    "device_timeseries_dhw_burner_stops_timelaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 43526
+    },
+    "device_timeseries_dhw_burner_stops_flamelossduringoperationallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_flamelossduringoperationlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_temperaturemonitorallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_temperaturemonitorlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_stabilisationprocessallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_stabilisationprocesslaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_ionizationalignmentallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_ionizationalignmentlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_undervoltageallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_undervoltagelaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_safetyshutdownallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_safetyshutdownlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_temperaturemonitorionizationcomparisonallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_temperaturemonitorionizationcomparisonlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_safetytimeallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_safetytimelaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_fluegastemperaturesensorallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_fluegastemperaturesensorlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_noionizationatstartallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_noionizationatstartlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_nogasatstartallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_nogasatstartlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_noignitionatstartallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_noignitionatstartlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_safetyshutdownerrorshutdownallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_safetyshutdownerrorshutdownlaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_dhw_burner_stops_normalstopallstops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 45
+    },
+    "device_timeseries_dhw_burner_stops_normalstoplaststops": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 45
+    },
+    "device_timeseries_ignitionTimeSteps_countone": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_ignitionTimeSteps_timestampone": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_ignitionTimeSteps_counttwo": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_ignitionTimeSteps_timestamptwo": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_ignitionTimeSteps_countthree": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_ignitionTimeSteps_timestampthree": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_ignitionTimeSteps_countfour": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 2
+    },
+    "device_timeseries_ignitionTimeSteps_timestampfour": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "2026-10-04T18:57:29.000Z"
+    },
+    "device_timeseries_ignitionTimeSteps_countfive": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 43
+    },
+    "device_timeseries_ignitionTimeSteps_timestampfive": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "2026-10-13T07:06:31.000Z"
+    },
+    "device_timeseries_ignitionTimeSteps_countsix": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 1
+    },
+    "device_timeseries_ignitionTimeSteps_timestampsix": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "2026-09-24T17:18:44.000Z"
+    },
+    "device_timeseries_ignitionTimeSteps_countseven": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_ignitionTimeSteps_timestampseven": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_ignitionTimeSteps_counteight": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_ignitionTimeSteps_timestampeight": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_ignitionTimeSteps_countnine": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_ignitionTimeSteps_timestampnine": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_ignitionTimeSteps_countten": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_ignitionTimeSteps_timestampten": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_monitoringIonization_countone": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_monitoringIonization_timestampone": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_monitoringIonization_counttwo": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_monitoringIonization_timestamptwo": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_monitoringIonization_countthree": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 3
+    },
+    "device_timeseries_monitoringIonization_timestampthree": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "2026-10-04T16:51:34.000Z"
+    },
+    "device_timeseries_monitoringIonization_countfour": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_monitoringIonization_timestampfour": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_monitoringIonization_countfive": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_monitoringIonization_timestampfive": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_monitoringIonization_countsix": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_monitoringIonization_timestampsix": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_monitoringIonization_countseven": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_monitoringIonization_timestampseven": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_water_pressure_peaks_countone": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_water_pressure_peaks_timestampone": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_water_pressure_peaks_counttwo": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_water_pressure_peaks_timestamptwo": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_water_pressure_peaks_countthree": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_water_pressure_peaks_timestampthree": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_timeseries_water_pressure_peaks_countfour": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "device_timeseries_water_pressure_peaks_timestampfour": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "1970-01-01T00:00:00.000Z"
+    },
+    "device_zigbee_active_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "device_zigbee_status_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_boiler_pumps_internal_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "on"
+    },
+    "heating_boiler_pumps_internal_target_value": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 60
+    },
+    "heating_boiler_sensors_temperature_commonSupply_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 24.8
+    },
+    "heating_boiler_sensors_temperature_commonSupply_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_boiler_serial_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "0000000000000000"
+    },
+    "heating_boiler_temperature_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 20
+    },
+    "heating_boiler_temperature_current_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 5
+    },
+    "heating_burners_enabled": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[\"0\"]"
+    },
+    "heating_burners_0_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_burners_0_modulation_value": {
+        "type": 2,
+        "profile": "~Valve.F",
+        "action": false,
+        "value": 0
+    },
+    "heating_burners_0_statistics_hours": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 3108
+    },
+    "heating_burners_0_statistics_starts": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 11682
+    },
+    "heating_circuits_enabled": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[\"0\"]"
+    },
+    "heating_circuits_internal": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "[\"0\"]"
+    },
+    "heating_circuits_0_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_0_name": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    },
+    "heating_circuits_0_type": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "heatingCircuit"
+    },
+    "heating_circuits_0_circulation_pump_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "on"
+    },
+    "heating_circuits_0_heating_schedule_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_0_operating_modes_active_value": {
+        "type": 3,
+        "profile": "VVC.Mode",
+        "action": true,
+        "value": "standby"
+    },
+    "heating_circuits_0_operating_modes_heating_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_0_operating_modes_standby_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_0_operating_programs_active_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "standby"
+    },
+    "heating_circuits_0_operating_programs_comfort_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": false
+    },
+    "heating_circuits_0_operating_programs_comfort_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "unknown"
+    },
+    "heating_circuits_0_operating_programs_comfort_temperature": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": true,
+        "value": 20
+    },
+    "heating_circuits_0_operating_programs_forcedLastFromSchedule_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": false
+    },
+    "heating_circuits_0_operating_programs_normal_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_0_operating_programs_normal_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "unknown"
+    },
+    "heating_circuits_0_operating_programs_normal_temperature": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": true,
+        "value": 20
+    },
+    "heating_circuits_0_operating_programs_reduced_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_circuits_0_operating_programs_reduced_demand": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "unknown"
+    },
+    "heating_circuits_0_operating_programs_reduced_temperature": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": true,
+        "value": 20
+    },
+    "heating_circuits_0_operating_programs_standby_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_circuits_0_sensors_temperature_supply_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 24.8
+    },
+    "heating_circuits_0_sensors_temperature_supply_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_circuits_0_temperature_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_bufferCylinderSize_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 300
+    },
+    "heating_configuration_centralHeatingCylinderSize_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_dhwCylinderSize_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_gasType_value": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "EGas"
+    },
+    "heating_configuration_houseHeatingLoad_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_houseLocation_latitude": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_houseLocation_longitude": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_houseLocation_altitude": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_houseOrientation_horizontal": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_houseOrientation_vertical": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0
+    },
+    "heating_configuration_pressure_total_defaultpressure": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 1.5
+    },
+    "heating_configuration_pressure_total_normalpressuredelta": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 0.5
+    },
+    "heating_configuration_pressure_total_maximumpressure": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 2.7
+    },
+    "heating_configuration_pressure_total_errorthreshold": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 3.5
+    },
+    "heating_dhw_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_dhw_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "on"
+    },
+    "heating_dhw_hygiene_enabled": {
+        "type": 0,
+        "profile": "",
+        "action": false,
+        "value": false
+    },
+    "heating_dhw_oneTimeCharge_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": true,
+        "value": false
+    },
+    "heating_dhw_operating_modes_active_value": {
+        "type": 3,
+        "profile": "VVC.Mode",
+        "action": true,
+        "value": "balanced"
+    },
+    "heating_dhw_operating_modes_balanced_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_dhw_operating_modes_off_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_dhw_pumps_primary_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "off"
+    },
+    "heating_dhw_schedule_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": true
+    },
+    "heating_dhw_sensors_temperature_dhwCylinder_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 39.7
+    },
+    "heating_dhw_sensors_temperature_dhwCylinder_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_dhw_sensors_temperature_hotWaterStorage_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": false,
+        "value": 39.7
+    },
+    "heating_dhw_sensors_temperature_hotWaterStorage_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "heating_dhw_sensors_temperature_outlet_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "notConnected"
+    },
+    "heating_dhw_temperature_main_value": {
+        "type": 2,
+        "profile": "~Temperature.Room",
+        "action": true,
+        "value": 40
+    },
+    "heating_external_lock_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_gas_consumption_dhw_day": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 0.4
+    },
+    "heating_gas_consumption_dhw_week": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 1
+    },
+    "heating_gas_consumption_dhw_month": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 10.3
+    },
+    "heating_gas_consumption_dhw_year": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 207.8
+    },
+    "heating_gas_consumption_dhw_dayvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893317
+    },
+    "heating_gas_consumption_dhw_weekvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893317
+    },
+    "heating_gas_consumption_dhw_monthvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893317
+    },
+    "heating_gas_consumption_dhw_yearvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893314
+    },
+    "heating_gas_consumption_heating_day": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 0
+    },
+    "heating_gas_consumption_heating_week": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 0
+    },
+    "heating_gas_consumption_heating_month": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 0
+    },
+    "heating_gas_consumption_heating_year": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 25.8
+    },
+    "heating_gas_consumption_heating_dayvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893317
+    },
+    "heating_gas_consumption_heating_weekvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893317
+    },
+    "heating_gas_consumption_heating_monthvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893317
+    },
+    "heating_gas_consumption_heating_yearvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893314
+    },
+    "heating_gas_consumption_summary_dhw_currentday": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 0.4
+    },
+    "heating_gas_consumption_summary_dhw_lastsevendays": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 5.9
+    },
+    "heating_gas_consumption_summary_dhw_currentmonth": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 10.3
+    },
+    "heating_gas_consumption_summary_dhw_lastmonth": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 21.2
+    },
+    "heating_gas_consumption_summary_dhw_currentyear": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 207.8
+    },
+    "heating_gas_consumption_summary_dhw_lastyear": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 296.9
+    },
+    "heating_gas_consumption_summary_heating_currentday": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 0
+    },
+    "heating_gas_consumption_summary_heating_lastsevendays": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 0
+    },
+    "heating_gas_consumption_summary_heating_currentmonth": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 0
+    },
+    "heating_gas_consumption_summary_heating_lastmonth": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 0
+    },
+    "heating_gas_consumption_summary_heating_currentyear": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 25.8
+    },
+    "heating_gas_consumption_summary_heating_lastyear": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 24.5
+    },
+    "heating_gas_consumption_total_day": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 0.4
+    },
+    "heating_gas_consumption_total_week": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 1
+    },
+    "heating_gas_consumption_total_month": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 10.3
+    },
+    "heating_gas_consumption_total_year": {
+        "type": 2,
+        "profile": "~Gas",
+        "action": false,
+        "value": 233.60000000000002
+    },
+    "heating_gas_consumption_total_dayvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893314
+    },
+    "heating_gas_consumption_total_weekvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893314
+    },
+    "heating_gas_consumption_total_monthvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893314
+    },
+    "heating_gas_consumption_total_yearvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893314
+    },
+    "heating_heat_production_summary_dhw_currentday": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 4
+    },
+    "heating_heat_production_summary_dhw_lastsevendays": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 59.1
+    },
+    "heating_heat_production_summary_dhw_currentmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 103.2
+    },
+    "heating_heat_production_summary_dhw_lastmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 212.4
+    },
+    "heating_heat_production_summary_dhw_currentyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 2078.2
+    },
+    "heating_heat_production_summary_dhw_lastyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 2969.8
+    },
+    "heating_heat_production_summary_heating_currentday": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heat_production_summary_heating_lastsevendays": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heat_production_summary_heating_currentmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heat_production_summary_heating_lastmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_heat_production_summary_heating_currentyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 258.1
+    },
+    "heating_heat_production_summary_heating_lastyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 245.2
+    },
+    "heating_operating_programs_holiday_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_operating_programs_holiday_start": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    },
+    "heating_operating_programs_holiday_end": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    },
+    "heating_operating_programs_holidayAtHome_active": {
+        "type": 0,
+        "profile": "~Switch",
+        "action": false,
+        "value": false
+    },
+    "heating_operating_programs_holidayAtHome_start": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    },
+    "heating_operating_programs_holidayAtHome_end": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    },
+    "heating_power_consumption_dhw_day": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_power_consumption_dhw_week": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_power_consumption_dhw_month": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0.4
+    },
+    "heating_power_consumption_dhw_year": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 9.4
+    },
+    "heating_power_consumption_dhw_dayvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893316
+    },
+    "heating_power_consumption_dhw_weekvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893316
+    },
+    "heating_power_consumption_dhw_monthvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893317
+    },
+    "heating_power_consumption_dhw_yearvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893314
+    },
+    "heating_power_consumption_heating_day": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0.1
+    },
+    "heating_power_consumption_heating_week": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0.30000000000000004
+    },
+    "heating_power_consumption_heating_month": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 3.1
+    },
+    "heating_power_consumption_heating_year": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 79.7
+    },
+    "heating_power_consumption_heating_dayvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893316
+    },
+    "heating_power_consumption_heating_weekvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893316
+    },
+    "heating_power_consumption_heating_monthvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893316
+    },
+    "heating_power_consumption_heating_yearvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893314
+    },
+    "heating_power_consumption_summary_dhw_currentday": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0
+    },
+    "heating_power_consumption_summary_dhw_lastsevendays": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0.2
+    },
+    "heating_power_consumption_summary_dhw_currentmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0.4
+    },
+    "heating_power_consumption_summary_dhw_lastmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0.9
+    },
+    "heating_power_consumption_summary_dhw_currentyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 9.4
+    },
+    "heating_power_consumption_summary_dhw_lastyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 16.2
+    },
+    "heating_power_consumption_summary_heating_currentday": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0.1
+    },
+    "heating_power_consumption_summary_heating_lastsevendays": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 1.6
+    },
+    "heating_power_consumption_summary_heating_currentmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 3.1
+    },
+    "heating_power_consumption_summary_heating_lastmonth": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 7.4
+    },
+    "heating_power_consumption_summary_heating_currentyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 79.7
+    },
+    "heating_power_consumption_summary_heating_lastyear": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 94.2
+    },
+    "heating_power_consumption_total_day": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0.1
+    },
+    "heating_power_consumption_total_week": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 0.30000000000000004
+    },
+    "heating_power_consumption_total_month": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 3.5
+    },
+    "heating_power_consumption_total_year": {
+        "type": 2,
+        "profile": "~Electricity",
+        "action": false,
+        "value": 89.10000000000001
+    },
+    "heating_power_consumption_total_dayvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893314
+    },
+    "heating_power_consumption_total_weekvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893314
+    },
+    "heating_power_consumption_total_monthvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893314
+    },
+    "heating_power_consumption_total_yearvaluereadat": {
+        "type": 1,
+        "profile": "~UnixTimestamp",
+        "action": false,
+        "value": 1791893314
+    },
+    "heating_sensors_pressure_supply_value": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": 1.2
+    },
+    "heating_sensors_pressure_supply_status": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": "connected"
+    },
+    "tcu_wifi_strength": {
+        "type": 2,
+        "profile": "",
+        "action": false,
+        "value": -65
+    },
+    "heating_circuits_0_name_name": {
+        "type": 3,
+        "profile": "",
+        "action": false,
+        "value": ""
+    }
+}
