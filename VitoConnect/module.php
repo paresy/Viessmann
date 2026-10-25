@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 include_once __DIR__ . '/compute_name.php';
+include_once __DIR__ . '/../libs/WebHookModule.php';
 
 if (defined('PHPUNIT_TESTSUITE')) {
     trait Simulate
@@ -13,7 +14,7 @@ if (defined('PHPUNIT_TESTSUITE')) {
             $this->ParseDeviceData($device);
         }
 
-        public function DebugRequestAction(string $Ident, mixed $Value): array
+        public function DebugRequestAction($Ident, $Value): array
         {
             $this->recordedActions = [];
             $this->RequestAction($Ident, $Value);
@@ -34,7 +35,7 @@ if (defined('PHPUNIT_TESTSUITE')) {
     }
 }
 
-class VitoConnect extends IPSModuleStrict
+class VitoConnect extends WebHookModule
 {
     use Simulate;
 
@@ -52,6 +53,11 @@ class VitoConnect extends IPSModuleStrict
     private $installation_data_url = 'https://api.viessmann-climatesolutions.com/iot/v2/equipment/installations?includeGateways=true';
     private $feature_data_url = 'https://api.viessmann-climatesolutions.com/iot/v2/features/installations/%s/gateways/%s/devices/%d/features/';
 
+    public function __construct($InstanceID)
+    {
+        parent::__construct($InstanceID, 'viessmann/' . $InstanceID);
+    }
+
     public function Create(): void
     {
         //Never delete this line!
@@ -67,18 +73,11 @@ class VitoConnect extends IPSModuleStrict
         $this->RegisterAttributeString('GatewaySerial', '');
         $this->RegisterAttributeString('DeviceID', "0");
 
-        // Maps variable idents to commands, which are set up while parsing the device data
-        $this->RegisterAttributeString('Commands', '{}');
-
         $this->RegisterTimer('Update', 0, 'VVC_Update($_IPS[\'TARGET\']);');
-
-        // This is our redirect URI for the OAuth process
-        $this->RegisterHook('viessmann/' . $this->InstanceID);
     }
 
     public function ApplyChanges(): void
     {
-
         //Never delete this line!
         parent::ApplyChanges();
 
@@ -104,7 +103,20 @@ class VitoConnect extends IPSModuleStrict
         // Remember the verifier for later use
         $this->SetBuffer('Verifier', $verifier);
 
-        return $this->authorize_url . '?client_id=' . $this->ReadPropertyString('ClientID') . '&redirect_uri=' . $this->GetCallbackURL() . '&response_type=code&code_challenge_method=S256&code_challenge=' . $code_challenge . '&scope=IoT%20User%20offline_access';
+        $url = $this->authorize_url . '?' . http_build_query([
+            'client_id'             => $this->ReadPropertyString('ClientID'),
+            'redirect_uri'          => $this->GetCallbackURL(),
+            'response_type'         => 'code',
+            'code_challenge_method' => 'S256',
+            'code_challenge'        => $code_challenge,
+            'scope'                 => 'IoT User offline_access',
+        ]);
+
+        // Show URL in the form field so the user can copy it
+        $this->UpdateFormField('AuthorizationURL', 'visible', true);
+        $this->UpdateFormField('AuthorizationURL', 'value', $url);
+
+        return $url;
     }
 
     public function GetConfigurationForm(): string
@@ -128,7 +140,9 @@ class VitoConnect extends IPSModuleStrict
         $data->actions[0]->enabled = strlen($this->ReadPropertyString('ClientID')) > 0;
         $data->actions[1]->enabled = strlen($this->ReadAttributeString('Token')) > 0;
         $data->actions[2]->enabled = strlen($this->ReadAttributeString('Token')) > 0;
-        $data->actions[3]->enabled = strlen($this->ReadAttributeString('Token')) > 0;
+        if (isset($data->actions[3])) {
+            $data->actions[3]->enabled = strlen($this->ReadAttributeString('Token')) > 0;
+        }
 
 
         return json_encode($data);
@@ -193,9 +207,9 @@ class VitoConnect extends IPSModuleStrict
         $this->ReloadForm();
     }
 
-    public function RequestAction(string $Ident, mixed $Value): void
+    public function RequestAction($Ident, $Value): void
     {
-        $commands = json_decode($this->ReadAttributeString('Commands'), true);
+        $commands = json_decode($this->GetBuffer('Commands'), true);
         $isKnown = function ($commands) use ($Ident)
         {
             return isset($commands[$Ident]['name']) || isset($commands[$Ident]['on']);
@@ -204,7 +218,7 @@ class VitoConnect extends IPSModuleStrict
         // Commands are collected while parsing the device data. Refresh them, if we do not know this ident yet
         if (!$isKnown($commands) && !is_array($this->recordedActions)) {
             $this->Update();
-            $commands = json_decode($this->ReadAttributeString('Commands'), true);
+            $commands = json_decode($this->GetBuffer('Commands'), true);
         }
 
         if (!$isKnown($commands)) {
@@ -232,7 +246,7 @@ class VitoConnect extends IPSModuleStrict
         $this->SetValue($Ident, $Value);
     }
 
-    protected function ProcessHookData(): void
+    protected function ProcessHookData()
     {
         $this->SendDebug('GET', print_r($_GET, true), 0);
         $this->SendDebug('POST', file_get_contents('php://input'), 0);
@@ -498,6 +512,8 @@ class VitoConnect extends IPSModuleStrict
                     if (is_object($value) || is_array($value)) {
                         $this->RegisterVariableString($ident, computeName($id, $name));
                         $this->SetValue($ident, json_encode($value));
+                    } elseif ($value === null) {
+                        // Null values for structured types are silently skipped
                     } elseif ($this->failOnUnexpected) {
                         throw new Exception(sprintf('Unsupported variable type: %s, id: %s', $type, $id));
                     } else {
@@ -738,8 +754,8 @@ class VitoConnect extends IPSModuleStrict
         }
 
         $identCommands = json_encode($identCommands);
-        if ($this->ReadAttributeString('Commands') != $identCommands) {
-            $this->WriteAttributeString('Commands', $identCommands);
+        if ($this->GetBuffer('Commands') != $identCommands) {
+            $this->SetBuffer('Commands', $identCommands);
         }
     }
 

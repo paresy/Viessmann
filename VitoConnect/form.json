@@ -51,7 +51,9 @@
 			]
 		},
 		{ "type": "Label", "caption": "Installation ID: %d", "visible": false },
-		{ "type": "Label", "caption": "Gateway Serial: %s", "visible": false }
+		{ "type": "Label", "caption": "Gateway Serial: %s", "visible": false },
+		{ "type": "Label", "caption": "" },
+		{ "type": "ValidationTextBox", "name": "AuthorizationURL", "caption": "Authorization URL (copy and open in browser if popup is blocked)", "width": "800px", "visible": false }
 	],
 	"actions":
 	[
