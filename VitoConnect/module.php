@@ -67,9 +67,6 @@ class VitoConnect extends IPSModuleStrict
         $this->RegisterAttributeString('GatewaySerial', '');
         $this->RegisterAttributeString('DeviceID', "0");
 
-        // Maps variable idents to commands, which are set up while parsing the device data
-        $this->RegisterAttributeString('Commands', '{}');
-
         $this->RegisterTimer('Update', 0, 'VVC_Update($_IPS[\'TARGET\']);');
 
         // This is our redirect URI for the OAuth process
@@ -101,10 +98,28 @@ class VitoConnect extends IPSModuleStrict
         $verifier = $base64url_encode($random);
         $code_challenge = $base64url_encode(hash('sha256', $verifier, true));
 
+        // We cannot receive the authorization code without Symcon Connect
+        if ($this->GetConnectURL() == '') {
+            throw new Exception($this->Translate('Symcon Connect must be enabled!'));
+        }
+
         // Remember the verifier for later use
         $this->SetBuffer('Verifier', $verifier);
 
-        return $this->authorize_url . '?client_id=' . $this->ReadPropertyString('ClientID') . '&redirect_uri=' . $this->GetCallbackURL() . '&response_type=code&code_challenge_method=S256&code_challenge=' . $code_challenge . '&scope=IoT%20User%20offline_access';
+        $url = $this->authorize_url . '?' . http_build_query([
+            'client_id'             => $this->ReadPropertyString('ClientID'),
+            'redirect_uri'          => $this->GetCallbackURL(),
+            'response_type'         => 'code',
+            'code_challenge_method' => 'S256',
+            'code_challenge'        => $code_challenge,
+            'scope'                 => 'IoT User offline_access',
+        ], '', '&', PHP_QUERY_RFC3986);
+
+        // Show the URL inside the form, if the browser blocks opening it
+        $this->UpdateFormField('AuthorizationURL', 'value', $url);
+        $this->UpdateFormField('AuthorizationURL', 'visible', true);
+
+        return $url;
     }
 
     public function GetConfigurationForm(): string
@@ -195,7 +210,7 @@ class VitoConnect extends IPSModuleStrict
 
     public function RequestAction(string $Ident, mixed $Value): void
     {
-        $commands = json_decode($this->ReadAttributeString('Commands'), true);
+        $commands = json_decode($this->GetBuffer('Commands'), true);
         $isKnown = function ($commands) use ($Ident)
         {
             return isset($commands[$Ident]['name']) || isset($commands[$Ident]['on']);
@@ -204,7 +219,7 @@ class VitoConnect extends IPSModuleStrict
         // Commands are collected while parsing the device data. Refresh them, if we do not know this ident yet
         if (!$isKnown($commands) && !is_array($this->recordedActions)) {
             $this->Update();
-            $commands = json_decode($this->ReadAttributeString('Commands'), true);
+            $commands = json_decode($this->GetBuffer('Commands'), true);
         }
 
         if (!$isKnown($commands)) {
@@ -293,10 +308,17 @@ class VitoConnect extends IPSModuleStrict
         echo $this->Translate("Successful. You can now close this window and press 'Update' inside the instance.");
     }
 
-    private function GetCallbackURL(): string
+    private function GetConnectURL(): string
     {
         $cc_ids = IPS_GetInstanceListByModuleID('{9486D575-BE8C-4ED8-B5B5-20930E26DE6F}');
         $cc_url = (count($cc_ids) > 0) ? @CC_GetConnectURL($cc_ids[0]) : false;
+
+        return $cc_url ? $cc_url : '';
+    }
+
+    private function GetCallbackURL(): string
+    {
+        $cc_url = $this->GetConnectURL();
 
         if ($cc_url) {
             return $cc_url . '/hook/viessmann/' . $this->InstanceID;
@@ -498,6 +520,8 @@ class VitoConnect extends IPSModuleStrict
                     if (is_object($value) || is_array($value)) {
                         $this->RegisterVariableString($ident, computeName($id, $name));
                         $this->SetValue($ident, json_encode($value));
+                    } elseif ($value === null) {
+                        // Structured types might not be set at all. There is nothing to show
                     } elseif ($this->failOnUnexpected) {
                         throw new Exception(sprintf('Unsupported variable type: %s, id: %s', $type, $id));
                     } else {
@@ -737,10 +761,8 @@ class VitoConnect extends IPSModuleStrict
             }
         }
 
-        $identCommands = json_encode($identCommands);
-        if ($this->ReadAttributeString('Commands') != $identCommands) {
-            $this->WriteAttributeString('Commands', $identCommands);
-        }
+        // Commands are derived from the device data on every update. Therefore, we do not need to persist them
+        $this->SetBuffer('Commands', json_encode($identCommands));
     }
 
     private function CreateNumberProfile(string $name, string $suffix, int $digits, string $icon): string

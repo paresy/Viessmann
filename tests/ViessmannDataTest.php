@@ -150,6 +150,21 @@ class ViessmannDataTest extends TestCase
         $this->requestAction($iid, 'heating_test_active', true);
     }
 
+    public function testNullStructuredType(): void
+    {
+        $iid = IPS_CreateInstance('{3BF2B1B8-BD31-4A06-8C70-FD0FF95FE22E}');
+        IPS\InstanceManager::getInstanceInterface($iid)->DebugParseDeviceData(json_decode(json_encode(['data' => [[
+            'feature'    => 'device.serial',
+            'properties' => [
+                'vin' => ['type' => 'VinEntry', 'value' => null],
+            ],
+            'commands' => []
+        ]]])));
+
+        // There is nothing to show, but it must not fail either
+        $this->assertFalse(@IPS_GetObjectIDByIdent('device_serial_vin', $iid));
+    }
+
     private function createInstance($name)
     {
         $iid = IPS_CreateInstance('{3BF2B1B8-BD31-4A06-8C70-FD0FF95FE22E}');
